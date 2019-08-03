@@ -2,7 +2,8 @@
 <head>
     <script src="Graph.js"></script>
 	<script src="/themes/supra/main.js"></script>
-    <link rel="stylesheet" href="/themes/supra/colors/colors-lavender.css">
+    <link id="colorHolder" rel="stylesheet" href="/themes/supra/colors/colors-lavender.css">
+    <link rel="stylesheet" href="/themes/supra/icons/dark/icons.css">
     <link rel="stylesheet" href="/themes/supra/Common.css">
 </head>
 <body style="width:2400px;height:1200px;">
@@ -110,7 +111,37 @@
     </div>
 
     <div id="settings" style="display:none">
-        <div class="centerInfoBox">Settings</div>
+        <div class="column left">
+            <div class="content">
+                <button class="vertical-tab" onclick="settingsPage(0)"><div>Appearance</div></button>
+
+                <!-- Not sure what to put on the left hand side yet... -->
+
+            </div>
+        </div>
+
+        <div class="column middle">
+            <div class="content">
+                <h2>Settings</h2>
+                <br />
+				<div id="appearance-settings">
+					<div style="text-align: left;">Color Palettes</div>
+					<div id="themeList" ></div>
+				</div>
+            </div>
+        </div>
+
+        <div class="column right">
+            <div class="content">
+                <h2>Profiles</h2>
+                <div id="profile"></div>
+                <div id="steamProfile"></div>
+                <div id="discordProfile"></div>
+
+                <img src="logoflat.png" style="height:40px;" />
+                <div id="version" style="text-decoration:none;font-size:20px;font-family:serif;color:rgb(216, 215, 195);font-style:oblique;">Version</div>
+            </div>
+        </div>
     </div>
 
     <div id="connecting" style="display:none">

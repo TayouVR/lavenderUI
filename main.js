@@ -217,8 +217,8 @@ function ChangeTheme(name) {
     var fileref=document.createElement("link")
     fileref.setAttribute("id", "colorHolder")
     fileref.setAttribute("rel", "stylesheet")
-    fileref.setAttribute("type", "text/css")
     fileref.setAttribute("href", "/themes/supra/colors/colors-" + name + ".css")
+	console.log("trying to add " + fileref + " to head");
 
 	document.getElementsByTagName("head")[0].removeChild(document.getElementById("colorHolder"));
     document.getElementsByTagName("head")[0].appendChild(fileref)
