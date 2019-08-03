@@ -98,15 +98,35 @@ input div, button div {
 		margin: 0px;
 		padding: 0px;
 		margin-right: 5px;
+		overflow: hidden;
 		background-color: var(--menuButtonBackground);
+		background-position: center;
+		background-size: 80px 80px;
 	}
-
 		#menuButtons button div {
 			margin-top: 20px;
 			font: 20px;
 			color: var(--textColor);
 			vertical-align: middle;
 		}
+#mainButton {
+	background-image: var(--main-icon);
+}
+#socialButton {
+	background-image: var(--social-icon);
+}
+#contentButton {
+	background-image: var(--content-icon);
+}
+#galaxyButton {
+	background-image: var(--galaxy-icon);
+}
+#testingButton {
+	background-image: var(--testing-icon);
+}
+#settingsButton {
+	background-image: var(--settings-icon);
+}
 .test {
 	float: left;
 	display: inline-block;
@@ -138,6 +158,12 @@ input div, button div {
 		right: 25%;
 		left: 25%;
 	}
+	.column.rightMiddle {
+		width: 75%;
+		height: 100%;
+		position: absolute;
+		left: 25%;
+	}
 
 .content {
 	padding: 8px;
@@ -162,6 +188,35 @@ input div, button div {
 	font: 30px;
 	top: 300px;
 	left: 300px;
+}
+#themeList {
+	text-align: left;
+}
+.themeCard {
+	width: 130px;
+	height: 120px !important;
+	background-color: var(--avatarCardBackground);
+	border-color: var(--avatarCardBorder);
+	color: var(--avatarCardText);
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 8px;
+	margin: 5px;
+	float: left;
+}
+
+	.themeCard p {
+		font: 16px;
+	}
+
+.themeImage {
+	width: 150px;
+	height: 90px;
+	margin-bottom: -10px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-bottom: 2px solid;
+	border-color: var(--avatarCardBorder);
 }
 .active {
 	background-color: var(--activeBGcolor) !important;

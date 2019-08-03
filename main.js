@@ -106,6 +106,7 @@ function ChangeState(newState) {
 				settings.style.display = "";
 				menuButtons.style.display = "";
 				settingsButton.classList.add("active");
+				LoadSettings();
 			}
 			break;
 		case 8:
@@ -193,6 +194,34 @@ function FailToConnect(reason) {
 
 function ClickDiscord() {
 	game.OpenLink("https://discord.gg/fWHjNfg");
+}
+
+function LoadSettings() {
+	LoadThemes();
+}
+
+function LoadThemes() {
+	var registeredThemes = ["lavender", "dark", "light"]
+	var themePicturePaths = ["/themes/supra/pictures/screenshot 2019-08-03 162046.png", "/themes/supra/pictures/screenshot 2019-08-03 165131.png", "/themes/supra/pictures/screenshot 2019-08-03 165205.png"]
+	var themeContainer = document.getElementById("themeList")
+
+	themeContainer.innerHTML = "";
+
+	for(var i = 0; i < registeredThemes.length; i++) {
+		themeContainer.innerHTML += '<button class="themeCard" onclick="ChangeTheme("' + registeredThemes[i] + '")"><img class="themeImage" src="' + themePicturePaths[i] + '" ></img><div>' + registeredThemes[i] + '</div></button>';
+	}
+}
+
+function ChangeTheme(name) {
+	console.log("trying to load " + name);
+    var fileref=document.createElement("link")
+    fileref.setAttribute("id", "colorHolder")
+    fileref.setAttribute("rel", "stylesheet")
+    fileref.setAttribute("type", "text/css")
+    fileref.setAttribute("href", "/themes/supra/colors/colors-" + name + ".css")
+
+	document.getElementsByTagName("head")[0].removeChild(document.getElementById("colorHolder"));
+    document.getElementsByTagName("head")[0].appendChild(fileref)
 }
 
 /*document.addEventListener('keyup', (e) => {
