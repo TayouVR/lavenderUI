@@ -11,14 +11,14 @@ html {
 	--buttonFGColor: var(--textColor); /* foreground */
 
 	/* focused element. Things like <input> */
-	--focusedElementBackgroundColor: #FFFFFF;
-	--focusedElementColor: #000000;
+	--focusedElementBackgroundColor: #3f1154;
+	--focusedElementColor: var(--textColor);
 
 	/* general UI colors */
 	--backgroundColor: #100021F7; /* background */
 	--borderColor: #26004cF9; /* border */
 	--borderColorSec: #0c0019; /* secondary border (buttons and elements inside the main UI) */
-	--inputBackgroundColor: #2b0e38;
+	--inputBackgroundColor: #270935;
 
 	/************************************
 	***********single elements***********
