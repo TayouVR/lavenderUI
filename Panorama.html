@@ -1,0 +1,133 @@
+<html>
+<head>
+    <script src="Graph.js"></script>
+	<script src="main.js"></script>
+    <link rel="stylesheet" href="colors.css">
+    <link rel="stylesheet" href="Common.css">
+</head>
+<body style="width:2400px;height:1200px;">
+
+    <div id="login" style="display:none">
+
+        <div class="column left">
+            <div class="content">
+                <h2>Side</h2>
+                <br />
+                <button onclick="ClickDiscord()"><div>Join us on discord</div></button>
+            </div>
+        </div>
+
+        <div class="column middle">
+            <div class="content">
+                <h2>Login</h2>
+                <br />
+                <input id="username" type="text" placeholder="email@email.com" />
+                <input id="password" type="password" placeholder="password"/>
+                <button onclick="Login()"><div>Login</div></button>
+                <br />
+                <button onclick="TogglePassword()"><div>hide/show password</div></button>
+
+                <h3 id="loginFail" style="display:none;color:red;border:2px solid red;">Fail reason</h3>
+            </div>
+        </div>
+
+        <div class="column right">
+            <div class="content">
+                <img src="logoflat.png" style="height:40px;" />
+                <div id="version" style="text-decoration:none;font-size:20px;font-family:serif;color:rgb(216, 215, 195);font-style:oblique;">Version</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginInProgress" class="content" style="display:none">
+        <div>Logging in</div>
+    </div>
+
+    <div id="main" style="display:none">
+        <div class="column left">
+            <div class="content">
+                <button onclick="ClickDiscord()"><div>Join us on discord</div></button>
+
+                <!-- Not sure what to put on the left hand side yet... -->
+
+            </div>
+        </div>
+
+        <div class="column middle">
+            <div class="content">
+                <h2>Main Content</h2>
+                <br />
+                <button onclick="game.Logout()"><div>Logout</div></button>
+                <p>You are logged in, look below under content to select your avatar.</p>
+
+				<div class="borderedBox">
+					connect to server<br>
+					<input id="ip" type="text" placeholder="127.0.0.1" />
+					<input id="port" type="number" placeholder="port" />
+					<button onclick="Connect()"><div>Connect</div></button>
+					<button onclick="game.Disconnect()"><div>Disconnect</div></button>
+				</div>
+                <br />
+                <h3 id="connectFail" style="display:none;color:red;border:2px solid red;">Fail reason</h3>
+
+            </div>
+        </div>
+
+        <div class="column right">
+            <div class="content">
+                <h2>Profiles</h2>
+                <div id="profile"></div>
+                <div id="steamProfile"></div>
+                <div id="discordProfile"></div>
+
+                <img src="logoflat.png" style="height:40px;" />
+                <div id="version" style="text-decoration:none;font-size:20px;font-family:serif;color:rgb(216, 215, 195);font-style:oblique;">Version</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="social" style="display:none">
+        <div class="centerInfoBox">Social</div>
+    </div>
+
+    <div id="content" style="display:none">
+        <div class="content" style="width:95%;height:75%;position:absolute;top:0;">
+            <p>Avatars</p>
+            <div id="avatarlist"></div>
+            <p>Worlds</p>
+            <div id="worldlist"></div>
+        </div>
+
+    </div>
+
+    <div id="galaxy" style="display:none">
+        <div class="centerInfoBox">Galaxy - Coming soon!</div>
+    </div>
+
+    <div id="testing" style="display:none">
+        <div class="centerInfoBox">Testing area</div>
+    </div>
+
+    <div id="settings" style="display:none">
+        <div class="centerInfoBox">Settings</div>
+    </div>
+
+    <div id="connecting" style="display:none">
+
+        <div class="centerInfoBox">
+            Connecting to server
+        </div>
+
+    </div>
+
+    <div id="menuButtons" style="display:none;">
+        <button id="mainButton" onclick="game.SwitchTo(2)"><div>Main</div></button>
+        <button id="socialButton" onclick="game.SwitchTo(3)"><div>Social</div></button>
+        <button id="contentButton" onclick="game.SwitchTo(4)"><div>Content</div></button>
+        <button id="galaxyButton" onclick="game.SwitchTo(5)"><div>Galaxy</div></button>
+        <button id="testingButton" onclick="game.SwitchTo(6)"><div>Testing</div></button>
+        <button id="settingsButton" onclick="game.SwitchTo(7)"><div>Settings</div></button>
+    </div>
+</body>
+</html>
