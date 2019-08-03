@@ -1,12 +1,8 @@
 # lavenderUI
 UI for the VR game lavender https://lavendervr.com/
 
-to install the UI paste the following files/folders into Lavender/BrowserAssets/themes/supra/ :
-- Common.css
-- main.js
-- colors
+to install the UI download the latest zip from the [release](https://github.com/SupraLP/lavenderUI/releases "release") section and drag the BrowserAssets folder into the game directory.
 
-then copy Panorama.html over the exitsting Panorama.html at Lavender/BrowserAssets
 ![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/screenshot%202019-08-03%20162046.png)
 ![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/screenshot%202019-08-03%20165131.png)
 ![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/screenshot%202019-08-03%20165205.png)
