@@ -35,7 +35,7 @@
         <div class="column right">
             <div class="content">
                 <img src="logoflat.png" style="height:40px;" />
-                <div id="version" style="text-decoration:none;font-size:20px;font-family:serif;color:rgb(216, 215, 195);font-style:oblique;">Version</div>
+                <div class="version" style="text-decoration:none;font-size:20px;font-family:serif;color:rgb(216, 215, 195);font-style:oblique;">Version</div>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
                 <div id="discordProfile"></div>
 
                 <img src="logoflat.png" style="height:40px;" />
-                <div id="version" style="text-decoration:none;font-size:20px;font-family:serif;color:rgb(216, 215, 195);font-style:oblique;">Version</div>
+                <div class="version" style="text-decoration:none;font-size:20px;font-family:serif;color:rgb(216, 215, 195);font-style:oblique;">Version</div>
             </div>
         </div>
 
@@ -110,15 +110,17 @@
     <div id="testing" style="display:none">
         <div class="content" style="width:95%;height:75%;position:absolute;top:0;">
 			<div class="listTitle">
-	            <div>Public Avatars</div>
+	            <label>Public Avatars</label>
 	            <button onclick="game.PrevAvatarPage()">Prev page</button>
 	            <button onclick="game.NextAvatarPage()">Next page</button>
 			</div>
             <div id="publicavatarlist"></div>
 
-            <p>Public Worlds</p>
-            <button onclick="game.PrevWorldPage()">Prev page</button>
-            <button onclick="game.NextWorldPage()">Next page</button>
+			<div class="listTitle">
+	            <label>Public Worlds</label>
+	            <button onclick="game.PrevWorldPage()">Prev page</button>
+	            <button onclick="game.NextWorldPage()">Next page</button>
+			</div>
             <div id="publicworldlist"></div>
         </div>
     </div>
