@@ -64,13 +64,14 @@
 				<div class="borderedBox">
 					connect to server<br>
 					<input id="ip" type="text" placeholder="127.0.0.1" />
-					<input id="port" type="number" placeholder="port" />
+					<input id="port" type="number" placeholder="port" value="10000" />
 					<button onclick="Connect()"><div>Connect</div></button>
 					<button onclick="game.Disconnect()"><div>Disconnect</div></button>
 				</div>
                 <br />
                 <h3 id="connectFail" style="display:none;color:red;border:2px solid red;">Fail reason</h3>
 
+                <button onclick="game.TeleportPlayerToSpawn()">Teleport to Spawn</button>
             </div>
         </div>
 
@@ -107,7 +108,19 @@
     </div>
 
     <div id="testing" style="display:none">
-        <div class="centerInfoBox">Testing area</div>
+        <div class="content" style="width:95%;height:75%;position:absolute;top:0;">
+			<div class="listTitle">
+	            <div>Public Avatars</div>
+	            <button onclick="game.PrevAvatarPage()">Prev page</button>
+	            <button onclick="game.NextAvatarPage()">Next page</button>
+			</div>
+            <div id="publicavatarlist"></div>
+
+            <p>Public Worlds</p>
+            <button onclick="game.PrevWorldPage()">Prev page</button>
+            <button onclick="game.NextWorldPage()">Next page</button>
+            <div id="publicworldlist"></div>
+        </div>
     </div>
 
     <div id="settings" style="display:none">
@@ -153,12 +166,12 @@
     </div>
 
     <div id="menuButtons" style="display:none;">
-        <button id="mainButton" onclick="game.SwitchTo(2)"></button>
-        <button id="socialButton" onclick="game.SwitchTo(3)"></button>
-        <button id="contentButton" onclick="game.SwitchTo(4)"></button>
-        <button id="galaxyButton" onclick="game.SwitchTo(5)"></button>
-        <button id="testingButton" onclick="game.SwitchTo(6)"></button>
-        <button id="settingsButton" onclick="game.SwitchTo(7)"></button>
+        <button id="mainButton" onclick="game.SwitchTo(2)"><div>Main</div></button>
+        <button id="socialButton" onclick="game.SwitchTo(3)"><div>Social</div></button>
+        <button id="contentButton" onclick="game.SwitchTo(4)"><div>Content</div></button>
+        <button id="galaxyButton" onclick="game.SwitchTo(5)"><div>Galaxy</div></button>
+        <button id="testingButton" onclick="game.SwitchTo(6)"><div>Testing</div></button>
+        <button id="settingsButton" onclick="game.SwitchTo(7)"><div>Settings</div></button>
     </div>
 </body>
 </html>

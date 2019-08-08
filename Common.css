@@ -86,7 +86,7 @@ input div, button div {
 #menuButtons {
 	position: absolute;
 	left: 330px;
-	bottom: 0;
+	bottom: 80;
 }
 
 	#menuButtons button {
@@ -98,13 +98,12 @@ input div, button div {
 		margin: 0px;
 		padding: 0px;
 		margin-right: 5px;
-		overflow: hidden;
 		background-color: var(--menuButtonBackground);
 		background-position: center;
 		background-size: 80px 80px;
 	}
 		#menuButtons button div {
-			margin-top: 20px;
+			margin-top: 80px;
 			font: 20px;
 			color: var(--textColor);
 			vertical-align: middle;
@@ -217,6 +216,12 @@ input div, button div {
 	border-top-right-radius: 6px;
 	border-bottom: 2px solid;
 	border-color: var(--avatarCardBorder);
+}
+.listTitle {
+	display: inline-block !important;
+}
+.listTitle button {
+	height: 20px;
 }
 .active {
 	background-color: var(--activeBGcolor) !important;
