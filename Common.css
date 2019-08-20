@@ -1,14 +1,15 @@
 
-html {
+:root {
 	color: var(--textColor);
+	font-size: 2rem;
 }
 h2 {
 	text-align: center;
 	font-size: 3rem;
 }
 input {
-	min-width: 200px;
-	height: 50px;
+	min-width: 300px;
+	height: 70px;
 	background-color: var(--inputBackground);
 	border-style: solid;
 	border-width: 2px;
@@ -29,7 +30,7 @@ input:focus {
 	color: var(--focusedElementColor);
 }
 input[type=button], input[type=submit], button{
-	height: 50px;
+	height: 70px;
 	background-color: var(--buttonBGColor);
 	border-style: solid;
 	border-width: 2px;
@@ -44,11 +45,11 @@ input[type=button], input[type=submit], button{
 	padding-right: 10px;
 }
 input div, button div {
-	margin-top: 15px;
+	margin-top: 7px;
 }
 .avatarCard {
-	width: 100px;
-	height: 200px !important;
+	width: 200px;
+	height: 300px !important;
 	background-color: var(--avatarCardBackground);
 	border-color: var(--avatarCardBorder);
 	color: var(--avatarCardText);
@@ -56,16 +57,15 @@ input div, button div {
 	border-width: 2px;
 	border-radius: 8px;
 	margin: 5px;
-	float: left;
 }
 
 	.avatarCard p {
-		font: 16px;
+		font: 25px;
 	}
 
 .avatarImage {
-	max-width: 120px;
-	max-height: 120px;
+	max-width: 220px;
+	max-height: 220px;
 	margin-bottom: -10px;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
@@ -85,28 +85,29 @@ input div, button div {
 
 #menuButtons {
 	position: absolute;
-	left: 330px;
+	left: 660px;
 	bottom: 80;
 }
 
 	#menuButtons button {
 		border: 2px solid;
 		border-color: var(--menuButtonBorder);
-		width: 80px;
-		height: 80px;
-		border-radius: 40px;
+		width: 160px;
+		height: 160px;
+		border-radius: 80px;
 		margin: 0px;
 		padding: 0px;
 		margin-right: 5px;
 		background-color: var(--menuButtonBackground);
 		background-position: center;
-		background-size: 80px 80px;
+		background-size: 160px 160px;
 	}
 		#menuButtons button div {
-			margin-top: 80px;
+			margin-top: 160px;
 			font: 20px;
 			color: var(--textColor);
 			vertical-align: middle;
+			font-size: 2rem;
 		}
 #mainButton {
 	background-image: var(--main-icon);
@@ -174,6 +175,7 @@ input div, button div {
 	border-color: var(--borderColor);
 	font: 16px bold;
 	border-radius: 8px;
+	font-size: 2rem;
 }
 
 .centerInfoBox {
@@ -221,7 +223,7 @@ input div, button div {
 	display: inline-block !important;
 }
 .listTitle button {
-	height: 20px;
+	height: 40px;
 }
 .active {
 	background-color: var(--activeBGcolor) !important;
