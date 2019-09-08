@@ -202,13 +202,27 @@ function LoadSettings() {
 
 function LoadThemes() {
 	var registeredThemes = ["lavender", "dark", "light"]
-	var themePicturePaths = ["/themes/supra/pictures/screenshot 2019-08-03 162046.png", "/themes/supra/pictures/screenshot 2019-08-03 165131.png", "/themes/supra/pictures/screenshot 2019-08-03 165205.png"]
-	var themeContainer = document.getElementById("themeList")
+	var themePicturePaths = ["/themes/supra/pictures/screenshot 2019-08-03 162046.png", "/themes/supra/pictures/screenshot 2019-08-03 165131.png", "/themes/supra/pictures/screenshot 2019-08-03 165205.png"];
+	var themeContainer = document.getElementById("themeList");
 
 	themeContainer.innerHTML = "";
 
 	for(var i = 0; i < registeredThemes.length; i++) {
 		themeContainer.innerHTML += '<button class="themeCard" onclick="ChangeTheme("' + registeredThemes[i] + '")"><img class="themeImage" src="' + themePicturePaths[i] + '" ></img><div>' + registeredThemes[i] + '</div></button>';
+	}
+}
+
+function LoadIcons() {
+	var registeredIcons = ["dark", "light"]
+	var iconsDark = ["/themes/supra/icons/dark/settings.png", "/themes/supra/icons/dark/content.png", "/themes/supra/icons/dark/galaxy.png"];
+	var iconsLight = ["/themes/supra/icons/light/settings.png", "/themes/supra/icons/light/content.png", "/themes/supra/icons/light/galaxy.png"];
+	var icons = [iconsDark, iconsLight];
+	var iconContainer = document.getElementById("iconList")
+
+	iconContainer.innerHTML = "";
+
+	for(var i = 0; i < registeredIcons.length; i++) {
+		iconContainer.innerHTML += '<button class="themeCard" onclick="ChangeTheme("' + registeredIcons[i] + '")"><div class="themeImage" style="margin-left: -10px;"><img style="width: 90px; height: 90px;" src="' + icons[i][0] + '"></img><img style="width: 90px; height: 90px;" src="' + icons[i][1] + '"></img><img style="width: 90px; height: 90px;" src="' + icons[i][2] + '"></img></div><div>' + registeredIcons[i] + '</div></button>';
 	}
 }
 
@@ -274,6 +288,7 @@ function settingsPage(newState) {
 		case 0:
 			{
 				LoadThemes();
+				LoadIcons();
 				ui.style.display = "";
 				uiButton.classList.add("active");
 			}

@@ -204,7 +204,7 @@ input:active {
 	top: 600px;
 	left: 900px;
 }
-#themeList {
+#themeList, #iconList {
 	text-align: left;
 }
 .themeCard {
@@ -253,6 +253,9 @@ input:active {
 }
 #publicworldlist > * > img {
 	width: 220px !important;
+}
+#publicworldlist > * > p {
+	text-align: center;
 }
 #publicworldlist > * > button {
 	width: 200px !important;
