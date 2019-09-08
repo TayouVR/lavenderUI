@@ -75,6 +75,7 @@ input:active {
 
 	.avatarCard p {
 		font: 25px;
+		margin-top: 10px;
 	}
 
 .avatarImage {
@@ -249,12 +250,16 @@ input:active {
 }
 #publicworldlist > * {
 	float: left;
+	display: table-column;
 	width: 220px !important;
 }
 #publicworldlist > * > img {
 	width: 220px !important;
 }
 #publicworldlist > * > p {
+	margin-top: 10px;
+	height: 60px;
+	margin-bottom: 10px;
 	text-align: center;
 }
 #publicworldlist > * > button {
