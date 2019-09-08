@@ -197,7 +197,7 @@ function ClickDiscord() {
 }
 
 function LoadSettings() {
-	LoadThemes();
+	settingsPage(0);
 }
 
 function LoadThemes() {
@@ -213,15 +213,16 @@ function LoadThemes() {
 }
 
 function ChangeTheme(name) {
-	console.log("trying to load " + name);
-    var fileref=document.createElement("link")
-    fileref.setAttribute("id", "colorHolder")
-    fileref.setAttribute("rel", "stylesheet")
-    fileref.setAttribute("href", "/themes/supra/colors/colors-" + name + ".css")
+	/*console.log("trying to load " + name);
+    var fileref=document.createElement("link");
+    fileref.setAttribute("id", "colorHolder");
+    fileref.setAttribute("rel", "stylesheet");
+    fileref.setAttribute("href", "/themes/supra/colors/colors-" + name + ".css");
 	console.log("trying to add " + fileref + " to head");
 
 	document.getElementsByTagName("head")[0].removeChild(document.getElementById("colorHolder"));
-    document.getElementsByTagName("head")[0].appendChild(fileref)
+    document.getElementsByTagName("head")[0].appendChild(fileref)*/
+	document.getElementById("colorHolder").innerHTML = '<link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-' + name + '.css">';
 }
 
 /*document.addEventListener('keyup', (e) => {
@@ -234,3 +235,66 @@ function ChangeTheme(name) {
 	}
 });
 */
+
+function settingsPage(newState) {
+	//newState is a state enum with the values:
+	//0 UI
+	//1 Graphics
+	//2 Gameplay
+	//3 Audio
+
+	console.log("[JS] Switching settings page to " + newState);
+
+	//Grab the various elements we care about
+
+	var ui = document.getElementById("uiSettings");
+	var graphics = document.getElementById("graphicsSettings");
+	var gameplay = document.getElementById("gameplaySettings");
+	var audio = document.getElementById("audioSettings");
+
+	//buttons
+	var uiButton = document.getElementById("uiButton");
+	var graphicsButton = document.getElementById("graphicsButton");
+	var gameplayButton = document.getElementById("gameplayButton");
+	var audioButton = document.getElementById("audioButton");
+
+	//Hide all of them
+	ui.style.display = "none";
+	graphics.style.display = "none";
+	gameplay.style.display = "none";
+	audio.style.display = "none";
+
+	uiButton.classList.remove("active");
+	graphicsButton.classList.remove("active");
+	gameplayButton.classList.remove("active");
+	audioButton.classList.remove("active");
+
+	//Show the ones for the state we just entered
+	switch (parseInt(newState)) {
+		case 0:
+			{
+				LoadThemes();
+				ui.style.display = "";
+				uiButton.classList.add("active");
+			}
+			break;
+		case 1:
+			{
+				graphics.style.display = "";
+				graphicsButton.classList.add("active");
+			}
+			break;
+		case 2:
+			{
+				gameplay.style.display = "";
+				gameplayButton.classList.add("active");
+			}
+			break;
+		case 3:
+			{
+				audio.style.display = "";
+				audioButton.classList.add("active");
+			}
+			break;
+	}
+}

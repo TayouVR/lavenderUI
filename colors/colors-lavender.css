@@ -8,6 +8,8 @@ html {
 
 	/* buttons (<button> aswell as <input>[button] and <input>[submit]) */
 	--buttonBGColor: #100021; /* background */
+	--buttonBGColorActive: #17002D; /* background */
+	--buttonBGColorHover: #17002D; /* background */
 	--buttonFGColor: var(--textColor); /* foreground */
 
 	/* focused element. Things like <input> */

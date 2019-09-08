@@ -2,7 +2,9 @@
 <head>
     <script src="Graph.js"></script>
 	<script src="/themes/supra/main.js"></script>
-    <link id="colorHolder" rel="stylesheet" href="/themes/supra/colors/colors-lavender.css">
+	<div id="colorHolder">
+    	<link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-lavender.css">
+	</div>
     <link rel="stylesheet" href="/themes/supra/icons/dark/icons.css">
     <link rel="stylesheet" href="/themes/supra/Common.css">
 </head>
@@ -35,7 +37,7 @@
         <div class="column right">
             <div class="content">
                 <img src="logoflat.png" style="height:40px;" />
-                <div class="version" style="text-decoration:none;font-size:20px;font-family:serif;color:rgb(216, 215, 195);font-style:oblique;">Version</div>
+                <div class="version">Version</div>
             </div>
         </div>
     </div>
@@ -83,7 +85,7 @@
                 <div id="discordProfile"></div>
 
                 <img src="logoflat.png" style="height:40px;" />
-                <div class="version" style="text-decoration:none;font-size:20px;font-family:serif;color:rgb(216, 215, 195);font-style:oblique;">Version</div>
+                <div class="version">Version</div>
             </div>
         </div>
 
@@ -127,21 +129,33 @@
 
     <div id="settings" style="display:none">
         <div class="column left">
-            <div class="content">
-                <button class="vertical-tab" onclick="settingsPage(0)"><div>Appearance</div></button>
-
-                <!-- Not sure what to put on the left hand side yet... -->
-
-            </div>
+            <button id="uiButton" class="vertical-tab" onclick="settingsPage(0)"><div>UI</div></button>
+            <button id="graphicsButton" class="vertical-tab" onclick="settingsPage(1)"><div>Graphics</div></button>
+	        <button id="gameplayButton" class="vertical-tab" onclick="settingsPage(2)"><div>Gameplay</div></button>
+	        <button id="audioButton" class="vertical-tab" onclick="settingsPage(3)"><div>Audio</div></button>
         </div>
 
         <div class="column middle">
             <div class="content">
                 <h2>Settings</h2>
                 <br />
-				<div id="appearance-settings">
+				<div id="uiSettings">
 					<div style="text-align: left;">Color Palettes</div>
 					<div id="themeList" ></div>
+					<div style="text-align: left;">Icons</div>
+					<div id="iconList" ></div>
+				</div>
+
+				<div id="graphicsSettings">
+					<div style="text-align: left;">Graphics</div>
+				</div>
+
+				<div id="gameplaySettings">
+					<div style="text-align: left;">Gameplay</div>
+				</div>
+
+				<div id="audioSettings">
+					<div style="text-align: left;">Audio</div>
 				</div>
             </div>
         </div>
@@ -154,7 +168,7 @@
                 <div id="discordProfile"></div>
 
                 <img src="logoflat.png" style="height:40px;" />
-                <div id="version" style="text-decoration:none;font-size:20px;font-family:serif;color:rgb(216, 215, 195);font-style:oblique;">Version</div>
+                <div class="version" >Version</div>
             </div>
         </div>
     </div>
