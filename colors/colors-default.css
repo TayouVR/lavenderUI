@@ -1,0 +1,45 @@
+html {
+	/* general text color */
+	--textColor: #FFFFFF;
+
+	/* colors for a active menu element (e.g. menu point for content menu) */
+	--activeBGcolor: #101010; /* background */
+	--activeFGcolor: #000000; /* foreground */
+
+	/* buttons (<button> aswell as <input>[button] and <input>[submit]) */
+	--buttonBGColor: #101010; /* background */
+	--buttonBGColorActive: #070707; /* background */
+	--buttonBGColorHover: #000000; /* background */
+	--buttonFGColor: var(--textColor); /* foreground */
+
+	/* focused element. Things like <input> */
+	--focusedElementBackgroundColor: var(--activeBGcolor);
+	--focusedElementColor: var(--textColor);
+
+	/* general UI colors */
+	--backgroundColor: rgba(21, 21, 21, 0.72); /* background */
+	--borderColor: #FFFFFF; /* border */
+	--borderColorSec: #090909; /* secondary border (buttons and elements inside the main UI) */
+	--inputBackgroundColor: #191919;
+
+	/************************************
+	***********single elements***********
+	************************************/
+
+	--menuButtonBackground: var(--backgroundColor);
+	--menuButtonBorder: var(--borderColor);
+	--menuButtonText: var(--textColor);
+
+	--inputBackground: var(--inputBackgroundColor);
+	--inputBorder: var(--borderColorSec);
+	--inputText: var(--buttonFGColor);
+
+	--buttonBackground: var(--buttonBGColor);
+	--buttonBorder: var(--borderColorSec);
+	--buttonText: var(--buttonFGColor);
+
+	--avatarCardBackground: var(--buttonBGColor);
+	--avatarCardBorder: var(--borderColorSec);
+	--avatarCardText: var(--textColor);
+
+}
