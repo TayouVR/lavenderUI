@@ -335,3 +335,29 @@ input:active {
     margin-top: 0px;
 	margin-bottom: 0px;
 }
+
+.drop-down {
+    width: 100%;
+    background-color: var(--backgroundColor);
+    border: solid 2px;
+    position: relative;
+    height: 64px;
+    font-size: 40px;
+}
+
+.drop-down-inner {
+    display: block;
+    position: absolute;
+    background-color: var(--backgroundColor);
+    font-size: 40px;
+}
+
+.drop-down-option:hover {
+    border: 2px solid;
+}
+
+.drop-down-label {
+    font-size: 32px;
+    line-height: 64px;
+    vertical-align: middle;
+}
