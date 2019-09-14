@@ -17,7 +17,7 @@ html {
 	--focusedElementColor: var(--textColor);
 
 	/* general UI colors */
-	--backgroundColor: rgba(21, 21, 21, 0.72); /* background */
+	--backgroundColor: #151515B7; /* background */
 	--borderColor: #FFFFFF; /* border */
 	--borderColorSec: #090909; /* secondary border (buttons and elements inside the main UI) */
 	--inputBackgroundColor: #191919;
