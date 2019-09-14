@@ -2,143 +2,282 @@
 <head>
     <script src="Graph.js"></script>
 	<script src="/themes/supra/main.js"></script>
-	<div id="colorHolder">
-    	<link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-lavender.css">
-	</div>
+    <link rel="stylesheet" href="Common.css">
+    <link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-lavender.css">
     <link rel="stylesheet" href="/themes/supra/icons/dark/icons.css">
     <link rel="stylesheet" href="/themes/supra/Common.css">
 </head>
 <body style="width:2400px;height:1200px;">
 
-    <div id="login" style="display:none">
+    <div id="login">
+        <div class="col-center">
+            <div class="row">
+                <div class="row" style="height:550px">
+                    <div style="width: 100%;">
+                        <img src="logoflat.png" style="position:relative; width:100%; top: 300px;" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-1">
 
-        <div class="column left">
-            <div class="content">
-                <h2>Side</h2>
-                <br />
-                <button onclick="ClickDiscord()"><div>Join us on discord</div></button>
+                    </div>
+                    <div class="col col-10">
+                        <div id="loginBox" class="center center-text content" style="background-color: rgba(45, 15, 49, 0.86); padding-top: 32px; padding-bottom: 32px;">
+                            <input id="email" type="text" style="width:60%; margin-bottom: 8px;" placeholder="Email" />
+                            <div style="position:relative; margin-bottom: 8px;">
+                                <input id="password" type="password" style=" position:relative; width:60%;" placeholder="Password" />
+                                <button onclick="togglePasswordField(this);" style="position:absolute; top:0px; left:82%">Show</button>
+                            </div>
+                            <p id="errorText" style="display:none;">Error text</p>
+                            <button id="loginButton" onclick="Login()">Login</button>
+                        </div>
+                        <div id="loginLoader" class="center center-text" style="vertical-align:middle ;display: none;background-color: rgba(21, 21, 21, 0.72); padding-top: 100px;padding-bottom: 100px;">
+                            <h1>Logging in</h1>
+                        </div>
+                    </div>
+                    <div class="col col-1">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="main">
+        <div class="col-left">
+            <div class="col col-1"></div>
+            <div class="col col-10 content" style="background-color:rgba(21, 21, 21, 0.72); height: 800px;">
+                <div class="row center center-text"><h1>Notifications</h1></div>
+                <div class="row">
+                    <div class="col col-1"></div>
+                    <div id="notifications" class="col col-10">
+                        <div class="notificationItem row">
+                            <div class="col col-10" style="line-height: 24px; font-size: 24px; padding: 0px;">
+                                <p>Example Notification</p>
+                                <p>This is a notifcation WIP</p>
+                            </div>
+                            <div class="col col-2 center center-text" style="line-height: 100px; background-color: grey; color:red" onclick="DismissNotification('guid')"><h1>X</h1></div>
+                        </div>
+                        <div class="notificationItem row">
+                            <div class="col col-10" style="line-height: 24px; font-size: 24px;">
+                                <p>Example Notification 2</p>
+                                <p>A second notification.</p>
+                            </div>
+                            <div class="col col-2 center center-text" style="line-height: 100px; background-color: grey; color:red" onclick="DismissNotification('guid')"><h1>X</h1></div>
+                        </div>
+                    </div>
+                    <div class="col col-1"></div>
+                </div>
+
+            </div>
+            <div class="col col-1"></div>
+        </div>
+        <div class="col-center">
+            <div class="row content" style="background-color:rgba(21, 21, 21, 0.72);">
+                <div class="center center-text" style="max-width: 400px;">
+                    <div style="border-radius:200px; max-width:400px; margin-left: auto; margin-right: auto">
+                        <img id="profileImage" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" height="400" width="400" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="row content" style="background-color:rgba(21, 21, 21, 0.72); margin-top: 16px; padding: 16px;">
+                <div class="center center-text">
+                    <h1 id="nameText">Hello</h1>
+                </div>
+            </div>
+            <div class="row content" style="background-color:rgba(21, 21, 21, 0.72); margin-top: 16px; padding: 16px;">
+                <div class="center center-text">
+                    <input style="width:60%; margin-bottom: 8px;" id="ip" type="text" placeholder="127.0.0.1" />
+                    <input style="width:60%; margin-bottom: 8px;" id="port" type="password" value="10000" placeholder="10000" />
+                    <br />
+                    <button style="padding-top: 16px; padding-bottom: 16px; padding-right: 64px; padding-left: 64px;"  onclick="Connect()">Connect</button>
+                    <button style="padding-top: 16px; padding-bottom: 16px; padding-right: 64px; padding-left: 64px;"  onclick="game.Disconnect()">Disconnect</button>
+                    <br />
+                    <h3 id="connectFail" style="display:none;color:red;border:2px solid red;">Fail reason</h3>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-right">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col col-12 content" style="background-color:rgba(21, 21, 21, 0.72);">
+                        <div style="height: 200px;"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-12 content" style="background-color:rgba(21, 21, 21, 0.72);">
+                        <div style="height: 200px;"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-12 content" style="background-color:rgba(21, 21, 21, 0.72);">
+                        <div style="height: 200px;"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-12 content" style="background-color:rgba(21, 21, 21, 0.72);">
+                        <div style="height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+
+    <div id="content" class="content-main" style="box-sizing: border-box;">
+        <div class="col-left">
+            <div class="row">
+                <div class="col col-1"></div>
+                <div class="col col-10 content" style="background-color:rgba(21, 21, 21, 0.72);">
+                    <div id="noAssetText" class="center center-text" >
+                        <h1 style="line-height: 500px;">No Asset Selected</h1>
+                    </div>
+                    <div id="assetInfo" style="position: relative; display: none;">
+                        <div class="center center-text" style="margin-top: 16px;">
+                            <img id="assetInfoImage" src="https://via.placeholder.com/256x256" />
+                        </div>
+                        <div id="assetInfoName" style="padding: 0px;font-size: 48px;line-height: 32px; margin-top: 16px; margin-left: 16px;">
+                            Name
+                        </div>
+                        <div id="assetInfoDescription" style="height: 400px;font-size: 32px; margin: 16px; overflow: hidden;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse auctor nibh et velit volutpat, ut consectetur orci varius. Donec condimentum massa nisl, in bibendum est consequat vitae. Aliquam mollis luctus tortor, ac ultrices ipsum commodo vel. Phasellus at interdum purus. Fusce eget porta sem. Vestibulum sit amet porttitor velit. Nulla blandit fringilla dignissim. Sed ipsum diam, dictum a congue quis, tempor at ligula. Aenean blandit lacus sit amet varius tempor. Fusce luctus magna et mi feugiat blandit. Aliquam lobortis, dolor at imperdiet vehicula, nisl risus dapibus velit, sed fringilla enim odio sit amet metus. Nullam gravida nisl ac imperdiet ultricies. Suspendisse posuere fringilla felis, at cursus neque tempus ac. In posuere lorem ante, sed pharetra urna lobortis vulputate. Maecenas aliquet faucibus eros, vitae ultricies lectus semper in. Cras vitae diam non turpis aliquam blandit vitae a nulla.
+                        </div>
+                        <div id="assetInfoSize" style="font-size: 32px; margin-left: 16px;">
+                            Size: 16mb
+                        </div>
+                        <div id="assetInfoButtons" style="margin-top: 16px;">
+                            <button style="width: 50%; border: none; padding-left: 0px; padding-right: 0px; margin: 0px; font-size: 32px; line-height: 48px; ">Subscribe</button>
+                            <button style="width: 50%; border: none; padding-left: 0px; padding-right: 0px; margin: 0px; font-size: 32px; line-height: 48px;">Favorite</button>
+                            <button style="display: block; line-height: 48px; font-size: 32px; margin-top: 16px;">Spawn</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-1"></div>
             </div>
         </div>
 
-        <div class="column middle">
-            <div class="content">
-                <h2>Login</h2>
+        <div class="col-center">
+            <div class="content-items content" style="background-color:rgba(21, 21, 21, 0.72);">
+                <div class="row content-row">
+                    <div class="content-item">
+                        <img src="loading.gif" data-loaded="false" />
+                        <p></p>
+                    </div>
+                    <div class="content-item">
+                        <img src="loading.gif" data-loaded="false" />
+                        <p></p>
+                    </div>
+                    <div class="content-item">
+                        <img src="loading.gif" data-loaded="false" />
+                        <p></p>
+                    </div>
+                </div>
+                <div class="row content-row">
+                    <div class="content-item">
+                        <img src="loading.gif" data-loaded="false" />
+                        <p></p>
+                    </div>
+                    <div class="content-item">
+                        <img src="loading.gif" data-loaded="false" />
+                        <p></p>
+                    </div>
+                    <div class="content-item">
+                        <img src="loading.gif" data-loaded="false" />
+                        <p></p>
+                    </div>
+                </div>
+                <div class="row content-row">
+                    <div class="content-item"></>
+                        <img src="loading.gif" data-loaded="false" />
+                        <p></p>
+                    </div>
+                    <div class="content-item">
+                        <img src="loading.gif" data-loaded="false" />
+                        <p></p>
+                    </div>
+                    <div class="content-item">
+                        <img src="loading.gif" data-loaded="false" />
+                        <p></p>
+                    </div>
+                </div>
                 <br />
-                <input id="username" type="text" placeholder="email@email.com" />
-                <input id="password" type="password" placeholder="password"/>
-                <button onclick="Login()"><div>Login</div></button>
                 <br />
-                <button onclick="TogglePassword()"><div>hide/show password</div></button>
+                <div class="row center center-text" style="margin-top: -50px;">
+                    <button class="content-items-prev" onclick="game.PreviousPage()">Previous</button>
+                    <button class="content-items-n ext" onclick="game.NextPage()">Next</button>
 
-                <h3 id="loginFail" style="display:none;color:red;border:2px solid red;">Fail reason</h3>
+                </div>
             </div>
         </div>
 
-        <div class="column right">
-            <div class="content">
-                <img src="logoflat.png" style="height:40px;" />
-                <div class="version">Version</div>
+
+        <div class="col-right">
+            <div class="row">
+                <div class="col col-1"></div>
+                <div class="col col-10 search-options content" style="background-color:rgba(21, 21, 21, 0.72);">
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col col-4 drop-down-label">
+                            <p>Type</p>
+                        </div>
+                        <div class="col col-8">
+                            <div id="dropDownType" class="drop-down">
+                                <div class="drop-down-text" onclick="openDropDown(this, typeOptions)">Avatar</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col col-4 drop-down-label">
+                            <p>Order By</p>
+                        </div>
+                        <div class="col col-8">
+                            <div id="dropDownOrder" class="drop-down">
+                                <div class="drop-down-text" onclick="openDropDown(this, orderByOptions)">Date Added</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col col-4 drop-down-label">
+                            <p>Date</p>
+                        </div>
+                        <div class="col col-8">
+                            <div id="dropDownTime" class="drop-down">
+                                <div class="drop-down-text" onclick="openDropDown(this, dateOptions)">All Time</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom:50px;">
+                        <div id="personalText" style="font-size: 32px;">Personal: False</div>
+                        <button style="font-size: 32px;" onclick="game.ChangeSearchSetting('personal', '')">Toggle Personal</button>
+                    </div>
+                    <div class="row" style="margin-top: 60px;">
+                        <p>My content status</p>
+                    </div>
+                </div>
+                <div class="col col-1"></div>
             </div>
+
+
         </div>
     </div>
 
-    <div id="loginInProgress" class="content" style="display:none">
-        <div>Logging in</div>
-    </div>
 
-    <div id="main" style="display:none">
-        <div class="column left">
-            <div class="content">
-                <button onclick="ClickDiscord()"><div>Join us on discord</div></button>
-
-                <!-- Not sure what to put on the left hand side yet... -->
-
+    <div id="settings">
+        <div class="col-center">
+            <div class="row">
+                <div class="top-tab-container">
+                    <div class="tab tab-left" onclick="settingsPage(0)">Game</div>
+                    <div class="tab" onclick="settingsPage(1)">Graphics</div>
+                    <div class="tab" onclick="settingsPage(2)">Audio</div>
+                    <div class="tab" onclick="settingsPage(3)">Online</div>
+                    <div class="tab tab-right" onclick="settingsPage(4)">UI</div>
+                </div>
             </div>
-        </div>
-
-        <div class="column middle">
-            <div class="content">
-                <h2>Main Content</h2>
-                <br />
-                <button onclick="game.Logout()"><div>Logout</div></button>
-                <p>You are logged in, look below under content to select your avatar.</p>
-
-				<div class="borderedBox">
-					connect to server<br>
-					<input id="ip" type="text" placeholder="127.0.0.1" />
-					<input id="port" type="number" placeholder="port" value="10000" />
-					<button onclick="Connect()"><div>Connect</div></button>
-					<button onclick="game.Disconnect()"><div>Disconnect</div></button>
-				</div>
-                <br />
-                <h3 id="connectFail" style="display:none;color:red;border:2px solid red;">Fail reason</h3>
-
-                <button onclick="game.TeleportPlayerToSpawn()">Teleport to Spawn</button>
-            </div>
-        </div>
-
-        <div class="column right">
-            <div class="content">
-                <h2>Profiles</h2>
-                <div id="profile"></div>
-                <div id="steamProfile"></div>
-                <div id="discordProfile"></div>
-
-                <img src="logoflat.png" style="height:40px;" />
-                <div class="version">Version</div>
-            </div>
-        </div>
-
-    </div>
-
-    <div id="social" style="display:none">
-        <div class="centerInfoBox">Social</div>
-    </div>
-
-    <div id="content" style="display:none">
-        <div class="content" style="width:95%;height:75%;position:absolute;top:0;">
-            <p>Avatars</p>
-            <div id="avatarlist"></div>
-            <p>Worlds</p>
-            <div id="worldlist"></div>
-        </div>
-
-    </div>
-
-    <div id="galaxy" style="display:none">
-        <div class="centerInfoBox">Galaxy - Coming soon!</div>
-    </div>
-
-    <div id="testing" style="display:none">
-        <div class="content" style="width:95%;height:75%;position:absolute;top:0;">
-			<div class="listTitle">
-	            <label>Public Avatars</label>
-	            <button onclick="game.PrevAvatarPage()">Prev page</button>
-	            <button onclick="game.NextAvatarPage()">Next page</button>
-			</div>
-            <div id="publicavatarlist"></div>
-
-			<div class="listTitle">
-	            <label>Public Worlds</label>
-	            <button onclick="game.PrevWorldPage()">Prev page</button>
-	            <button onclick="game.NextWorldPage()">Next page</button>
-			</div>
-            <div id="publicworldlist"></div>
-        </div>
-    </div>
-
-    <div id="settings" style="display:none">
-        <div class="column left">
-            <button id="uiButton" class="vertical-tab" onclick="settingsPage(0)"><div>UI</div></button>
-            <button id="graphicsButton" class="vertical-tab" onclick="settingsPage(1)"><div>Graphics</div></button>
-	        <button id="gameplayButton" class="vertical-tab" onclick="settingsPage(2)"><div>Gameplay</div></button>
-	        <button id="audioButton" class="vertical-tab" onclick="settingsPage(3)"><div>Audio</div></button>
-        </div>
-
-        <div class="column middle">
-            <div class="content">
-                <h2>Settings</h2>
-                <br />
+            <div class="row content" style="height: 870px; background-color: rgba(21, 21, 21, 0.72);">
 				<div id="uiSettings">
 					<div style="text-align: left;">Color Palettes</div>
 					<div id="themeList" ></div>
@@ -160,34 +299,21 @@
             </div>
         </div>
 
-        <div class="column right">
-            <div class="content">
-                <h2>Profiles</h2>
-                <div id="profile"></div>
-                <div id="steamProfile"></div>
-                <div id="discordProfile"></div>
-
-                <img src="logoflat.png" style="height:40px;" />
-                <div class="version" >Version</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="connecting" style="display:none">
-
-        <div class="centerInfoBox">
-            Connecting to server
-        </div>
 
     </div>
 
-    <div id="menuButtons" style="display:none;">
-        <button id="mainButton" onclick="game.SwitchTo(2)"><div>Main</div></button>
-        <button id="socialButton" onclick="game.SwitchTo(3)"><div>Social</div></button>
-        <button id="contentButton" onclick="game.SwitchTo(4)"><div>Content</div></button>
-        <button id="galaxyButton" onclick="game.SwitchTo(5)"><div>Galaxy</div></button>
-        <button id="testingButton" onclick="game.SwitchTo(6)"><div>Testing</div></button>
-        <button id="settingsButton" onclick="game.SwitchTo(7)"><div>Settings</div></button>
+
+	<div id="menuButtons">
+		<button id="mainButton" onclick="ChangeState(2);"><div>Home</div></button>
+		<button id="contentButton" onclick="ChangeState(4);"><div>Content</div></button>
+		<button id="galaxyButton" onclick=""><div>Galaxy</div></button>
+		<button id="socialButton" onclick=""><div>Social</div></button>
+		<button id="settingsButton" onclick="ChangeState(7);"><div>Settings</div></button>
+	</div>
+
+    <div id="loginInProgress">
+
+
     </div>
 </body>
 </html>

@@ -3,9 +3,12 @@
 	color: var(--textColor);
 	font-size: 2rem;
 }
+h1 {
+	font-size: 2em;
+}
 h2 {
 	text-align: center;
-	font-size: 3rem;
+	font-size: 1em;
 }
 .version {
     text-decoration: none;
@@ -37,7 +40,7 @@ input:focus {
 	background-color: var(--focusedElementBackgroundColor);
 	color: var(--focusedElementColor);
 }
-input[type=button], input[type=submit], button{
+input[type=button] , input[type=submit] , button {
 	height: 50px;
 	background-color: var(--buttonBGColor);
 	border-style: solid;
@@ -100,8 +103,8 @@ input:active {
 
 #menuButtons {
 	position: absolute;
-	left: 660px;
-	bottom: 80;
+	left: 770px;
+	bottom: 50;
 }
 
 	#menuButtons button {
@@ -124,6 +127,10 @@ input:active {
 			vertical-align: middle;
 			font-size: 2rem;
 		}
+
+    #menuButtons button:hover {
+		background-color: var(--buttonBGColorHover);
+    }
 #mainButton {
 	background-image: var(--main-icon);
 }
@@ -182,10 +189,9 @@ input:active {
 
 .content {
 	padding: 8px;
-	margin: 20px;
 	margin-bottom: 0;
 	color: var(--textColor);
-	background-color: var(--backgroundColor);
+	background-color: var(--backgroundColor) !important;
 	border: 4px solid;
 	border-color: var(--borderColor);
 	font: 16px bold;
@@ -280,6 +286,79 @@ input:active {
 #settings > .left > * {
 	width: 400px;
 	margin: 10px;
+}
+
+.col-1 {
+    width: calc(100% / 12);
+}
+
+.col-2 {
+    width: calc(calc(100% / 12) * 2);
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width:  calc(calc(100% / 12) * 4);
+}
+
+.col-5 {
+    width:  calc(calc(100% / 12) * 5);
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width:  calc(calc(100% / 12) * 7);
+}
+
+.col-8 {
+    width:  calc(calc(100% / 12) * 8);
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: calc(calc(100% / 12) * 10);
+}
+
+.col-11 {
+    width:  calc(calc(100% / 12) * 11);
+}
+
+.col-12 {
+    width: 100%;
+}
+
+.tab {
+    display: inline-block;
+    width: calc(20% - 4px);
+    text-align: center;
+    line-height: 60px;
+    font-size: 32px;
+    background-color: var(--buttonBGColor);
+    border: solid 2px lightgrey;
+	border-radius: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+    .tab:hover {
+		background-color: var(--buttonBGColorHover);
+    }
 
 
+.tab-left {
+	border-top-left-radius: 16px;
+	border-bottom-right-radius: 16px; /* WTF? why do i have to switch left and right around on the bottom one??????*/
+}
+
+.tab-right {
+	border-top-right-radius: 16px;
+	border-bottom-left-radius: 16px; /* WTF? why do i have to switch left and right around on the bottom one??????*/
 }

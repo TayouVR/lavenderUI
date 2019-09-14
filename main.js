@@ -1,3 +1,130 @@
+var dateOptions = ["All Time", "Hour", "Day", "Week", "Month", "6 Months"];
+var orderByOptions = ["Date Added", "Name", "Type", "Subscribers", "Likes", "Size"];
+var typeOptions = ["Avatar", "World", "Prop", "Gamemode"];
+
+function nextPage() {
+	game.NextPage();
+}
+
+function previousPage() {
+	game.PreviousPage();
+}
+
+function updateSearchSettings(personal) {
+	document.getElementById("personalText").innerText = "Personal: " + personal;
+}
+
+
+function updateAssetInfo(asset) {
+
+	var a = JSON.parse(asset);
+	var name = document.getElementById("assetInfoName");
+	var desc = document.getElementById("assetInfoDescription");
+	var img = document.getElementById("assetInfoImage");
+	var size = document.getElementById("assetInfoSize");
+	var buttonContainer = document.getElementById("assetInfoButtons");
+
+	name.innerText = a.Name;
+	desc.innerText = a.Description;
+	size.innerText = a.Size;
+
+	img.src = a.AssetImageURL + "-sm";
+
+	if (a.Type == 1) {
+		buttonContainer.lastElementChild.addEventListener("click", function (event) {
+			game.SpawnAvatar(a.ID);
+		});
+	}
+	else if (a.Type == 2) {
+		buttonContainer.lastElementChild.addEventListener("click", function (event) {
+			game.SpawnWorld(a.ID);
+		});
+	}
+
+	document.getElementById("noAssetText").style.display = "none";
+	document.getElementById("assetInfo").style.display = "block";
+}
+
+
+
+function selectDropDown(option, id) {
+
+	var doc = document.getElementById(id);
+	doc.getElementsByClassName("drop-down-text")[0].innerText = option;
+
+	game.ChangeSearchSetting(id, option);
+
+	closeDropDown();
+}
+
+function closeDropDown() {
+	var elms = document.getElementsByClassName("drop-down-inner");
+
+	for (var i = 0; i < elms.length; i++) {
+		elms[i].remove();
+	}
+}
+
+function openDropDown(elm, array) {
+	var p = elm.parentElement;
+	var rect = p.getBoundingClientRect();
+
+	var elms = document.getElementsByClassName("drop-down-inner");
+
+	for (var i = 0; i < elms.length; i++) {
+		elms[i].remove();
+	}
+
+	var inner = document.createElement("div");
+	inner.classList.add("drop-down-inner");
+
+	for (var i = 0; i < array.length; i++) {
+		var t = document.createElement("div");
+		t.classList.add("drop-down-option");
+		t.innerText = array[i];
+		t.setAttribute("onclick", "selectDropDown('" + array[i] + "', '" + p.id + "')");
+		inner.appendChild(t);
+	}
+
+	inner.style.position = "fixed";
+	inner.style.top = rect.y + 64;
+	inner.style.left = rect.x;
+
+	p.parentElement.parentElement.parentElement.appendChild(inner);
+}
+
+function togglePasswordField(elm) {
+
+	var p = document.getElementById('password');
+
+	var data = p.value;
+
+
+	if (p.type == 'text')
+		p.type = 'password';
+	else if (p.type == 'password')
+		p.type = 'text';
+
+	p.value = "";
+	p.value = data;
+
+}
+
+
+function UpdateProfileData(profile) {
+	var obj = JSON.parse(profile);
+	document.getElementById("nameText").innerText = obj.DisplayName;
+
+}
+
+function SetProfileImage(image) {
+	document.getElementById("profileImage").src = image;
+}
+
+
+function SetName(name) {
+	document.getElementById("nameText").innerText = "Hello " + name + "!";
+}
 
 //Exposed functions for the game to call to change things
 function ChangeState(newState) {
@@ -18,40 +145,39 @@ function ChangeState(newState) {
 	var menuButtons = document.getElementById("menuButtons");
 
 	var login = document.getElementById("login");
-	var loginInProgress = document.getElementById("loginInProgress");
 	var main = document.getElementById("main");
-	var social = document.getElementById("social");
+	var loginInProgress = document.getElementById("loginInProgress");
+	//var social = document.getElementById("social");
 	var content = document.getElementById("content");
-	var galaxy = document.getElementById("galaxy");
-	var testing = document.getElementById("testing");
+	//var galaxy = document.getElementById("galaxy");
+	//var testing = document.getElementById("testing");
 	var settings = document.getElementById("settings");
-	var connecting = document.getElementById("connecting");
+	//var connecting = document.getElementById("connecting");
+
 
 	//buttons
 	var mainButton = document.getElementById("mainButton");
 	var socialButton = document.getElementById("socialButton");
 	var contentButton = document.getElementById("contentButton");
 	var galaxyButton = document.getElementById("galaxyButton");
-	var testingButton = document.getElementById("testingButton");
 	var settingsButton = document.getElementById("settingsButton");
 
 	//Hide all of them
 	menuButtons.style.display = "none";
 	login.style.display = "none";
-	loginInProgress.style.display = "none";
+	//loginInProgress.style.display = "none";
 	main.style.display = "none";
-	social.style.display = "none";
+	//social.style.display = "none";
 	content.style.display = "none";
-	galaxy.style.display = "none";
-	testing.style.display = "none";
+	//galaxy.style.display = "none";
+	//testing.style.display = "none";
 	settings.style.display = "none";
-	connecting.style.display = "none";
+	//connecting.style.display = "none";
 
 	mainButton.classList.remove("active");
 	socialButton.classList.remove("active");
 	contentButton.classList.remove("active");
 	galaxyButton.classList.remove("active");
-	testingButton.classList.remove("active");
 	settingsButton.classList.remove("active");
 
 	//Show the ones for the state we just entered
@@ -118,7 +244,9 @@ function ChangeState(newState) {
 }
 
 function FailToLogin(reason) {
-	var fail = document.getElementById("loginFail");
+	document.getElementById("loginBox").style.display = "block";
+	document.getElementById("loginLoader").style.display = "none";
+	var fail = document.getElementById("errorText");
 	fail.innerText = reason;
 	fail.style.display = "block";
 }
@@ -138,39 +266,16 @@ function TogglePassword() {
     }
 }
 
-//Avatar cards are created and added to the first element with the id avatarlist
-
-function FailToGetAvatars(reason) {
-
-}
-
-function TogglePassword() {
-	var pass = document.getElementById("password");
-	var type = pass.getAttribute("type");
-	var value = pass.getAttribute("value");
-
-	if (type == "password") {
-		pass.setAttribute("type", "text");
-		value += "-";
-		value = value.substring(0, value.length - 1);
-		console.log(type + " -> text");
-	}
-	else
-	{
-		pass.setAttribute("type", "password");
-		value += "-";
-		value = value.substring(0, value.length - 1);
-		console.log(type + " -> password");
-	}
-}
-
 function Login() {
 	//clear the error text before starting to login
-	var fail = document.getElementById("loginFail");
+	var fail = document.getElementById("errorText");
 	fail.innerText = "";
 	fail.style.display = "none";
 
-	var user = document.getElementById("username").value;
+	document.getElementById("loginBox").style.display = "none";
+	document.getElementById("loginLoader").style.display = "block";
+
+	var user = document.getElementById("email").value;
 	var pass = document.getElementById("password").value;
 	game.Login(user, pass);
 }
@@ -252,45 +357,48 @@ function ChangeTheme(name) {
 
 function settingsPage(newState) {
 	//newState is a state enum with the values:
-	//0 UI
+	//0 Gameplay
 	//1 Graphics
-	//2 Gameplay
-	//3 Audio
+	//2 Audio
+	//3 Online
+	//4 UI
 
 	console.log("[JS] Switching settings page to " + newState);
 
 	//Grab the various elements we care about
 
-	var ui = document.getElementById("uiSettings");
-	var graphics = document.getElementById("graphicsSettings");
 	var gameplay = document.getElementById("gameplaySettings");
+	var graphics = document.getElementById("graphicsSettings");
 	var audio = document.getElementById("audioSettings");
+	var online = document.getElementById("onlineSettings");
+	var ui = document.getElementById("uiSettings");
 
 	//buttons
-	var uiButton = document.getElementById("uiButton");
-	var graphicsButton = document.getElementById("graphicsButton");
 	var gameplayButton = document.getElementById("gameplayButton");
+	var graphicsButton = document.getElementById("graphicsButton");
 	var audioButton = document.getElementById("audioButton");
+	var onlineButton = document.getElementById("onlineButton");
+	var uiButton = document.getElementById("uiButton");
 
 	//Hide all of them
-	ui.style.display = "none";
-	graphics.style.display = "none";
 	gameplay.style.display = "none";
+	graphics.style.display = "none";
 	audio.style.display = "none";
+	online.style.display = "none";
+	ui.style.display = "none";
 
-	uiButton.classList.remove("active");
-	graphicsButton.classList.remove("active");
 	gameplayButton.classList.remove("active");
+	graphicsButton.classList.remove("active");
 	audioButton.classList.remove("active");
+	onlineButton.classList.remove("active");
+	uiButton.classList.remove("active");
 
 	//Show the ones for the state we just entered
 	switch (parseInt(newState)) {
 		case 0:
 			{
-				LoadThemes();
-				LoadIcons();
-				ui.style.display = "";
-				uiButton.classList.add("active");
+				gameplay.style.display = "";
+				gameplayButton.classList.add("active");
 			}
 			break;
 		case 1:
@@ -301,14 +409,22 @@ function settingsPage(newState) {
 			break;
 		case 2:
 			{
-				gameplay.style.display = "";
-				gameplayButton.classList.add("active");
+				audio.style.display = "";
+				audioButton.classList.add("active");
 			}
 			break;
 		case 3:
 			{
-				audio.style.display = "";
-				audioButton.classList.add("active");
+				online.style.display = "";
+				onlineButton.classList.add("active");
+			}
+			break;
+		case 4:
+			{
+				LoadThemes();
+				LoadIcons();
+				ui.style.display = "";
+				uiButton.classList.add("active");
 			}
 			break;
 	}
