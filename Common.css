@@ -361,3 +361,8 @@ input:active {
     line-height: 64px;
     vertical-align: middle;
 }
+
+/* for a purple tint, wich was used on the login panel in the default UI*/
+.loginPanelTint {
+	background-color: var(--loginPanelTint) !important;
+}

@@ -42,4 +42,5 @@ html {
 	--avatarCardBorder: var(--borderColorSec);
 	--avatarCardText: var(--textColor);
 
+	--loginPanelTint: var(--backgroundColor);
 }

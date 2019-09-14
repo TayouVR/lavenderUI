@@ -22,7 +22,7 @@
 
                     </div>
                     <div class="col col-10">
-                        <div id="loginBox" class="center center-text content" style="background-color: rgba(45, 15, 49, 0.86); padding-top: 32px; padding-bottom: 32px;">
+                        <div id="loginBox" class="center center-text content purple" style="padding-top: 32px; padding-bottom: 32px;">
                             <input id="email" type="text" style="width:60%; margin-bottom: 8px;" placeholder="Email" />
                             <div style="position:relative; margin-bottom: 8px;">
                                 <input id="password" type="password" style=" position:relative; width:60%;" placeholder="Password" />
@@ -31,7 +31,7 @@
                             <p id="errorText" style="display:none;">Error text</p>
                             <button id="loginButton" onclick="Login()">Login</button>
                         </div>
-                        <div id="loginLoader" class="center center-text" style="vertical-align:middle ;display: none;background-color: rgba(21, 21, 21, 0.72); padding-top: 100px;padding-bottom: 100px;">
+                        <div id="loginLoader" class="center center-text content" style="vertical-align:middle ;display: none;background-color: rgba(21, 21, 21, 0.72); padding-top: 100px;padding-bottom: 100px;">
                             <h1>Logging in</h1>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
     <div id="main">
         <div class="col-left">
             <div class="col col-1"></div>
-            <div class="col col-10 content" style="background-color:rgba(21, 21, 21, 0.72); height: 800px;">
+            <div class="col col-10 content" style="height: 800px;">
                 <div class="row center center-text"><h1>Notifications</h1></div>
                 <div class="row">
                     <div class="col col-1"></div>
@@ -74,7 +74,7 @@
             <div class="col col-1"></div>
         </div>
         <div class="col-center">
-            <div class="row content" style="background-color:rgba(21, 21, 21, 0.72);">
+            <div class="row content" >
                 <div class="center center-text" style="max-width: 400px;">
                     <div style="border-radius:200px; max-width:400px; margin-left: auto; margin-right: auto">
                         <img id="profileImage" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" height="400" width="400" />
@@ -82,12 +82,12 @@
                 </div>
 
             </div>
-            <div class="row content" style="background-color:rgba(21, 21, 21, 0.72); margin-top: 16px; padding: 16px;">
+            <div class="row content" style="margin-top: 16px; padding: 16px;">
                 <div class="center center-text">
                     <h1 id="nameText">Hello</h1>
                 </div>
             </div>
-            <div class="row content" style="background-color:rgba(21, 21, 21, 0.72); margin-top: 16px; padding: 16px;">
+            <div class="row content" style="margin-top: 16px; padding: 16px;">
                 <div class="center center-text">
                     <input style="width:60%; margin-bottom: 8px;" id="ip" type="text" placeholder="127.0.0.1" />
                     <input style="width:60%; margin-bottom: 8px;" id="port" type="password" value="10000" placeholder="10000" />
@@ -104,22 +104,22 @@
             <div class="col-1"></div>
             <div class="col-10">
                 <div class="row">
-                    <div class="col col-12 content" style="background-color:rgba(21, 21, 21, 0.72);">
+                    <div class="col col-12 content">
                         <div style="height: 200px;"></div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-12 content" style="background-color:rgba(21, 21, 21, 0.72);">
+                    <div class="col col-12 content">
                         <div style="height: 200px;"></div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-12 content" style="background-color:rgba(21, 21, 21, 0.72);">
+                    <div class="col col-12 content">
                         <div style="height: 200px;"></div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-12 content" style="background-color:rgba(21, 21, 21, 0.72);">
+                    <div class="col col-12 content">
                         <div style="height: 200px;"></div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
         <div class="col-left">
             <div class="row">
                 <div class="col col-1"></div>
-                <div class="col col-10 content" style="background-color:rgba(21, 21, 21, 0.72);">
+                <div class="col col-10 content">
                     <div id="noAssetText" class="center center-text" >
                         <h1 style="line-height: 500px;">No Asset Selected</h1>
                     </div>
@@ -162,7 +162,7 @@
         </div>
 
         <div class="col-center">
-            <div class="content-items content" style="background-color:rgba(21, 21, 21, 0.72);">
+            <div class="content-items content">
                 <div class="row content-row">
                     <div class="content-item">
                         <img src="loading.gif" data-loaded="false" />
@@ -219,7 +219,7 @@
         <div class="col-right">
             <div class="row">
                 <div class="col col-1"></div>
-                <div class="col col-10 search-options content" style="background-color:rgba(21, 21, 21, 0.72);">
+                <div class="col col-10 search-options content">
                     <div class="row" style="margin-bottom: 50px;">
                         <div class="col col-4 drop-down-label">
                             <p>Type</p>
@@ -277,7 +277,7 @@
                     <div class="tab tab-right" onclick="settingsPage(4)">UI</div>
                 </div>
             </div>
-            <div class="row content" style="height: 870px; background-color: rgba(21, 21, 21, 0.72);">
+            <div class="row content" style="height: 800px;">
 				<div id="uiSettings">
 					<div style="text-align: left;">Color Palettes</div>
 					<div id="themeList" ></div>
@@ -313,7 +313,6 @@
 
 
     <div id="loginInProgress">
-
 
     </div>
 </body>
