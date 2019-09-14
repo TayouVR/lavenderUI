@@ -142,10 +142,10 @@ input:active {
 }
 #galaxyButton {
 	background-image: var(--galaxy-icon);
-}
+}/*
 #testingButton {
 	background-image: var(--testing-icon);
-}
+}*/
 #settingsButton {
 	background-image: var(--settings-icon);
 }
