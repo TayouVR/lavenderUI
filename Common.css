@@ -155,38 +155,6 @@ input:active {
 	position: absolute;
 }
 
-.column {
-	text-align: center;
-}
-
-	.column.left {
-		width: 25%;
-		height: 100%;
-		position: absolute;
-		right: 75%;
-	}
-
-	.column.right {
-		width: 25%;
-		height: 100%;
-		position: absolute;
-		left: 75%;
-	}
-
-	.column.middle {
-		width: 50%;
-		height: 100%;
-		position: absolute;
-		right: 25%;
-		left: 25%;
-	}
-	.column.rightMiddle {
-		width: 75%;
-		height: 100%;
-		position: absolute;
-		left: 25%;
-	}
-
 .content {
 	padding: 8px;
 	margin-bottom: 0;
