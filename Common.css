@@ -330,3 +330,8 @@ input:active {
 	border-top-right-radius: 16px;
 	border-bottom-left-radius: 16px; /* WTF? why do i have to switch left and right around on the bottom one??????*/
 }
+
+.content-row {
+    margin-top: 0px;
+	margin-bottom: 0px;
+}
