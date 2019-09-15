@@ -190,7 +190,8 @@ input:active {
     line-height: 60px;
     font-size: 32px;
     background-color: var(--buttonBGColor);
-    border: solid 2px lightgrey;
+    border: solid 2px;
+	border-color: var(--buttonBorder);
 	border-radius: 0px;
 	margin: 0px;
 	padding: 0px;
