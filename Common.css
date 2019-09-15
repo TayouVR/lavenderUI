@@ -1,13 +1,8 @@
 
 :root {
 	color: var(--textColor);
-	font-size: 2rem;
 }
 h1 {
-	font-size: 2em;
-}
-h2 {
-	text-align: center;
 	font-size: 1em;
 }
 .version {
@@ -254,54 +249,6 @@ input:active {
 #settings > .left > * {
 	width: 400px;
 	margin: 10px;
-}
-
-.col-1 {
-    width: calc(100% / 12);
-}
-
-.col-2 {
-    width: calc(calc(100% / 12) * 2);
-}
-
-.col-3 {
-    width: 25%;
-}
-
-.col-4 {
-    width:  calc(calc(100% / 12) * 4);
-}
-
-.col-5 {
-    width:  calc(calc(100% / 12) * 5);
-}
-
-.col-6 {
-    width: 50%;
-}
-
-.col-7 {
-    width:  calc(calc(100% / 12) * 7);
-}
-
-.col-8 {
-    width:  calc(calc(100% / 12) * 8);
-}
-
-.col-9 {
-    width: 75%;
-}
-
-.col-10 {
-    width: calc(calc(100% / 12) * 10);
-}
-
-.col-11 {
-    width:  calc(calc(100% / 12) * 11);
-}
-
-.col-12 {
-    width: 100%;
 }
 
 .tab {
