@@ -302,7 +302,8 @@ function ClickDiscord() {
 }
 
 function LoadSettings() {
-	settingsPage(4);
+	console.log("[JS] loading settings");
+	SettingsPage(0);
 }
 
 function LoadThemes() {
@@ -355,13 +356,16 @@ function ChangeTheme(name) {
 });
 */
 
-function settingsPage(newState) {
+function SettingsPage(newState) {
 	//newState is a state enum with the values:
 	//0 Gameplay
 	//1 Graphics
 	//2 Audio
 	//3 Online
 	//4 UI
+
+	//var newState = newState.parseInt();
+	console.log("[JS] newState type = " + typeof newState);
 
 	console.log("[JS] Switching settings page to " + newState);
 
@@ -394,7 +398,7 @@ function settingsPage(newState) {
 	uiButton.classList.remove("active");
 
 	//Show the ones for the state we just entered
-	switch (parseInt(newState)) {
+	switch (newState) {
 		case 0:
 			{
 				gameplay.style.display = "";
