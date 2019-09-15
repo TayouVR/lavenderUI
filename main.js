@@ -302,11 +302,11 @@ function ClickDiscord() {
 }
 
 function LoadSettings() {
-	settingsPage(0);
+	settingsPage(4);
 }
 
 function LoadThemes() {
-	var registeredThemes = ["lavender", "dark", "light"]
+	var registeredThemes = ["lavender", "dark", "light", "default"]
 	var themePicturePaths = ["/themes/supra/pictures/screenshot 2019-08-03 162046.png", "/themes/supra/pictures/screenshot 2019-08-03 165131.png", "/themes/supra/pictures/screenshot 2019-08-03 165205.png"];
 	var themeContainer = document.getElementById("themeList");
 
