@@ -371,12 +371,14 @@ function SettingsPage(newState) {
 
 	//Grab the various elements we care about
 
+	console.log("[JS] are pages the error?");
 	var gameplay = document.getElementById("gameplaySettings");
 	var graphics = document.getElementById("graphicsSettings");
 	var audio = document.getElementById("audioSettings");
 	var online = document.getElementById("onlineSettings");
 	var ui = document.getElementById("uiSettings");
 
+	console.log("[JS] are buttons the error?");
 	//buttons
 	var gameplayButton = document.getElementById("gameplayButton");
 	var graphicsButton = document.getElementById("graphicsButton");
@@ -384,6 +386,14 @@ function SettingsPage(newState) {
 	var onlineButton = document.getElementById("onlineButton");
 	var uiButton = document.getElementById("uiButton");
 
+	console.log("[JS] is button active removing the error?");
+	gameplayButton.classList.remove("active");
+	graphicsButton.classList.remove("active");
+	audioButton.classList.remove("active");
+	onlineButton.classList.remove("active");
+	uiButton.classList.remove("active");
+
+	console.log("[JS] is page hiding the error?");
 	//Hide all of them
 	gameplay.style.display = "none";
 	graphics.style.display = "none";
@@ -391,12 +401,7 @@ function SettingsPage(newState) {
 	online.style.display = "none";
 	ui.style.display = "none";
 
-	gameplayButton.classList.remove("active");
-	graphicsButton.classList.remove("active");
-	audioButton.classList.remove("active");
-	onlineButton.classList.remove("active");
-	uiButton.classList.remove("active");
-
+	console.log("[JS] is switch the error?");
 	//Show the ones for the state we just entered
 	switch (newState) {
 		case 0:

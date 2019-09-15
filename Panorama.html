@@ -270,31 +270,35 @@
         <div class="col-center">
             <div class="row">
                 <div class="top-tab-container">
-                    <div class="tab tab-left" onclick="settingsPage(0)">Game</div>
-                    <div class="tab" onclick="settingsPage(1)">Graphics</div>
-                    <div class="tab" onclick="settingsPage(2)">Audio</div>
-                    <div class="tab" onclick="settingsPage(3)">Online</div>
-                    <div class="tab tab-right" onclick="settingsPage(4)">UI</div>
+                    <div id="gameplayButton" class="tab tab-left" onclick="SettingsPage(0);">Game</div>
+                    <div id="graphicsButton" class="tab" onclick="SettingsPage(1);">Graphics</div>
+                    <div id="audioButton" class="tab" onclick="SettingsPage(2);">Audio</div>
+                    <div id="onlineButton" class="tab" onclick="SettingsPage(3);">Online</div>
+                    <div id="uiButton" class="tab tab-right" onclick="SettingsPage(4);">UI</div>
                 </div>
             </div>
             <div class="row content" style="height: 800px;">
-				<div id="uiSettings">
-					<div style="text-align: left;">Color Palettes</div>
-					<div id="themeList" ></div>
-					<div style="text-align: left;">Icons</div>
-					<div id="iconList" ></div>
+				<div id="gameplaySettings">
+					<div style="text-align: left;">Gameplay</div>
 				</div>
 
 				<div id="graphicsSettings">
 					<div style="text-align: left;">Graphics</div>
 				</div>
 
-				<div id="gameplaySettings">
-					<div style="text-align: left;">Gameplay</div>
-				</div>
-
 				<div id="audioSettings">
 					<div style="text-align: left;">Audio</div>
+				</div>
+
+				<div id="onlineSettings">
+					<div style="text-align: left;">Online</div>
+				</div>
+
+				<div id="uiSettings">
+					<div style="text-align: left;">Color Palettes</div>
+					<div id="themeList" ></div>
+					<div style="text-align: left;">Icons</div>
+					<div id="iconList" ></div>
 				</div>
             </div>
         </div>
