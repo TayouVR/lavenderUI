@@ -241,6 +241,33 @@ input:active {
     vertical-align: middle;
 }
 
+.content-items {
+    padding-top: 50px;
+}
+
+.content-row {
+    margin-left: 75px;
+}
+
+.content-item {
+	background-color: var(--buttonBGColor);
+	border-style: solid;
+	border-width: 4px;
+	border-color: var(--buttonBorder);
+	border-radius: 16px;
+	color: var(--buttonFGColor);
+}
+
+	.content-item > img {
+		/* nothing of my knowledge fixes the image scaling.
+		   Will be fixed API side eventually */
+	}
+
+	.content-item > p {
+		margin: 5px;
+		text-shadow: 1px 1px 2px black;
+	}
+
 /* for a purple tint, wich was used on the login panel in the default UI*/
 .loginPanelTint {
 	background-color: var(--loginPanelTint) !important;
