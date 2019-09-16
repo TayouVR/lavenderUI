@@ -3,8 +3,8 @@ html {
 	--textColor: #FFFFFF;
 
 	/* colors for a active menu element (e.g. menu point for content menu) */
-	--activeBGcolor: #100021; /* background */
-	--activeFGcolor: #000000; /* foreground */
+	--activeBGcolor: #200042; /* background */
+	--activeFGcolor: #FFFFFF; /* foreground */
 
 	/* buttons (<button> aswell as <input>[button] and <input>[submit]) */
 	--buttonBGColor: #100021; /* background */
