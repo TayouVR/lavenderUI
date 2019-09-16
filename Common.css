@@ -219,23 +219,34 @@ input:active {
 }
 
 .drop-down {
-    width: 100%;
+    width: 93%;
     background-color: var(--backgroundColor);
-    border: solid 2px;
+    border: solid 3px;
+	border-color: var(--borderColorSec);
+	border-radius: 8px;
     position: relative;
     height: 64px;
     font-size: 40px;
+	padding-top: 15px;
+	padding-left: 15px;
 }
 
 .drop-down-inner {
+    width: 13.8%;
     display: block;
-    position: absolute;
     background-color: var(--backgroundColor);
     font-size: 40px;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+
+.drop-down-option {
+	padding-left: 15px;
 }
 
 .drop-down-option:hover {
-    border: 2px solid;
+	background-color: var(--borderColorSec);
+	border: none;
 }
 
 .drop-down-label {
