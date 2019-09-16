@@ -65,8 +65,16 @@ function closeDropDown() {
 	}
 }
 
+function toggleDropDown(elm, array) {
+	if (document.getElementsByClassName("drop-down-inner").length > 0) {
+		closeDropDown();
+	} else {
+		openDropDown(elm, array);
+	}
+}
+
 function openDropDown(elm, array) {
-	var p = elm.parentElement;
+	var p = elm;
 	var rect = p.getBoundingClientRect();
 
 	var elms = document.getElementsByClassName("drop-down-inner");
