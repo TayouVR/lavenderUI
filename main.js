@@ -174,6 +174,7 @@ function ChangeState(newState) {
 	settings.style.display = "none";
 	//connecting.style.display = "none";
 
+	//buttons
 	mainButton.classList.remove("active");
 	socialButton.classList.remove("active");
 	contentButton.classList.remove("active");
@@ -194,9 +195,9 @@ function ChangeState(newState) {
 			break;
 		case 2:
 			{
-				mainButton.classList.add("active");
 				main.style.display = "";
 				menuButtons.style.display = "";
+				//mainButton.classList.add("active");
 			}
 			break;
 		case 3:
