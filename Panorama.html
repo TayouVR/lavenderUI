@@ -2,14 +2,14 @@
 <head>
     <script src="Graph.js"></script>
 	<script src="/themes/supra/main.js"></script>
-    <link rel="stylesheet" type="text/css" href="Common.css">
+    <link rel="stylesheet" href="Common.css">
     <link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-default.css">
-    <!--link rel="stylesheet" type="text/css" href="/themes/supra/icons/dark/icons.css"-->
+	<link rel="stylesheet" type="text/css" href="/themes/supra/icons/dark/icons.css">
     <link rel="stylesheet" type="text/css" href="/themes/supra/Common.css">
 </head>
 <body style="width:2400px;height:1200px;">
 
-    <div id="login">
+	<div id="login">
         <div class="col-center">
             <div class="row">
                 <div class="row" style="height:550px">
@@ -44,7 +44,7 @@
     </div>
 
 
-    <div id="main">
+	<div id="main">
         <div class="col-left">
             <div class="col col-1"></div>
             <div class="col col-10 content" style="height: 800px;">
@@ -92,8 +92,8 @@
                     <input style="width:60%; margin-bottom: 8px;" id="ip" type="text" placeholder="127.0.0.1" />
                     <input style="width:60%; margin-bottom: 8px;" id="port" type="password" value="10000" placeholder="10000" />
                     <br />
-                    <button style="padding-top: 16px; padding-bottom: 16px; padding-right: 64px; padding-left: 64px;"  onclick="Connect()">Connect</button>
-                    <button style="padding-top: 16px; padding-bottom: 16px; padding-right: 64px; padding-left: 64px;"  onclick="game.Disconnect()">Disconnect</button>
+                    <button style="padding-top: 16px; padding-bottom: 8px; padding-right: 64px; padding-left: 64px;"  onclick="Connect()">Connect</button>
+                    <button style="padding-top: 16px; padding-bottom: 8px; padding-right: 64px; padding-left: 64px;"  onclick="game.Disconnect()">Disconnect</button>
                     <br />
                     <h3 id="connectFail" style="display:none;color:red;border:2px solid red;">Fail reason</h3>
                 </div>
@@ -209,7 +209,7 @@
                 <br />
                 <div class="row center center-text" style="margin-top: -50px;">
                     <button class="content-items-prev" onclick="game.PreviousPage()">Previous</button>
-                    <button class="content-items-n ext" onclick="game.NextPage()">Next</button>
+                    <button class="content-items-next" onclick="game.NextPage()">Next</button>
 
                 </div>
             </div>
@@ -315,8 +315,8 @@
 		<button id="settingsButton" onclick="ChangeState(7);"><div>Settings</div></button>
 	</div>
 
-
     <div id="loginInProgress">
+
 
     </div>
 </body>
