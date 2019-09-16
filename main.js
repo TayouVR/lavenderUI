@@ -66,7 +66,8 @@ function closeDropDown() {
 }
 
 function toggleDropDown(elm, array) {
-	if (document.getElementsByClassName("drop-down-inner").length > 0) {
+	var openDropdown = document.getElementsByClassName("drop-down-inner");
+	if (openDropdown.length > 0 && openDropdown[0].classList.contains(elm.id)) {
 		closeDropDown();
 	} else {
 		openDropDown(elm, array);
@@ -85,6 +86,7 @@ function openDropDown(elm, array) {
 
 	var inner = document.createElement("div");
 	inner.classList.add("drop-down-inner");
+	inner.classList.add(elm.id);
 
 	for (var i = 0; i < array.length; i++) {
 		var t = document.createElement("div");
