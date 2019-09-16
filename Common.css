@@ -196,6 +196,7 @@ input:active {
 	border-radius: 0px;
 	margin: 0px;
 	padding: 0px;
+	color: var(--inputText);
 }
     .tab:hover {
 		background-color: var(--buttonBGColorHover);

@@ -3,14 +3,14 @@ html {
 	--textColor: #FFFFFF;
 
 	/* colors for a active menu element (e.g. menu point for content menu) */
-	--activeBGcolor: #101010; /* background */
+	--activeBGcolor: #AAAAAA; /* background */
 	--activeFGcolor: #000000; /* foreground */
 
 	/* buttons (<button> aswell as <input>[button] and <input>[submit]) */
-	--buttonBGColor: #101010; /* background */
-	--buttonBGColorActive: #070707; /* background */
-	--buttonBGColorHover: #000000; /* background */
-	--buttonFGColor: var(--textColor); /* foreground */
+	--buttonBGColor: #FFFFFF; /* background */
+	--buttonBGColorActive: #DDDDDD; /* background */
+	--buttonBGColorHover: #AAAAAA; /* background */
+	--buttonFGColor: #000000; /* foreground */
 
 	/* focused element. Things like <input> */
 	--focusedElementBackgroundColor: var(--activeBGcolor);
@@ -19,8 +19,8 @@ html {
 	/* general UI colors */
 	--backgroundColor: #151515B7; /* background */
 	--borderColor: #FFFFFF; /* border */
-	--borderColorSec: #090909; /* secondary border (buttons and elements inside the main UI) */
-	--inputBackgroundColor: #191919;
+	--borderColorSec: #777777; /* secondary border (buttons and elements inside the main UI) */
+	--inputBackgroundColor: #EEEEEE;
 
 	/************************************
 	***********single elements***********
