@@ -1,5 +1,5 @@
 var dateOptions = ["All Time", "Hour", "Day", "Week", "Month", "6 Months"];
-var orderByOptions = ["Date Added", "Name", "Type", "Subscribers", "Likes", "Size"];
+var sortByOptions = ["Date Added", "Name", "Type", "Subscribers", "Likes", "Size"];
 var typeOptions = ["Avatar", "World", "Prop", "Gamemode"];
 
 function nextPage() {

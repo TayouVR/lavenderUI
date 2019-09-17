@@ -232,10 +232,10 @@
                     </div>
                     <div class="row" style="margin-bottom: 50px;">
                         <div class="col col-4 drop-down-label">
-                            <p>Order By</p>
+                            <p>Sort By</p>
                         </div>
                         <div class="col col-8">
-                            <div id="dropDownOrder" class="drop-down" onclick="toggleDropDown(this, orderByOptions)">
+                            <div id="dropDownOrder" class="drop-down" onclick="toggleDropDown(this, sortByOptions)">
                                 <div class="drop-down-text">Date Added</div>
                             </div>
                         </div>
@@ -250,12 +250,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-bottom:50px;">
-                        <div id="personalText" style="font-size: 32px;">Personal: False</div>
-                        <button style="font-size: 32px;" onclick="game.ChangeSearchSetting('personal', '')">Toggle Personal</button>
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col col-4 drop-down-label">
+                            <p>Visibility</p>
+                        </div>
+                        <div class="col col-8">
+                            <div id="dropDownVisibility" class="drop-down" onclick="toggleDropDown(this, ['Public','Personal'])">
+                                <div class="drop-down-text">Public</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col col-4 drop-down-label">
+                            <p>Order</p>
+                        </div>
+                        <div class="col col-8">
+                            <div id="dropDownOrder" class="drop-down" onclick="toggleDropDown(this, ['Ascending','Descending'])">
+                                <div class="drop-down-text">Ascending</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row" style="margin-top: 60px;">
-                        <p>My content status</p>
+                        <p style="line-height: 0px;">My content status</p>
                     </div>
                 </div>
                 <div class="col col-1"></div>
