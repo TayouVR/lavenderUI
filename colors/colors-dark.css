@@ -4,12 +4,12 @@ html {
 
 	/* colors for a active menu element (e.g. menu point for content menu) */
 	--activeBGcolor: #101010; /* background */
-	--activeFGcolor: #000000; /* foreground */
+	--activeFGcolor: #CCCCCC; /* foreground */
 
 	/* buttons (<button> aswell as <input>[button] and <input>[submit]) */
 	--buttonBGColor: #101010; /* background */
 	--buttonBGColorActive: #070707; /* background */
-	--buttonBGColorHover: #000000; /* background */
+	--buttonBGColorHover: #050505; /* background */
 	--buttonFGColor: var(--textColor); /* foreground */
 
 	/* focused element. Things like <input> */
