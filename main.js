@@ -1,6 +1,18 @@
+// assets
 var dateOptions = ["All Time", "Hour", "Day", "Week", "Month", "6 Months"];
 var sortByOptions = ["Date Added", "Name", "Type", "Subscribers", "Likes", "Size"];
 var typeOptions = ["Avatar", "World", "Prop", "Gamemode"];
+
+// ui themes
+var registeredThemes = ["lavender", "dark", "light", "default"]
+var themePicturePaths = ["/themes/supra/pictures/screenshot 2019-08-03 162046.png", "/themes/supra/pictures/screenshot 2019-08-03 165131.png", "/themes/supra/pictures/screenshot 2019-08-03 165205.png"];
+
+// ui icon themes
+var registeredIcons = ["dark", "light"]
+var iconsDark = ["/themes/supra/icons/dark/settings.png", "/themes/supra/icons/dark/content.png", "/themes/supra/icons/dark/galaxy.png"];
+var iconsLight = ["/themes/supra/icons/light/settings.png", "/themes/supra/icons/light/content.png", "/themes/supra/icons/light/galaxy.png"];
+var icons = [iconsDark, iconsLight];
+
 
 function nextPage() {
 	game.NextPage();
@@ -313,8 +325,6 @@ function LoadSettings() {
 }
 
 function LoadThemes() {
-	var registeredThemes = ["lavender", "dark", "light", "default"]
-	var themePicturePaths = ["/themes/supra/pictures/screenshot 2019-08-03 162046.png", "/themes/supra/pictures/screenshot 2019-08-03 165131.png", "/themes/supra/pictures/screenshot 2019-08-03 165205.png"];
 	var themeContainer = document.getElementById("themeList");
 
 	themeContainer.innerHTML = "";
@@ -325,10 +335,6 @@ function LoadThemes() {
 }
 
 function LoadIcons() {
-	var registeredIcons = ["dark", "light"]
-	var iconsDark = ["/themes/supra/icons/dark/settings.png", "/themes/supra/icons/dark/content.png", "/themes/supra/icons/dark/galaxy.png"];
-	var iconsLight = ["/themes/supra/icons/light/settings.png", "/themes/supra/icons/light/content.png", "/themes/supra/icons/light/galaxy.png"];
-	var icons = [iconsDark, iconsLight];
 	var iconContainer = document.getElementById("iconList")
 
 	iconContainer.innerHTML = "";
@@ -348,7 +354,27 @@ function ChangeTheme(name) {
 
 	document.getElementsByTagName("head")[0].removeChild(document.getElementById("colorHolder"));
     document.getElementsByTagName("head")[0].appendChild(fileref)*/
-	document.getElementById("colorHolder").innerHTML = '<link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-' + name + '.css">';
+	var themeTag;
+	for (var i in document.getElementsByTagName("link")) {
+		for (var e in registeredThemes) {
+			if (i.getAttribute("href") == registeredThemes[e]) {
+				themeTag = i;
+			}
+		}
+	}
+	themeTag.setAttribute("href", name);
+
+	/*panorama = fopen("/Panorama.html", 0); // Open the file for reading
+	if(panorama!=-1) // If the file has been successfully opened
+	{
+	    length = flength(panorama);         // Get the length of the file
+	    str = fread(panorama, length);     // Read in the entire file
+	    fclose(panorama);                    // Close the file
+
+	// Display the contents of the file
+	    write(str);
+	}*/
+	//document.getElementById("colorHolder").innerHTML = '<link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-' + name + '.css">';
 }
 
 /*document.addEventListener('keyup', (e) => {
