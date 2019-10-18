@@ -103,22 +103,25 @@
         <div class="col-right">
             <div class="col-1"></div>
             <div class="col-10">
-                <div class="row">
+                <div class="row" style="margin-bottom: 20px;">
+                    <div class="col col-12 content">
+                        <div>
+                            <img src="logoflat.png" style="position:relative; width:100%;" />
+                            <div class="version" id="version">Version</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 20px;">
+                    <div class="col col-12 content" onclick="ClickDiscord()">
+                        <div style="text-align: center; padding-bottom: -20px; padding-left: 5px;"><h1 style="font-size: 1.7em;">join the Discord Server!</h1></div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 20px;">
                     <div class="col col-12 content">
                         <div style="height: 200px;"></div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col col-12 content">
-                        <div style="height: 200px;"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-12 content">
-                        <div style="height: 200px;"></div>
-                    </div>
-                </div>
-                <div class="row">
+                <div class="row" style="margin-bottom: 20px;">
                     <div class="col col-12 content">
                         <div style="height: 200px;"></div>
                     </div>
@@ -325,7 +328,7 @@
 
 
 	<div id="menuButtons">
-		<button id="mainButton" onclick="ChangeState(2);"><div>Home</div></button>
+		<button id="mainButton" class="active" onclick="ChangeState(2);"><div>Home</div></button>
 		<button id="contentButton" onclick="ChangeState(4);"><div>Content</div></button>
 		<button id="galaxyButton" onclick=""><div>Galaxy</div></button>
 		<button id="socialButton" onclick=""><div>Social</div></button>
