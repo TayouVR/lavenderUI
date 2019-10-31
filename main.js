@@ -23,18 +23,21 @@ function previousPage() {
 }
 
 function updateAssetInfo(asset) {
-
 	var a = JSON.parse(asset);
+	//var name = $("#assetInfoName");
 	var name = document.getElementById("assetInfoName");
+	//var desc = $("#assetInfoDescription");
 	var desc = document.getElementById("assetInfoDescription");
+
 	var img = document.getElementById("assetInfoImage");
 	var size = document.getElementById("assetInfoSize");
 	var buttonContainer = document.getElementById("assetInfoButtons");
+	var assetInfoAuthor = document.getElementById("assetInfoAuthor");
 
-	name.innerText = a.Name;
-	desc.innerText = a.Description;
-	size.innerText = a.Size;
-
+	name.textContent = a.Name;
+	desc.textContent = a.Description;
+	size.textContent = "Size: " + formatBytes(a.Size, 2);
+	assetInfoAuthor.textContent = "Author: " + a.OwnerName;
 	img.src = a.AssetImageURL + "-sm";
 
 	if (a.Type == 1) {
@@ -45,6 +48,11 @@ function updateAssetInfo(asset) {
 	else if (a.Type == 2) {
 		buttonContainer.lastElementChild.addEventListener("click", function (event) {
 			game.SpawnWorld(a.ID);
+		});
+	}
+	else if (a.Type == 3) {
+		buttonContainer.lastElementChild.addEventListener("click", function (event) {
+			game.SpawnProp(a.ID);
 		});
 	}
 
@@ -461,4 +469,14 @@ function SettingsPage(newState) {
 			}
 			break;
 	}
+}
+
+//https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
+function formatBytes(a, b) {
+	if (0 == a)
+		return "0 Bytes";
+	var c = 1024, d = b || 2,
+		e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
+		f = Math.floor(Math.log(a) / Math.log(c));
+	return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
 }
