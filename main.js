@@ -444,41 +444,56 @@ function dismissNotification(guid) {
 
 
 function updateAssetInfo(asset) {
-	var a = JSON.parse(asset);
-	//var name = $("#assetInfoName");
-	var name = document.getElementById("assetInfoName");
-	//var desc = $("#assetInfoDescription");
-	var desc = document.getElementById("assetInfoDescription");
+    var name = document.getElementById("assetInfoName");
+    //var name = document.getElementById("assetInfoName");
+    var desc = document.getElementById("assetInfoDescription");
 
-	var img = document.getElementById("assetInfoImage");
-	var size = document.getElementById("assetInfoSize");
-	var buttonContainer = document.getElementById("assetInfoButtons");
-	var assetInfoAuthor = document.getElementById("assetInfoAuthor");
+    var img = document.getElementById("assetInfoImage");
+    var size = document.getElementById("assetInfoSize");
+    var buttonContainer = document.getElementById("assetInfoButtons");
+    var assetInfoAuthor = document.getElementById("assetInfoAuthor");
 
-	name.textContent = a.Name;
-	desc.textContent = a.Description;
-	size.textContent = "Size: " + formatBytes(a.Size, 2);
-	assetInfoAuthor.textContent = "Author: " + a.OwnerName;
-	img.src = a.AssetImageURL + "-sm";
+    name.textContent = asset.Name;
+    desc.textContent = asset.Description;
+    size.textContent = "Size: " + formatBytes(asset.Size, 2);
+    assetInfoAuthor.textContent = "Author: " + asset.OwnerName;
+    img.src = asset.AssetImageURL + "-sm";
 
-	if (a.Type == 1) {
-		buttonContainer.lastElementChild.addEventListener("click", function (event) {
-			game.SpawnAvatar(a.ID);
-		});
-	}
-	else if (a.Type == 2) {
-		buttonContainer.lastElementChild.addEventListener("click", function (event) {
-			game.SpawnWorld(a.ID);
-		});
-	}
-	else if (a.Type == 3) {
-		buttonContainer.lastElementChild.addEventListener("click", function (event) {
-			game.SpawnProp(a.ID);
-		});
-	}
 
-	document.getElementById("noAssetText").style.display = "none";
-	document.getElementById("assetInfo").style.display = "block";
+
+    buttonContainer.removeChild(buttonContainer.lastElementChild);
+
+
+    var spawn = document.createElement("button");
+
+    spawn.textContent = "Spawn";
+    spawn.style.display = "block";
+    spawn.style.lineHeight = "48px";
+    spawn.style.fontSize = "32px";
+    spawn.style.marginTop = "16px";
+
+    if (asset.Type == 1) {
+
+        spawn.addEventListener("click", function (event) {
+            game.Content.SpawnAvatar(asset.ID.toString());
+        });
+    }
+    else if (asset.Type == 2) {
+        spawn.addEventListener("click", function (event) {
+            game.Content.SpawnWorld(asset.ID.toString());
+        });
+    }
+    else if (asset.Type == 3) {
+        spawn.addEventListener("click", function (event) {
+            game.Content.SpawnProp(asset.ID.toString());
+        });
+    }
+
+    buttonContainer.appendChild(spawn);
+
+
+    document.getElementById("noAssetText").style.display = "none";
+    document.getElementById("assetInfo").style.display = "block";
 }
 
 
