@@ -18,9 +18,77 @@ function nextPage() {
 	game.NextPage();
 }
 
-function previousPage() {
-	game.PreviousPage();
+
+// #region content
+function searchContent() {
+    var searchInput = document.getElementById("contentSearchInput");
+
+    if (searchInput.value != null) {
+        game.Content.SearchSettings.SearchTerm = searchInput.value.toString();
+    }
+    else {
+        game.Content.SearchSettings.SearchTerm = "";
+    }
+
+    game.Content.Search(
+        function (result) {
+            var container = document.getElementById("contentItemContainer");
+
+            while (container.firstElementChild)
+                container.removeChild(container.firstElementChild);
+
+            var currentRow = document.createElement("div");
+            currentRow.classList.add("row");
+            currentRow.classList.add("content-row");
+
+            for (var i = 0; i < result.Elements.Count; i++) {
+                if (i % 3 == 0 && i != 0) {
+                    container.appendChild(currentRow);
+                    currentRow = document.createElement("div");
+                    currentRow.classList.add("row");
+                    currentRow.classList.add("content-row");
+                }
+
+                var elm = document.createElement("div");
+                elm.classList.add("content-item");
+
+                function f(asset) {
+                    elm.addEventListener("click", function (e) {
+                        updateAssetInfo(asset);
+                    });
+                } f(result.Elements[i]);
+
+
+                var img = document.createElement("img");
+                img.src = "image://" + result.Elements[i].AssetImageURL;
+                elm.appendChild(img);
+
+                var p = document.createElement("p");
+                p.textContent = result.Elements[i].Name;
+                elm.appendChild(p);
+
+                currentRow.appendChild(elm);
+            }
+            container.appendChild(currentRow);
+        },
+        function (error) {
+            console.log(error);
+        }
+    );
 }
+function nextPage() {
+    game.Content.SearchSettings.Page++;
+    searchContent();
+}
+function previousPage() {
+    game.Content.SearchSettings.Page--;
+    if (game.Content.SearchSettings.Page < 0)
+        game.Content.SearchSettings.Page = 0;
+    else
+        searchContent();
+}
+//#endregion
+
 
 function updateAssetInfo(asset) {
 	var a = JSON.parse(asset);
