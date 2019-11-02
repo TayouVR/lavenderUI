@@ -5,7 +5,7 @@ var typeOptions = ["Avatar", "World", "Prop", "Gamemode"];
 
 // ui themes
 var registeredThemes = ["lavender", "dark", "light", "default"]
-var themePicturePaths = ["/themes/supra/pictures/screenshot 2019-08-03 162046.png", "/themes/supra/pictures/screenshot 2019-08-03 165131.png", "/themes/supra/pictures/screenshot 2019-08-03 165205.png"];
+var themePicturePaths = ["/themes/supra/pictures/colors_lavender.png", "/themes/supra/pictures/colors_dark.png", "/themes/supra/pictures/colors_light.png", "/themes/supra/pictures/colors_default.png"];
 
 // ui icon themes
 var registeredIcons = ["dark", "light"]
