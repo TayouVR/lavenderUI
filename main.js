@@ -482,7 +482,7 @@ function updateAssetInfo(asset) {
 }
 
 
-
+//#region dropdown
 function selectDropDown(option, id) {
 
 	var doc = document.getElementById(id);
@@ -538,6 +538,8 @@ function openDropDown(elm, array) {
 
 	p.parentElement.parentElement.parentElement.appendChild(inner);
 }
+//#endregion
+
 
 function togglePasswordField(elm) {
 
@@ -583,10 +585,142 @@ function UpdateProfileData(profile) {
 
 }
 
+
+//#region settings
+function LoadSettings() {
+	console.log("[JS] loading settings");
+	SettingsPage(0);
 }
 
+function LoadThemes() {
+	var themeContainer = document.getElementById("themeList");
 
+	themeContainer.innerHTML = "";
+
+	for(var i = 0; i < registeredThemes.length; i++) {
+		themeContainer.innerHTML += '<button class="themeCard" onclick="ChangeTheme("' + registeredThemes[i] + '")"><img class="themeImage" src="' + themePicturePaths[i] + '" ></img><div>' + registeredThemes[i] + '</div></button>';
+	}
 }
+
+function LoadIcons() {
+	var iconContainer = document.getElementById("iconList")
+
+	iconContainer.innerHTML = "";
+
+	for(var i = 0; i < registeredIcons.length; i++) {
+		iconContainer.innerHTML += '<button class="themeCard" onclick="ChangeTheme("' + registeredIcons[i] + '")"><div class="themeImage" style="margin-left: -10px;"><img style="width: 90px; height: 90px;" src="' + icons[i][0] + '"></img><img style="width: 90px; height: 90px;" src="' + icons[i][1] + '"></img><img style="width: 90px; height: 90px;" src="' + icons[i][2] + '"></img></div><div>' + registeredIcons[i] + '</div></button>';
+	}
+}
+
+function ChangeTheme(name) {
+	/*console.log("trying to load " + name);
+    var fileref=document.createElement("link");
+    fileref.setAttribute("id", "colorHolder");
+    fileref.setAttribute("rel", "stylesheet");
+    fileref.setAttribute("href", "/themes/supra/colors/colors-" + name + ".css");
+	console.log("trying to add " + fileref + " to head");
+
+	document.getElementsByTagName("head")[0].removeChild(document.getElementById("colorHolder"));
+    document.getElementsByTagName("head")[0].appendChild(fileref)*/
+	var themeTag;
+	for (var i in document.getElementsByTagName("link")) {
+		for (var e in registeredThemes) {
+			if (i.getAttribute("href") == registeredThemes[e]) {
+				themeTag = i;
+			}
+		}
+	}
+	themeTag.setAttribute("href", name);
+
+	/*panorama = fopen("/Panorama.html", 0); // Open the file for reading
+	if(panorama!=-1) // If the file has been successfully opened
+	{
+	    length = flength(panorama);         // Get the length of the file
+	    str = fread(panorama, length);     // Read in the entire file
+	    fclose(panorama);                    // Close the file
+
+	// Display the contents of the file
+	    write(str);
+	}*/
+	//document.getElementById("colorHolder").innerHTML = '<link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-' + name + '.css">';
+}
+
+function SettingsPage(newState) {
+	//newState is a state enum with the values:
+	//0 Gameplay
+	//1 Graphics
+	//2 Audio
+	//3 Online
+	//4 UI
+
+	console.log("[JS] Switching settings page to " + newState);
+
+	//Grab the various elements we care about
+
+	var gameplay = document.getElementById("gameplaySettings");
+	var graphics = document.getElementById("graphicsSettings");
+	var audio = document.getElementById("audioSettings");
+	var online = document.getElementById("onlineSettings");
+	var ui = document.getElementById("uiSettings");
+
+	//buttons
+	var gameplayButton = document.getElementById("gameplayButton");
+	var graphicsButton = document.getElementById("graphicsButton");
+	var audioButton = document.getElementById("audioButton");
+	var onlineButton = document.getElementById("onlineButton");
+	var uiButton = document.getElementById("uiButton");
+
+	gameplayButton.classList.remove("active");
+	graphicsButton.classList.remove("active");
+	audioButton.classList.remove("active");
+	onlineButton.classList.remove("active");
+	uiButton.classList.remove("active");
+
+	//Hide all of them
+	gameplay.style.display = "none";
+	graphics.style.display = "none";
+	audio.style.display = "none";
+	online.style.display = "none";
+	ui.style.display = "none";
+
+	//Show the ones for the state we just entered
+	switch (newState) {
+		case 0:
+			{
+				gameplay.style.display = "";
+				gameplayButton.classList.add("active");
+			}
+			break;
+		case 1:
+			{
+				graphics.style.display = "";
+				graphicsButton.classList.add("active");
+			}
+			break;
+		case 2:
+			{
+				audio.style.display = "";
+				audioButton.classList.add("active");
+			}
+			break;
+		case 3:
+			{
+				online.style.display = "";
+				onlineButton.classList.add("active");
+			}
+			break;
+		case 4:
+			{
+				LoadThemes();
+				LoadIcons();
+				ui.style.display = "";
+				uiButton.classList.add("active");
+			}
+			break;
+	}
+}
+//#endregion
+
 
 //Exposed functions for the game to call to change things
 function ChangeState(newState) {
@@ -609,7 +743,7 @@ function ChangeState(newState) {
 	var login = document.getElementById("login");
 	var main = document.getElementById("main");
 	var loginInProgress = document.getElementById("loginInProgress");
-	//var social = document.getElementById("social");
+	var social = document.getElementById("social");
 	var content = document.getElementById("content");
 	//var galaxy = document.getElementById("galaxy");
 	//var testing = document.getElementById("testing");
@@ -627,9 +761,9 @@ function ChangeState(newState) {
 	//Hide all of them
 	menuButtons.style.display = "none";
 	login.style.display = "none";
-	//loginInProgress.style.display = "none";
+	loginInProgress.style.display = "none";
 	main.style.display = "none";
-	//social.style.display = "none";
+	social.style.display = "none";
 	content.style.display = "none";
 	//galaxy.style.display = "none";
 	//testing.style.display = "none";
@@ -660,6 +794,7 @@ function ChangeState(newState) {
 				main.style.display = "";
 				menuButtons.style.display = "";
 				//mainButton.classList.add("active");
+				updateUserProfile();
 			}
 			break;
 		case 3:
@@ -667,6 +802,7 @@ function ChangeState(newState) {
 				social.style.display = "";
 				menuButtons.style.display = "";
 				socialButton.classList.add("active");
+				GetFriends();
 			}
 			break;
 		case 4:
@@ -674,6 +810,7 @@ function ChangeState(newState) {
 				content.style.display = "";
 				menuButtons.style.display = "";
 				contentButton.classList.add("active");
+				searchContent();
 			}
 			break;
 		case 5:
@@ -764,62 +901,20 @@ function ClickDiscord() {
 	game.OpenLink("https://discord.gg/fWHjNfg");
 }
 
-function LoadSettings() {
-	console.log("[JS] loading settings");
-	SettingsPage(0);
+//https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
+function formatBytes(a, b) {
+	if (0 == a)
+		return "0 Bytes";
+	var c = 1024, d = b || 2,
+		e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
+		f = Math.floor(Math.log(a) / Math.log(c));
+	return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
 }
 
-function LoadThemes() {
-	var themeContainer = document.getElementById("themeList");
-
-	themeContainer.innerHTML = "";
-
-	for(var i = 0; i < registeredThemes.length; i++) {
-		themeContainer.innerHTML += '<button class="themeCard" onclick="ChangeTheme("' + registeredThemes[i] + '")"><img class="themeImage" src="' + themePicturePaths[i] + '" ></img><div>' + registeredThemes[i] + '</div></button>';
-	}
-}
-
-function LoadIcons() {
-	var iconContainer = document.getElementById("iconList")
-
-	iconContainer.innerHTML = "";
-
-	for(var i = 0; i < registeredIcons.length; i++) {
-		iconContainer.innerHTML += '<button class="themeCard" onclick="ChangeTheme("' + registeredIcons[i] + '")"><div class="themeImage" style="margin-left: -10px;"><img style="width: 90px; height: 90px;" src="' + icons[i][0] + '"></img><img style="width: 90px; height: 90px;" src="' + icons[i][1] + '"></img><img style="width: 90px; height: 90px;" src="' + icons[i][2] + '"></img></div><div>' + registeredIcons[i] + '</div></button>';
-	}
-}
-
-function ChangeTheme(name) {
-	/*console.log("trying to load " + name);
-    var fileref=document.createElement("link");
-    fileref.setAttribute("id", "colorHolder");
-    fileref.setAttribute("rel", "stylesheet");
-    fileref.setAttribute("href", "/themes/supra/colors/colors-" + name + ".css");
-	console.log("trying to add " + fileref + " to head");
-
-	document.getElementsByTagName("head")[0].removeChild(document.getElementById("colorHolder"));
-    document.getElementsByTagName("head")[0].appendChild(fileref)*/
-	var themeTag;
-	for (var i in document.getElementsByTagName("link")) {
-		for (var e in registeredThemes) {
-			if (i.getAttribute("href") == registeredThemes[e]) {
-				themeTag = i;
-			}
-		}
-	}
-	themeTag.setAttribute("href", name);
-
-	/*panorama = fopen("/Panorama.html", 0); // Open the file for reading
-	if(panorama!=-1) // If the file has been successfully opened
-	{
-	    length = flength(panorama);         // Get the length of the file
-	    str = fread(panorama, length);     // Read in the entire file
-	    fclose(panorama);                    // Close the file
-
-	// Display the contents of the file
-	    write(str);
-	}*/
-	//document.getElementById("colorHolder").innerHTML = '<link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-' + name + '.css">';
+//runs once when the UI is first loaded
+//Bind all functions and events here
+function loaded() {
+	game.Friends.AddEventListener("updatefriendlist", UpdateFriends);
 }
 
 /*document.addEventListener('keyup', (e) => {
@@ -832,88 +927,3 @@ function ChangeTheme(name) {
 	}
 });
 */
-
-function SettingsPage(newState) {
-	//newState is a state enum with the values:
-	//0 Gameplay
-	//1 Graphics
-	//2 Audio
-	//3 Online
-	//4 UI
-
-	console.log("[JS] Switching settings page to " + newState);
-
-	//Grab the various elements we care about
-
-	var gameplay = document.getElementById("gameplaySettings");
-	var graphics = document.getElementById("graphicsSettings");
-	var audio = document.getElementById("audioSettings");
-	var online = document.getElementById("onlineSettings");
-	var ui = document.getElementById("uiSettings");
-
-	//buttons
-	var gameplayButton = document.getElementById("gameplayButton");
-	var graphicsButton = document.getElementById("graphicsButton");
-	var audioButton = document.getElementById("audioButton");
-	var onlineButton = document.getElementById("onlineButton");
-	var uiButton = document.getElementById("uiButton");
-
-	gameplayButton.classList.remove("active");
-	graphicsButton.classList.remove("active");
-	audioButton.classList.remove("active");
-	onlineButton.classList.remove("active");
-	uiButton.classList.remove("active");
-
-	//Hide all of them
-	gameplay.style.display = "none";
-	graphics.style.display = "none";
-	audio.style.display = "none";
-	online.style.display = "none";
-	ui.style.display = "none";
-
-	//Show the ones for the state we just entered
-	switch (newState) {
-		case 0:
-			{
-				gameplay.style.display = "";
-				gameplayButton.classList.add("active");
-			}
-			break;
-		case 1:
-			{
-				graphics.style.display = "";
-				graphicsButton.classList.add("active");
-			}
-			break;
-		case 2:
-			{
-				audio.style.display = "";
-				audioButton.classList.add("active");
-			}
-			break;
-		case 3:
-			{
-				online.style.display = "";
-				onlineButton.classList.add("active");
-			}
-			break;
-		case 4:
-			{
-				LoadThemes();
-				LoadIcons();
-				ui.style.display = "";
-				uiButton.classList.add("active");
-			}
-			break;
-	}
-}
-
-//https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
-function formatBytes(a, b) {
-	if (0 == a)
-		return "0 Bytes";
-	var c = 1024, d = b || 2,
-		e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
-		f = Math.floor(Math.log(a) / Math.log(c));
-	return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
-}
