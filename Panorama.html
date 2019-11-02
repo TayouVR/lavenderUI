@@ -77,16 +77,9 @@
                     <div class="col col-1"></div>
                     <div id="notifications" class="col col-10">
                         <div class="notificationItem row">
-                            <div class="col col-10" style="line-height: 24px; font-size: 24px; padding: 0px;">
-                                <p>Example Notification</p>
-                                <p>This is a notifcation WIP</p>
-                            </div>
-                            <div class="col col-2 center center-text" style="line-height: 100px; background-color: grey; color:red" onclick="DismissNotification('guid')"><h1>X</h1></div>
-                        </div>
-                        <div class="notificationItem row">
-                            <div class="col col-10" style="line-height: 24px; font-size: 24px;">
-                                <p>Example Notification 2</p>
-                                <p>A second notification.</p>
+                            <div class="col col-10" style="line-height: 24px; font-size: 24px; padding: 0px;" onclick="openNotification('guid')">
+                                <p>Friend Request</p>
+                                <p>June wants to be your friend</p>
                             </div>
                             <div class="col col-2 center center-text" style="line-height: 100px; background-color: grey; color:red" onclick="DismissNotification('guid')"><h1>X</h1></div>
                         </div>
@@ -165,7 +158,6 @@
         </div>
     </div>
 
-
     <div id="content" class="content-main" style="box-sizing: border-box;">
         <div class="col-left">
             <div class="row">
@@ -175,7 +167,7 @@
                         <h1 style="line-height: 930px;">No Asset Selected</h1>
                     </div>
                     <div id="assetInfo" style="position: relative; display: none;">
-						<div class="center center-text" style="margin-top: 16px;">
+                        <div class="center center-text" style="margin-top: 16px;">
                             <img id="assetInfoImage" src="https://via.placeholder.com/256x256" />
                         </div>
                         <div id="assetInfoName" style="padding: 0px;font-size: 48px;line-height: 32px; margin-top: 16px; margin-left: 16px;">
