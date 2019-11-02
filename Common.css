@@ -13,7 +13,7 @@ h1 {
     font-style: oblique;
 }
 
-.content {
+.content, .col-color {
 	padding: 8px;
 	margin-bottom: 0;
 	color: var(--textColor);
@@ -23,7 +23,6 @@ h1 {
 	font: 16px bold;
 	border-radius: 16px;
 	font-size: 2rem;
-	overflow: hidden;
 }
 
 input {
@@ -208,7 +207,7 @@ input:active {
 }
 
 .drop-down {
-    width: 93%;
+    width: 100%;
     background-color: var(--backgroundColor);
     border: solid 3px;
 	border-color: var(--borderColorSec);
@@ -220,17 +219,25 @@ input:active {
 	padding-left: 15px;
 }
 
+.drop-down-text {
+	margin-top: -45px;
+}
+
 .drop-down-inner {
-    width: 13.8%;
+    width: 14.1%;
     display: block;
     background-color: var(--backgroundColor);
     font-size: 40px;
+	border: 2px solid;
+	border-top: 0;
+	border-color: var(--borderColorSec);
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 }
 
 .drop-down-option {
 	padding-left: 15px;
+	margin: 0px 2px 2px 2px;
 }
 
 .drop-down-option:hover {
@@ -242,6 +249,11 @@ input:active {
     font-size: 32px;
     line-height: 64px;
     vertical-align: middle;
+}
+
+.content-search > .row {
+	height: 64px;
+	margin: 0;
 }
 
 .content-items {
@@ -261,10 +273,9 @@ input:active {
 	color: var(--buttonFGColor);
 }
 
-	.content-item > img {
-		/* nothing of my knowledge fixes the image scaling.
-		   Will be fixed API side eventually */
-	}
+    .content-item > img {
+        margin-top: 0;
+    }
 
 	.content-item > p {
 		margin: 5px;

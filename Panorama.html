@@ -195,53 +195,14 @@
 
         <div class="col-center">
             <div class="content-items content">
-                <div class="row content-row">
-                    <div class="content-item">
-                        <img src="loading.gif" data-loaded="false" />
-                        <p></p>
-                    </div>
-                    <div class="content-item">
-                        <img src="loading.gif" data-loaded="false" />
-                        <p></p>
-                    </div>
-                    <div class="content-item">
-                        <img src="loading.gif" data-loaded="false" />
-                        <p></p>
-                    </div>
-                </div>
-                <div class="row content-row">
-                    <div class="content-item">
-                        <img src="loading.gif" data-loaded="false" />
-                        <p></p>
-                    </div>
-                    <div class="content-item">
-                        <img src="loading.gif" data-loaded="false" />
-                        <p></p>
-                    </div>
-                    <div class="content-item">
-                        <img src="loading.gif" data-loaded="false" />
-                        <p></p>
-                    </div>
-                </div>
-                <div class="row content-row">
-                    <div class="content-item"></>
-                        <img src="loading.gif" data-loaded="false" />
-                        <p></p>
-                    </div>
-                    <div class="content-item">
-                        <img src="loading.gif" data-loaded="false" />
-                        <p></p>
-                    </div>
-                    <div class="content-item">
-                        <img src="loading.gif" data-loaded="false" />
-                        <p></p>
-                    </div>
+                <div id="contentItemContainer" style="margin-top: 15px; height: 850px;">
+
                 </div>
                 <br />
                 <br />
                 <div class="row center center-text" style="margin-top: -50px;">
-                    <button class="content-items-prev" onclick="game.PreviousPage()">Previous</button>
-                    <button class="content-items-next" onclick="game.NextPage()">Next</button>
+                    <button class="content-items-prev" onclick="previousPage()">Previous</button>
+                    <button class="content-items-next" onclick="nextPage()">Next</button>
 
                 </div>
             </div>
@@ -250,61 +211,62 @@
 
         <div class="col-right">
             <div class="row">
-                <div class="col col-1"></div>
-                <div class="col col-10 search-options content">
-                    <div class="row" style="margin-bottom: 50px;">
-                        <div class="col col-4 drop-down-label">
-                            <p>Type</p>
-                        </div>
-                        <div class="col col-8">
-                            <div id="dropDownType" class="drop-down" onclick="toggleDropDown(this, typeOptions)">
-                                <div class="drop-down-text">Avatar</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom: 50px;">
-                        <div class="col col-4 drop-down-label">
-                            <p>Sort By</p>
-                        </div>
-                        <div class="col col-8">
-                            <div id="dropDownOrder" class="drop-down" onclick="toggleDropDown(this, sortByOptions)">
-                                <div class="drop-down-text">Date Added</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom: 50px;">
-                        <div class="col col-4 drop-down-label">
-                            <p>Date</p>
-                        </div>
-                        <div class="col col-8">
-                            <div id="dropDownTime" class="drop-down" onclick="toggleDropDown(this, dateOptions)">
-                                <div class="drop-down-text">All Time</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom: 50px;">
-                        <div class="col col-4 drop-down-label">
-                            <p>Visibility</p>
-                        </div>
-                        <div class="col col-8">
-                            <div id="dropDownVisibility" class="drop-down" onclick="toggleDropDown(this, ['Public','Personal'])">
-                                <div class="drop-down-text">Public</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom: 50px;">
-                        <div class="col col-4 drop-down-label">
-                            <p>Order</p>
-                        </div>
-                        <div class="col col-8">
-                            <div id="dropDownOrder" class="drop-down" onclick="toggleDropDown(this, ['Ascending','Descending'])">
-                                <div class="drop-down-text">Ascending</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 60px;">
-                        <p style="line-height: 0px;">My content status</p>
-                    </div>
+                <div class="col col-11 content-search content">
+					<input id="contentSearchInput" type="text" style="position: absolute; min-height:64px; width: 60%; font-size:32px;  padding: 12px 20px; margin-left:10px; box-sizing: border-box; overflow: hidden;" placeholder="Name" />
+					<button onclick="game.Content.SearchSettings.Page = 0; searchContent()" style="position:absolute; left:65%; border: none; padding:13px 20px 30px 20px; text-decoration: none;  cursor: pointer; font-size: 32px; box-sizing: border-box;">Search</button>
+
+					<div style="width: 100%;  margin-top: 40px;">
+	                    <div class="row" style="height: 64px;">
+	                        <div class="col col-4 drop-down-label">
+	                            <p>Type</p>
+	                        </div>
+	                        <div class="col col-7">
+	                            <div id="dropDownType" class="drop-down" onclick="toggleDropDown(this, typeOptions)">
+	                                <div class="drop-down-text">Avatar</div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="row" style="height: 64px;">
+	                        <div class="col col-4 drop-down-label">
+	                            <p>Sort By</p>
+	                        </div>
+	                        <div class="col col-7">
+	                            <div id="dropDownOrder" class="drop-down" onclick="toggleDropDown(this, sortByOptions)">
+	                                <div class="drop-down-text">Date Added</div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="row" style="height: 64px;">
+	                        <div class="col col-4 drop-down-label">
+	                            <p>Date</p>
+	                        </div>
+	                        <div class="col col-7">
+	                            <div id="dropDownTime" class="drop-down" onclick="toggleDropDown(this, dateOptions)">
+	                                <div class="drop-down-text">All Time</div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="row" style="height: 64px;">
+	                        <div class="col col-4 drop-down-label">
+	                            <p>Visibility</p>
+	                        </div>
+	                        <div class="col col-7">
+	                            <div id="dropDownVisibility" class="drop-down" onclick="toggleDropDown(this, ['Public','Personal'])">
+	                                <div class="drop-down-text">Public</div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="row" style="height: 64px;">
+	                        <div class="col col-4 drop-down-label">
+	                            <p>Order</p>
+	                        </div>
+	                        <div class="col col-7">
+	                            <div id="dropDownOrder" class="drop-down" onclick="toggleDropDown(this, ['Ascending','Descending'])">
+	                                <div class="drop-down-text">Ascending</div>
+	                            </div>
+	                        </div>
+	                    </div>
+					</div>
                 </div>
                 <div class="col col-1"></div>
             </div>
