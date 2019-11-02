@@ -1,6 +1,6 @@
 // assets
 var dateOptions = ["All Time", "Hour", "Day", "Week", "Month", "6 Months"];
-var sortByOptions = ["Date Added", "Name", "Type", "Subscribers", "Likes", "Size"];
+var sortByOptions = ["Date Added", "Name", "Subscribers", "Likes", "Size"];
 var typeOptions = ["Avatar", "World", "Prop", "Gamemode"];
 
 // ui themes
@@ -488,9 +488,9 @@ function selectDropDown(option, id) {
 	var doc = document.getElementById(id);
 	doc.getElementsByClassName("drop-down-text")[0].innerText = option;
 
-	game.ChangeSearchSetting(id, option);
-
 	closeDropDown();
+
+	game.Content.ChangeSearchSetting(id, option);
 }
 
 function closeDropDown() {
@@ -522,7 +522,6 @@ function openDropDown(elm, array) {
 
 	var inner = document.createElement("div");
 	inner.classList.add("drop-down-inner");
-	inner.classList.add(elm.id);
 
 	for (var i = 0; i < array.length; i++) {
 		var t = document.createElement("div");
