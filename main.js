@@ -537,6 +537,7 @@ function openDropDown(elm, array) {
 
 	var inner = document.createElement("div");
 	inner.classList.add("drop-down-inner");
+	inner.classList.add(elm.id);
 
 	for (var i = 0; i < array.length; i++) {
 		var t = document.createElement("div");
