@@ -275,6 +275,88 @@
         </div>
     </div>
 
+	<div id="social">
+		<div class="col-left">
+			<div class="col col-1"></div>
+			<div class="col col-10 col-color">
+				<div id="noFriendText" class="center center-text">
+					<h1 style="line-height: 800px;">No Friend Selected</h1>
+				</div>
+				<div id="friendInfo" style="position: relative; display: none">
+					<div class="center center-text" style="margin-top: 16px;">
+						<img id="friendImage" src="image://https://via.placeholder.com/256x256" style="width: 256px;  height: auto;" />
+					</div>
+					<div id="friendName" class="friend-info-name">
+						Name
+					</div>
+					<div id="friendStatus" class="friend-info-status">
+						Offline
+					</div>
+					<div id="friendWorld" class="friend-info-world">
+						Not in a public game
+					</div>
+					<div style="margin: 16px;">
+						<button id="joinGameButton" class="friend-button-join">Join Game</button>
+						<button id="sendMessageButton" class="friend-button-message">Send Message</button>
+					</div>
+				</div>
+				<div id="otherUserInfo" style="position: relative; display: none;">
+					<div class="center center-text" style="margin-top: 16px;">
+						<img id="otherUserImage" src="image://https://via.placeholder.com/256x256" style="width: auto;  height: 256px;" />
+					</div>
+					<div id="otherUserName" class="friend-info-name">
+						Name
+					</div>
+					<div style="margin: 16px;">
+						<button class="friend-button-add" id="addFriendButton">Add friend</button>
+					</div>
+				</div>
+			</div>
+			<div class="col col-1"></div>
+		</div>
+		<div class="col-center">
+			<div class="friends col col-12 col-color">
+				<div class="row online-friends">
+					<h1>Online Friends</h1>
+					<div id="onlineFriendsContainer" class="row">
+
+					</div>
+					<p class="totalOnlineFriends" id="totalOnlineFriends">Online: 0</p>
+				</div>
+				<div class="row offline-friends">
+					<h1>Offline Friends</h1>
+					<div id="offlineFriendsContainer" class="row">
+
+					</div>
+					<p class="totalOfflineFriends" id="totalOfflineFriends">Offline: 2</p>
+				</div>
+				<br />
+				<br />
+			</div>
+		</div>
+		<div class="col-right">
+			<div class="row">
+				<div class="col col-12 friend-search col-color">
+					<div id="friendSearchError" class="center center-text" style="position:center; top: 0px; z-index: -1;">
+						<h1 style="line-height: 875px;">Search for users here</h1>
+					</div>
+					<div class="friend-search-settings" style="position:relative;">
+						<input id="friendSearchInput" type="text" style="position: absolute; min-height:64px; width: 60%; font-size:32px;  padding: 12px 20px; margin-left:10px; box-sizing: border-box; overflow: hidden;" placeholder="User name" />
+						<button onclick="friendSearchOptions.page = 0; SearchFriends()" style="position:absolute; left:65%; border: none; padding:13px 20px; text-decoration: none;  cursor: pointer; font-size: 32px; box-sizing: border-box;">Search</button>
+					</div>
+					<div id="friendSearchResults" class="friend-search-results" style="margin-top: 100px; margin-left: 12.5%;">
+
+					</div>
+
+					<div style="box-sizing: border-box; position: absolute; bottom: 10px; width: 100%; left: calc(25% - 20px);">
+						<button onclick="previousFriendPage()" style="position: relative; padding:13px 20px; text-decoration: none;  cursor: pointer; font-size: 32px; box-sizing: border-box;">Back</button>
+						<button onclick="nextFriendPage()" style="position: relative; padding:13px 20px; text-decoration: none;  cursor: pointer; font-size: 32px; box-sizing: border-box; margin-left: 10px;">Next</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
     <div id="settings">
         <div class="col-center">
@@ -317,18 +399,13 @@
 
     </div>
 
-
 	<div id="menuButtons">
 		<button id="mainButton" class="active" onclick="ChangeState(2);"><div>Home</div></button>
 		<button id="contentButton" onclick="ChangeState(4);"><div>Content</div></button>
 		<button id="galaxyButton" onclick=""><div>Galaxy</div></button>
-		<button id="socialButton" onclick=""><div>Social</div></button>
+		<button id="socialButton" onclick="ChangeState(3); GetFriends();"><div>Social</div></button>
 		<button id="settingsButton" onclick="ChangeState(7);"><div>Settings</div></button>
 	</div>
 
-    <div id="loginInProgress">
-
-
-    </div>
 </body>
 </html>

@@ -13,11 +13,329 @@ var iconsDark = ["/themes/supra/icons/dark/settings.png", "/themes/supra/icons/d
 var iconsLight = ["/themes/supra/icons/light/settings.png", "/themes/supra/icons/light/content.png", "/themes/supra/icons/light/galaxy.png"];
 var icons = [iconsDark, iconsLight];
 
+// social
+var friendSearchOptions = {
+	"page": 0
+};
 
-function nextPage() {
-	game.NextPage();
+var friendData = {
+	"onlinePage": 0,
+	"offlinePage": 0,
+	"totalFriends": 0,
+	"offlineFriends": 0,
+	"onlineFriends": 0
+};
+
+//--------------------------------------------------------------------------
+
+
+// #region friends
+function SearchFriends() {
+    var d = document.getElementById("friendSearchResults");
+    document.getElementById("friendSearchError").children[0].style.display = "hidden";
+    while (d.children.length > 0)
+        d.removeChild(d.firstElementChild);
+
+    game.Friends.SearchUsers(document.getElementById('friendSearchInput').value, friendSearchOptions.page, 6, function (results) {
+
+        if (results.Count == 0) {
+            document.getElementById("friendSearchError").children[0].style.display = "";
+            document.getElementById("friendSearchError").children[0].textContent = "No results";
+            return;
+        }
+
+        var curElm = document.createElement("div");
+        curElm.classList.add("row");
+        curElm.style.marginBottom = "25px";
+
+
+        for (var i = 0; i < results.Count; i++) {
+
+            if (i % 2 == 0 && i != 0) {
+                d.appendChild(curElm);
+                curElm = document.createElement("div");
+                curElm.classList.add("row");
+                curElm.style.marginBottom = "25px";
+            }
+
+            var temp = document.createElement("div");
+            temp.classList.add("friend-item");
+            var img = document.createElement("img");
+            var text = document.createElement("p");
+
+            if (results[i].AccountPicture != null && results[i].AccountPicture != "")
+                img.src = "image://" + results[i].AccountPictureURL;
+            else
+                img.src = "image://icon_app_19.png";
+
+            text.textContent = results[i].DisplayName;
+
+            temp.appendChild(img);
+            temp.appendChild(text);
+            function f(n) {
+                temp.addEventListener("click", function (event) {
+                    game.Friends.GetUserInfo(n.ID.toString(), function (r) {
+                        UpdateUserInfo(r);
+                    });
+                });
+            } f(results[i]);
+
+
+            curElm.appendChild(temp);
+        }
+        d.appendChild(curElm);
+    }, function (e) {
+        document.getElementById("friendSearchError").children[0].style.display = "";
+        if (e.StatusCode == "429") {
+            document.getElementById("friendSearchError").children[0].textContent = "Error: To many requests";
+        }
+        else {
+
+            document.getElementById("friendSearchError").children[0].textContent = "Error: " + e.StatusResult;
+        }
+    });
 }
 
+function UpdateUserInfo(user) {
+    var nft = document.getElementById("noFriendText");
+    var oui = document.getElementById("otherUserInfo");
+    var fi = document.getElementById("friendInfo");
+    fi.style.display = "none";
+    oui.style.display = "none";
+    nft.style.display = "none";
+
+    if (user.FriendSince == null) {
+        oui.style.display = "block";
+        var addFriendButton = document.getElementById("addFriendButton");
+        var afbParent = addFriendButton.parentElement;
+        addFriendButton.remove();
+
+        addFriendButton = document.createElement("button");
+        addFriendButton.classList.add("friend-button-add");
+        addFriendButton.id = "addFriendButton";
+
+        //need to do this to get around power ui's image bug
+        var img = document.getElementById("otherUserImage");
+        var imgParent = img.parentElement;
+        img.remove();
+
+        img = document.createElement("img");
+        img.id = "otherUserImage";
+        img.style.width = "auto";
+        img.style.height = "256px";
+        if (user.AccountPicture == null) {
+            img.src = "image://icon_app_19.png";
+        }
+        else {
+            img.src = "image://" + user.AccountPictureURL;
+        }
+        //
+
+        imgParent.appendChild(img);
+
+
+        function f(x) {
+            document.getElementById("otherUserName").textContent = x.DisplayName;
+            if (user.RequestPending) {
+                addFriendButton.textContent = "Request Pending";
+            }
+            else {
+                addFriendButton.textContent = "Add Friend";
+                addFriendButton.addEventListener("click", function (e) {
+                    AddFriend(x.ID.toString());
+                    addFriendButton.textContent = "Sent!";
+                });
+            }
+        } f(user);
+
+        afbParent.appendChild(addFriendButton);
+    }
+    else {
+        fi.style.display = "block";
+        var sendMessageButton = document.getElementById("sendMessageButton");
+        var joinGameButton = document.getElementById("joinGameButton");
+        var friendButtonParent = sendMessageButton.parentElement;
+
+        document.getElementById("friendName").textContent = user.DisplayName;
+        document.getElementById("friendImage").src = user.AccountPictureURL;
+
+        //sendMessageButton.remove();
+        //joinGameButton.remove();
+
+        //sendMessageButton = document.createElement("button");
+        //joinGameButton = document.createElement("button");
+
+        ////message system not implememented yet
+        //sendMessageButton.classList.add("");
+        //sendMessageButton.textContent = "Send Message";
+
+        ////needs to be conditional on if the user is running a game or not
+        //joinGameButton.classList.add("");
+        //joinGameButton.textContent = "Join Game";
+
+    }
+}
+
+function AddFriend(friendID) {
+    game.Friends.AddFriend(friendID,
+        function () {
+
+
+        },
+        function (e) {
+            console.log(e.StatusResult);
+        });
+}
+
+function nextFriendPage() {
+    friendSearchOptions.page++;
+    SearchFriends();
+}
+
+function previousFriendPage() {
+    friendSearchOptions.page--;
+    if (friendSearchOptions.page < 0)
+        friendSearchOptions.page = 0;
+
+    SearchFriends();
+}
+
+function GetFriends() {
+    game.Friends.GetFriends(
+        function (x) {
+            UpdateFriends(x);
+        }, function (e) {
+            console.log(e);
+        });
+}
+
+function UpdateFriends(x) {
+    friendData.onlineFriends = x.OnlineFriends.Count;
+    friendData.offlineFriends = x.OfflineFriends.Count;
+    friendData.totalFriends = x.TotalFriends;
+
+    var offlineContainer = document.getElementById("offlineFriendsContainer");
+    var onlineContainer = document.getElementById("onlineFriendsContainer");
+    while (offlineContainer.firstChild)
+        offlineContainer.firstChild.remove();
+    while (onlineContainer.firstChild)
+        onlineContainer.firstChild.remove();
+
+    var offBackButton = document.createElement("button");
+    offBackButton.classList.add("friends-back");
+    offBackButton.addEventListener("click", function (e) { previousOfflineFriendPage(); });
+    offBackButton.textContent = "<";
+    offlineContainer.appendChild(offBackButton);
+
+    var onBackButton = document.createElement("button");
+    onBackButton.classList.add("friends-back");
+    onBackButton.addEventListener("click", function (e) { previousOnlineFriendPage(); });
+    onBackButton.textContent = "<";
+    onlineContainer.appendChild(onBackButton);
+
+
+    //online
+    for (var i = friendData.onlinePage * 3; i < x.OnlineFriends.Count; i++) {
+        if (friendData.onlinePage > 0)
+            if (i >= friendData.onlinePage * 3)
+                break;
+
+        var child = document.createElement("div");
+        child.classList.add("friend-item");
+        child.addEventListener("click", function (e) { SelectFriend(child, x.OnlineFriends[i].ID.toString()); });
+        var img = document.createElement("img");
+
+        if (x.OnlineFriends[i].AccountPicture == null)
+            img.src = "image://icon_app_19.png";
+        else
+            img.src = "image://" + x.OnlineFriends[i].AccountPictureURL;
+
+        var p = document.createElement("p");
+        p.textContent = x.OnlineFriends[i].DisplayName;
+
+        child.appendChild(img);
+        child.appendChild(p);
+
+        onlineContainer.appendChild(child);
+    }
+
+    //offline
+    for (var i = friendData.offlinePage * 3; i < x.OfflineFriends.Count; i++) {
+        if (friendData.offlinePage > 0) {
+            if (i > friendData.offlinePage * 3) {
+                break;
+            }
+        }
+        else {
+            if (i > 2)
+                break;
+        }
+
+        var child = document.createElement("div");
+        child.classList.add("friend-item");
+        child.addEventListener("click", function (e) { SelectFriend(child, x.OfflineFriends[i].ID.toString()); });
+        var img = document.createElement("img");
+
+        if (x.OfflineFriends[i].AccountPicture == null)
+            img.src = "image://icon_app_19.png";
+        else
+            img.src = "image://" + x.OfflineFriends[i].AccountPictureURL;
+
+        var p = document.createElement("p");
+        p.textContent = x.OfflineFriends[i].DisplayName;
+
+        child.appendChild(img);
+        child.appendChild(p);
+
+
+        offlineContainer.appendChild(child);
+    }
+
+    var offNext = document.createElement("button");
+    offNext.classList.add("friends-forward");
+    offNext.addEventListener("click", function (e) { nextOfflineFriendPage(); });
+    offNext.textContent = ">";
+    offlineContainer.appendChild(offNext);
+
+    var onNext = document.createElement("button");
+    onNext.classList.add("friends-forward");
+    onNext.addEventListener("click", function (e) { nextOnlineFriendPage(); });
+    onNext.textContent = ">";
+    onlineContainer.appendChild(onNext);
+
+
+    document.getElementById("totalOnlineFriends").textContent = "Online: " + x.OnlineFriends.Count;
+    document.getElementById("totalOfflineFriends").textContent = "Offline: " + x.OfflineFriends.Count;
+
+}
+
+function nextOnlineFriendPage() {
+}
+function previousOnlineFriendPage() {
+
+}
+
+function nextOfflineFriendPage() {
+    friendData.offlinePage++;
+
+    if (((friendData.offlinePage + 1) * 3) > friendData.offlineFriends + 3) {
+        friendData.offlinePage--;
+    }
+    else {
+        UpdateFriends();
+    }
+}
+function previousOfflineFriendPage() {
+    friendData.offlinePage--;
+
+    if (friendData.offlinePage < 0) {
+        friendData.offlinePage = 0;
+    }
+    else {
+        UpdateFriends();
+    }
+}
+//#endregion
 
 // #region content
 function searchContent() {
@@ -203,6 +521,26 @@ function togglePasswordField(elm) {
 
 }
 
+
+function updateUserProfile() {
+    game.Friends.UpdateProfile(function (result) {
+        var container = document.getElementById("profileImageContainer");
+        container.removeChild(container.firstElementChild);
+        var elm = document.createElement("img");
+        elm.style.width = "400";
+        elm.style.height = "400";
+
+        if (result.AccountPicture != null)
+            elm.src = "image://" + result.AccountPictureURL;
+        else
+            elm.src = "image://icon_app_19_gray.png";
+
+        container.appendChild(elm);
+
+        document.getElementById("nameText").innerText = "Hello " + result.DisplayName + "!";
+
+    }, function (error) { console.log(error.StatusResult); });
+}
 
 function UpdateProfileData(profile) {
 	var obj = JSON.parse(profile);
