@@ -583,13 +583,9 @@ function UpdateProfileData(profile) {
 
 }
 
-function SetProfileImage(image) {
-	document.getElementById("profileImage").src = image;
 }
 
 
-function SetName(name) {
-	document.getElementById("nameText").innerText = "Hello " + name + "!";
 }
 
 //Exposed functions for the game to call to change things
