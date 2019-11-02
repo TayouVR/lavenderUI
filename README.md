@@ -14,7 +14,7 @@ possible choices are:
 you can also make your own color schemes by copying one of those files and modifying it.
 
 # Screenshots
-![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/colors_lavender.png)
-![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/colors_dark.png)
-![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/colors_default.png)
-![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/colors_light.png)
+![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/colors_lavender.jpg)
+![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/colors_dark.jpg)
+![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/colors_default.jpg)
+![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/colors_light.jpg)
