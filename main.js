@@ -407,6 +407,41 @@ function previousPage() {
 }
 //#endregion
 
+//#region notification
+function openNotification() {
+    game.GetNotifications()
+        .then(function (resolve) {
+
+            console.log("RESOLVE: " + resolve);
+
+
+        })
+        .catch(
+            function (e) {
+                console.log("ERROR: " + e)
+            });
+
+
+
+    var popup = document.getElementById("notificationPopup");
+    var info = document.getElementById("notificationPopupInfo");
+    var controls = document.getElementById("notificationPopupControls");
+    popup.style.display = "block";
+
+    // while (controls.firstElementChild)
+    //     controls.removeChild(controls.firstElementChild);
+
+
+
+
+
+    console.log(guid);
+}
+function dismissNotification(guid) {
+    console.log(guid);
+}
+//#endregion
+
 
 function updateAssetInfo(asset) {
 	var a = JSON.parse(asset);
