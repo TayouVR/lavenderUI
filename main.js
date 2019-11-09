@@ -497,17 +497,19 @@ function updateAssetInfo(asset) {
     spawn.classList.add("asset-info-spawn");
 
     if (asset.Type == 1) {
-
+		spawn.textContent = "Switch To Avatar";
         spawn.addEventListener("click", function (event) {
             game.Content.SpawnAvatar(asset.ID.toString());
         });
     }
     else if (asset.Type == 2) {
+    	spawn.textContent = "Go To World";
         spawn.addEventListener("click", function (event) {
             game.Content.SpawnWorld(asset.ID.toString());
         });
     }
     else if (asset.Type == 3) {
+    	spawn.textContent = "Spawn Prop";
         spawn.addEventListener("click", function (event) {
             game.Content.SpawnProp(asset.ID.toString());
         });
