@@ -29,6 +29,26 @@ var friendData = {
 //--------------------------------------------------------------------------
 
 
+//############################################
+//# Functions the game calls to give the api #
+//############################################
+var game = {};
+function SetAPI(api) {
+    game = api;
+
+    //game.BindFunc1("AddPlayer", function (data) {
+    //    players.push(data);
+    //});
+
+    //runs once when the UI is first loaded
+    //Bind all functions and events here
+    game.BindFunc0("updateFriendsList", function () {
+        GetFriends();
+    });
+
+}
+//############################################
+
 // #region friends
 function SearchFriends() {
     var d = document.getElementById("friendSearchResults");
@@ -221,23 +241,12 @@ function UpdateFriends(x) {
     while (onlineContainer.firstChild)
         onlineContainer.firstChild.remove();
 
-    var offBackButton = document.createElement("button");
-    offBackButton.classList.add("friends-back");
-    offBackButton.addEventListener("click", function (e) { previousOfflineFriendPage(); });
-    offBackButton.textContent = "<";
-    offlineContainer.appendChild(offBackButton);
-
-    var onBackButton = document.createElement("button");
-    onBackButton.classList.add("friends-back");
-    onBackButton.addEventListener("click", function (e) { previousOnlineFriendPage(); });
-    onBackButton.textContent = "<";
-    onlineContainer.appendChild(onBackButton);
-
 
     //online
     for (var i = friendData.onlinePage * 3; i < x.OnlineFriends.Count; i++) {
+        console.log(x.onlineFriends[i].DisplayName);
         if (friendData.onlinePage > 0)
-            if (i >= friendData.onlinePage * 3)
+            if (i >= friendData.onlinePage * 3 + 3)
                 break;
 
         var child = document.createElement("div");
@@ -262,7 +271,7 @@ function UpdateFriends(x) {
     //offline
     for (var i = friendData.offlinePage * 3; i < x.OfflineFriends.Count; i++) {
         if (friendData.offlinePage > 0) {
-            if (i > friendData.offlinePage * 3) {
+            if (i >= friendData.offlinePage * 3 + 3) {
                 break;
             }
         }
@@ -291,22 +300,8 @@ function UpdateFriends(x) {
         offlineContainer.appendChild(child);
     }
 
-    var offNext = document.createElement("button");
-    offNext.classList.add("friends-forward");
-    offNext.addEventListener("click", function (e) { nextOfflineFriendPage(); });
-    offNext.textContent = ">";
-    offlineContainer.appendChild(offNext);
-
-    var onNext = document.createElement("button");
-    onNext.classList.add("friends-forward");
-    onNext.addEventListener("click", function (e) { nextOnlineFriendPage(); });
-    onNext.textContent = ">";
-    onlineContainer.appendChild(onNext);
-
-
     document.getElementById("totalOnlineFriends").textContent = "Online: " + x.OnlineFriends.Count;
     document.getElementById("totalOfflineFriends").textContent = "Offline: " + x.OfflineFriends.Count;
-
 }
 
 function nextOnlineFriendPage() {
@@ -318,11 +313,11 @@ function previousOnlineFriendPage() {
 function nextOfflineFriendPage() {
     friendData.offlinePage++;
 
-    if (((friendData.offlinePage + 1) * 3) > friendData.offlineFriends + 3) {
+    if ((friendData.offlinePage + 1) * 3 > friendData.offlineFriends + 3) {
         friendData.offlinePage--;
     }
     else {
-        UpdateFriends();
+        GetFriends();
     }
 }
 function previousOfflineFriendPage() {
@@ -332,7 +327,7 @@ function previousOfflineFriendPage() {
         friendData.offlinePage = 0;
     }
     else {
-        UpdateFriends();
+        GetFriends();
     }
 }
 //#endregion
@@ -378,12 +373,18 @@ function searchContent() {
 
 
                 var img = document.createElement("img");
-                img.src = "image://" + result.Elements[i].AssetImageURL;
+                img.src = "image://" + result.Elements[i].AssetImageURL + "_256";
                 elm.appendChild(img);
+
+
+                var inner = document.createElement("div");
 
                 var p = document.createElement("p");
                 p.textContent = result.Elements[i].Name;
-                elm.appendChild(p);
+
+                inner.appendChild(p);
+
+                elm.appendChild(inner);
 
                 currentRow.appendChild(elm);
             }
@@ -443,6 +444,26 @@ function dismissNotification(guid) {
 //#endregion
 
 
+function updateUserProfile() {
+    game.Friends.UpdateProfile(function (result) {
+        var container = document.getElementById("profileImageContainer");
+        container.removeChild(container.firstElementChild);
+        var elm = document.createElement("img");
+        elm.style.width = "400";
+        elm.style.height = "400";
+
+        if (result.AccountPicture != null)
+            elm.src = "image://" + result.AccountPictureURL;
+        else
+            elm.src = "image://icon_app_19_gray.png";
+
+        container.appendChild(elm);
+
+        document.getElementById("nameText").innerText = "Hello " + result.DisplayName + "!";
+
+    }, function (error) { console.log(error.StatusResult); });
+}
+
 function updateAssetInfo(asset) {
     var name = document.getElementById("assetInfoName");
     //var name = document.getElementById("assetInfoName");
@@ -453,24 +474,27 @@ function updateAssetInfo(asset) {
     var buttonContainer = document.getElementById("assetInfoButtons");
     var assetInfoAuthor = document.getElementById("assetInfoAuthor");
 
+
+	var imgp = img.parentElement;
+
+	imgp.removeChild(img);
+	img = document.createElement("img");
+	img.id = "assetInfoImage";
+
     name.textContent = asset.Name;
     desc.textContent = asset.Description;
     size.textContent = "Size: " + formatBytes(asset.Size, 2);
     assetInfoAuthor.textContent = "Author: " + asset.OwnerName;
-    img.src = asset.AssetImageURL + "-sm";
+    img.src = "image://" + asset.AssetImageURL + "_256";
 
-
+    imgp.appendChild(img);
 
     buttonContainer.removeChild(buttonContainer.lastElementChild);
 
 
     var spawn = document.createElement("button");
-
     spawn.textContent = "Spawn";
-    spawn.style.display = "block";
-    spawn.style.lineHeight = "48px";
-    spawn.style.fontSize = "32px";
-    spawn.style.marginTop = "16px";
+    spawn.classList.add("asset-info-spawn");
 
     if (asset.Type == 1) {
 
@@ -550,6 +574,7 @@ function openDropDown(elm, array) {
 	inner.style.position = "fixed";
 	inner.style.top = rect.y + 64;
 	inner.style.left = rect.x;
+    inner.style.width = rect.width;
 
 	p.parentElement.parentElement.parentElement.appendChild(inner);
 }
@@ -571,27 +596,6 @@ function togglePasswordField(elm) {
 	p.value = "";
 	p.value = data;
 
-}
-
-
-function updateUserProfile() {
-    game.Friends.UpdateProfile(function (result) {
-        var container = document.getElementById("profileImageContainer");
-        container.removeChild(container.firstElementChild);
-        var elm = document.createElement("img");
-        elm.style.width = "400";
-        elm.style.height = "400";
-
-        if (result.AccountPicture != null)
-            elm.src = "image://" + result.AccountPictureURL;
-        else
-            elm.src = "image://icon_app_19_gray.png";
-
-        container.appendChild(elm);
-
-        document.getElementById("nameText").innerText = "Hello " + result.DisplayName + "!";
-
-    }, function (error) { console.log(error.StatusResult); });
 }
 
 function UpdateProfileData(profile) {
@@ -924,12 +928,6 @@ function formatBytes(a, b) {
 		e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
 		f = Math.floor(Math.log(a) / Math.log(c));
 	return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
-}
-
-//runs once when the UI is first loaded
-//Bind all functions and events here
-function loaded() {
-	game.Friends.AddEventListener("updatefriendlist", UpdateFriends);
 }
 
 /*document.addEventListener('keyup', (e) => {
