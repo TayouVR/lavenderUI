@@ -129,8 +129,8 @@ input:active {
 	text-align: left;
 }
 .themeCard {
-	width: 260px;
-	height: 220px !important;
+	width: calc(calc(33.3333% - var(--border-width)) - 10px);
+	height: auto !important;
 	background-color: var(--avatarCardBackground);
 	border-color: var(--avatarCardBorder);
 	color: var(--avatarCardText);
@@ -146,8 +146,8 @@ input:active {
 	}
 
 .themeImage {
-	width: 280px;
-	height: 160px;
+	margin-top: calc(-10px + var(--border-width));
+	width: calc(calc(100% + 36px) - calc(var(--border-width) * 2));
 	border-top-left-radius: var(--border-radius-medium) !important;
 	border-top-right-radius: var(--border-radius-medium) !important;
 	border-bottom-style: solid;
