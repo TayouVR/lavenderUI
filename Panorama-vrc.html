@@ -130,7 +130,7 @@
 		        <div class="col-right">
 		            <div class="col-12">
 		                <div class="row" style="margin-bottom: 20px;">
-		                    <div class="col col-12 content">
+		                    <div class="col col-12">
 		                        <div>
 		                            <img src="logoflat.png" style="position:relative; width:100%;" />
 		                            <div class="version" id="version">Version</div>
@@ -138,13 +138,13 @@
 		                    </div>
 		                </div>
 		                <div class="row" style="margin-bottom: 20px;">
-		                    <div class="col col-12 content" onclick="ClickDiscord()">
+		                    <div class="col col-12" onclick="ClickDiscord()">
 								<img src="themes/supra/discord-logo.png" style="position:relative; width:100%;" />
 		                        <div style="text-align: center; padding-bottom: -20px; padding-left: 5px;"><h1 style="font-size: 1.7em;">join the Discord Server!</h1></div>
 		                    </div>
 		                </div>
 		                <div class="row" style="margin-bottom: 20px;">
-		                    <div class="col col-12 content">
+		                    <div class="col col-12">
 		                        <div style="height: 200px;">
 		                            <pre style="font-size: 1em;">Temp mic toggle</pre>
 		                            <button style="padding-top: 16px; padding-bottom: 16px; padding-right: 64px; padding-left: 64px; font-size: 1.7em;" id="pttbtn" onclick="game.MicActivation()">Push to talk</button>
@@ -170,7 +170,7 @@
 		        <div class="col-left">
 		            <div class="row">
 		                <div class="col col-1"></div>
-		                <div class="col col-10 content">
+		                <div class="col col-10">
 		                    <div id="noAssetText" class="center center-text" >
 		                        <h1 style="line-height: 930px;">No Asset Selected</h1>
 		                    </div>
@@ -202,7 +202,7 @@
 		        </div>
 
 		        <div class="col-center">
-		            <div class="content-items content">
+		            <div class="content-items">
 		                <div id="contentItemContainer" style="margin-top: 15px; height: 850px;">
 
 		                </div>
@@ -219,7 +219,7 @@
 
 		        <div class="col-right">
 		            <div class="row">
-		                <div class="col col-11 content-search content">
+		                <div class="col col-11 content-search">
 							<input id="contentSearchInput" type="text" style="position: absolute; min-height:64px; width: 60%; font-size:32px;  padding: 12px 20px; margin-left:10px; box-sizing: border-box; overflow: hidden;" placeholder="Name" />
 							<button onclick="game.Content.SearchSettings.Page = 0; searchContent()" style="position:absolute; left:65%; border: none; padding:13px 20px 30px 20px; text-decoration: none;  cursor: pointer; font-size: 32px; box-sizing: border-box;">Search</button>
 
@@ -286,7 +286,7 @@
 			<div id="social">
 				<div class="col-left">
 					<div class="col col-1"></div>
-					<div class="col col-10 col-color">
+					<div class="col col-10">
 						<div id="noFriendText" class="center center-text">
 							<h1 style="line-height: 800px;">No Friend Selected</h1>
 						</div>
@@ -323,7 +323,7 @@
 					<div class="col col-1"></div>
 				</div>
 				<div class="col-center">
-					<div class="friends col col-12 col-color">
+					<div class="friends col col-12">
 						<div class="row online-friends">
 							<h1>Online Friends</h1>
 							<div id="onlineFriendsContainer" class="row">
@@ -344,7 +344,7 @@
 				</div>
 				<div class="col-right">
 					<div class="row">
-						<div class="col col-12 friend-search col-color">
+						<div class="col col-12 friend-search">
 							<div id="friendSearchError" class="center center-text" style="position:center; top: 0px; z-index: -1;">
 								<h1 style="line-height: 875px;">Search for users here</h1>
 							</div>
@@ -367,45 +367,43 @@
 			</div>
 
 		    <div id="settings">
-	        <div class="col-center">
-	            <div class="row">
-	                <div class="top-tab-container">
-	                    <div id="gameplayButton" class="tab tab-left" onclick="SettingsPage(0);">Game</div>
-	                    <div id="graphicsButton" class="tab" onclick="SettingsPage(1);">Graphics</div>
-	                    <div id="audioButton" class="tab" onclick="SettingsPage(2);">Audio</div>
-	                    <div id="onlineButton" class="tab" onclick="SettingsPage(3);">Online</div>
-	                    <div id="uiButton" class="tab tab-right" onclick="SettingsPage(4);">UI</div>
-	                </div>
-	            </div>
-	            <div class="row content" style="height: 800px;">
-					<div id="gameplaySettings">
-						<div style="text-align: left;">Gameplay</div>
-						<pre style="font-size:32px;" id="settingsdump">Settings</pre>
-					</div>
+		        <div>
+		            <div class="row">
+		                <div class="top-tab-container">
+		                    <div id="gameplayButton" class="tab tab-left" onclick="SettingsPage(0);">Game</div>
+		                    <div id="graphicsButton" class="tab" onclick="SettingsPage(1);">Graphics</div>
+		                    <div id="audioButton" class="tab" onclick="SettingsPage(2);">Audio</div>
+		                    <div id="onlineButton" class="tab" onclick="SettingsPage(3);">Online</div>
+		                    <div id="uiButton" class="tab tab-right" onclick="SettingsPage(4);">UI</div>
+		                </div>
+		            </div>
+		            <div class="row" style="height: 800px;">
+						<div id="gameplaySettings">
+							<div style="text-align: left;">Gameplay</div>
+							<pre style="font-size:32px;" id="settingsdump">Settings</pre>
+						</div>
 
-					<div id="graphicsSettings">
-						<div style="text-align: left;">Graphics</div>
-					</div>
+						<div id="graphicsSettings">
+							<div style="text-align: left;">Graphics</div>
+						</div>
 
-					<div id="audioSettings">
-						<div style="text-align: left;">Audio</div>
-					</div>
+						<div id="audioSettings">
+							<div style="text-align: left;">Audio</div>
+						</div>
 
-					<div id="onlineSettings">
-						<div style="text-align: left;">Online</div>
-					</div>
+						<div id="onlineSettings">
+							<div style="text-align: left;">Online</div>
+						</div>
 
-					<div id="uiSettings">
-						<div style="text-align: left;">Color Palettes</div>
-						<div id="themeList" ></div>
-						<div style="text-align: left;">Icons</div>
-						<div id="iconList" ></div>
-					</div>
-	            </div>
-	        </div>
-
-
-	    </div>
+						<div id="uiSettings">
+							<div style="text-align: left;">Color Palettes</div>
+							<div id="themeList" ></div>
+							<div style="text-align: left;">Icons</div>
+							<div id="iconList" ></div>
+						</div>
+		            </div>
+		        </div>
+		    </div>
 		</div>
 	</div>
 
