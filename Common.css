@@ -291,5 +291,5 @@ input:active {
 	background-color: var(--loginPanelTint) !important;
 }
 .asset-info-spawn {
-	width: calc(calc(100% - 20px) - var(--border-width));
+	width: calc(100% - var(--border-width));
 }
