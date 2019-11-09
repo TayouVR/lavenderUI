@@ -293,3 +293,6 @@ input:active {
 .loginPanelTint {
 	background-color: var(--loginPanelTint) !important;
 }
+.asset-info-spawn {
+	width: calc(calc(100% - 20px) - var(--border-width));
+}
