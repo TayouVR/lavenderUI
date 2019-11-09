@@ -1,0 +1,5 @@
+html {
+	--border-radius-outside: 16px;
+	--border-radius-medium: 12px;
+	--border-radius-inside: 8px;
+}
