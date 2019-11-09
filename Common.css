@@ -178,7 +178,7 @@ input:active {
 
 .tab {
     display: inline-block;
-    width: calc(20% - 8px);
+    width: calc(20% - calc(var(--border-width) * 2));
     text-align: center;
     line-height: 60px;
     font-size: 32px;
