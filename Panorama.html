@@ -109,9 +109,10 @@
                 <div class="center center-text">
                     <input style="width:60%; margin-bottom: 8px;" id="ip" type="text" placeholder="127.0.0.1" />
                     <input style="width:60%; margin-bottom: 8px;" id="port" type="password" value="10000" placeholder="10000" />
-                    <br />
-                    <button style="padding-top: 16px; padding-bottom: 8px; padding-right: 64px; padding-left: 64px;"  onclick="Connect()">Connect</button>
-                    <button style="padding-top: 16px; padding-bottom: 8px; padding-right: 64px; padding-left: 64px;"  onclick="game.Disconnect()">Disconnect</button>
+					<div style="width:60%; margin-bottom: -8px; display: inline-block; padding: 0;">
+	                    <button style="width: 46%; margin:0;"  onclick="Connect()">Connect</button>
+	                    <button style="width: 46%;"  onclick="game.Disconnect()">Disconnect</button>
+					</div>
                     <br />
                     <h3 id="connectFail" style="display:none;color:red;border:2px solid red;">Fail reason</h3>
                 </div>
@@ -137,21 +138,10 @@
                 </div>
                 <div class="row" style="margin-bottom: 20px;">
                     <div class="col col-12 content">
-                        <div style="height: 200px;">
-                            <pre style="font-size: 1em;">Temp mic toggle</pre>
-                            <button style="padding-top: 16px; padding-bottom: 16px; padding-right: 64px; padding-left: 64px; font-size: 1.7em;" id="pttbtn" onclick="game.MicActivation()">Push to talk</button>
+                        <div>
+                            <pre style="font-size: 1em; margin: 0; text-align: center;">Temp mic toggle</pre>
+                            <button style="height: 90px; width: 100%; font-size: 1.7em;" id="pttbtn" onclick="game.MicActivation()">Push to talk</button>
                         </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: 20px;">
-                    <div class="col col-12">
-						<div class="col col-6">
-	                        <button style="padding-top: 16px; padding-bottom: 16px; font-size: 2em; width: 100%;" onclick="game.Logout()">Logout</button>
-						</div>
-						<div class="col col-2"></div>
-						<div class="col col-4">
-	                        <button style="padding-top: 16px; padding-bottom: 16px; font-size: 2em; width: 100%;" onclick="game.Quit()">Quit</button>
-						</div>
                     </div>
                 </div>
             </div>
@@ -183,9 +173,9 @@
                         <div id="assetInfoAuthor" style="font-size: 32px; margin-left: 16px;">
                             By no2
                         </div>
-                        <div id="assetInfoButtons" style="margin-top: 16px;">
-                            <button style="width: 50%; border: none; padding-left: 0px; padding-right: 0px; margin: 0px; font-size: 32px; line-height: 48px; ">Subscribe</button>
-                            <button style="width: 50%; border: none; padding-left: 0px; padding-right: 0px; margin: 0px; font-size: 32px; line-height: 48px;">Favorite</button>
+                        <div id="assetInfoButtons" style="margin-top: 16px; margin-bottom: -16px;">
+                            <button style="width: 45%; border: none; padding-left: 0px; padding-right: 0px; margin: 0px; font-size: 32px; line-height: 48px; margin-bottom: 20px; margin-right: 10%;">Subscribe</button>
+                            <button style="width: 45%; border: none; padding-left: 0px; padding-right: 0px; margin: 0px; font-size: 32px; line-height: 48px; margin-bottom: 20px;">Favorite</button>
                             <button style="display: block; line-height: 48px; font-size: 32px; margin-top: 16px;">Spawn</button>
                         </div>
                     </div>
@@ -202,9 +192,8 @@
                 <br />
                 <br />
                 <div class="row center center-text" style="margin-top: -50px;">
-                    <button class="content-items-prev" onclick="previousPage()">Previous</button>
-                    <button class="content-items-next" onclick="nextPage()">Next</button>
-
+					<button class="content-items-prev" onclick="previousPage()" style="position: relative; padding:13px 20px; text-decoration: none;  cursor: pointer; font-size: 32px; box-sizing: border-box;">Previous</button>
+					<button class="content-items-next" onclick="nextPage()" style="position: relative; padding:13px 20px; text-decoration: none;  cursor: pointer; font-size: 32px; box-sizing: border-box; margin-left: 10px;">Next</button>
                 </div>
             </div>
         </div>
@@ -214,7 +203,7 @@
             <div class="row">
                 <div class="col col-11 content-search content">
 					<input id="contentSearchInput" type="text" style="position: absolute; min-height:64px; width: 60%; font-size:32px;  padding: 12px 20px; margin-left:10px; box-sizing: border-box; overflow: hidden;" placeholder="Name" />
-					<button onclick="game.Content.SearchSettings.Page = 0; searchContent()" style="position:absolute; left:65%; border: none; padding:13px 20px 30px 20px; text-decoration: none;  cursor: pointer; font-size: 32px; box-sizing: border-box;">Search</button>
+					<button onclick="game.Content.SearchSettings.Page = 0; searchContent()" style="position:absolute; left:65%; top: 10px; border: none; padding:13px 20px 30px 20px; text-decoration: none;  cursor: pointer; font-size: 32px; box-sizing: border-box;">Search</button>
 
 					<div style="width: 100%;  margin-top: 90px;">
 	                    <div class="row" style="height: 64px;">
@@ -224,6 +213,7 @@
 	                        <div class="col col-7">
 	                            <div id="dropDownType" class="drop-down" onclick="toggleDropDown(this, typeOptions)">
 	                                <div class="drop-down-text">Avatar</div>
+									<span></span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -234,6 +224,7 @@
 	                        <div class="col col-7">
 	                            <div id="dropDownOrder" class="drop-down" onclick="toggleDropDown(this, sortByOptions)">
 	                                <div class="drop-down-text">Date Added</div>
+									<span></span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -244,6 +235,7 @@
 	                        <div class="col col-7">
 	                            <div id="dropDownTime" class="drop-down" onclick="toggleDropDown(this, dateOptions)">
 	                                <div class="drop-down-text">All Time</div>
+									<span></span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -254,6 +246,7 @@
 	                        <div class="col col-7">
 	                            <div id="dropDownVisibility" class="drop-down" onclick="toggleDropDown(this, ['Public','Personal'])">
 	                                <div class="drop-down-text">Public</div>
+									<span></span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -264,6 +257,7 @@
 	                        <div class="col col-7">
 	                            <div id="dropDownOrder" class="drop-down" onclick="toggleDropDown(this, ['Ascending','Descending'])">
 	                                <div class="drop-down-text">Ascending</div>
+									<span></span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -406,6 +400,11 @@
 		<button id="galaxyButton" onclick=""><div>Galaxy</div></button>
 		<button id="socialButton" onclick="ChangeState(3); GetFriends();"><div>Social</div></button>
 		<button id="settingsButton" onclick="ChangeState(7);"><div>Settings</div></button>
+
+		<div class="row" style="position: fixed; bottom: 60px; left: 1800px;">
+			<input type="button" style="height: 90px; font-size: 4em;" onclick="game.Logout()" value="Logout"></input>
+			<input type="button" style="height: 90px; font-size: 4em; margin-left: 20px;" onclick="game.Quit()" value="Quit"></input>
+		</div>
 	</div>
 
 </body>

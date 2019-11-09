@@ -28,8 +28,8 @@ h1 {
 }
 
 input {
-	min-width: 300px;
-	height: 50px;
+	min-height:64px;
+	padding: 12px 20px;
 	background-color: var(--inputBackground);
 	border-style: solid;
 	border-width: var(--border-width);
@@ -38,19 +38,14 @@ input {
 	text-align: left;
 	font-size: 1em;
 	color: var(--inputText);
-	margin-right: 2px;
-	padding-bottom: 0px;
-	padding-top: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-
+	box-sizing: border-box;
 }
 input:focus {
 	background-color: var(--focusedElementBackgroundColor);
 	color: var(--focusedElementColor);
 }
 input[type=button] , input[type=submit] , button {
-	height: 50px;
+	height: 64px;
 	background-color: var(--buttonBGColor);
 	border-style: solid;
 	border-width: var(--border-width);
@@ -59,13 +54,8 @@ input[type=button] , input[type=submit] , button {
 	text-align: center;
 	font-size: 2rem;
 	color: var(--buttonFGColor);
-	padding-bottom: 0px;
-	padding-top: 0px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-input div, button div {
-	margin-top: 7px;
+	padding: 13px 20px;
+	box-sizing: border-box;
 }
 input:hover {
 	background-color: var(--buttonBGColorHover);
@@ -221,16 +211,23 @@ input:active {
     position: relative;
     height: 64px;
     font-size: 40px;
-	padding-top: 15px;
+	padding-top: 10px;
 	padding-left: 15px;
 }
 
+.drop-down > span {
+    width: 64px;
+	height: 64px;
+	margin-right: 5px;
+}
+
 .drop-down-text {
-	margin-top: -100px;
+	line-height: 64px;
+	margin-top: -80px;
+	width: calc(calc(100% - 79px) - var(--border-width));
 }
 
 .drop-down-inner {
-    width: 14.1%;
     display: block;
     background-color: var(--backgroundColor);
     font-size: 40px;
