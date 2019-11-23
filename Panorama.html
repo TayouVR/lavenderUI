@@ -1,8 +1,9 @@
 <html>
 <head>
-	<script src="/js/ui.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/main.js"></script>
 	<script src="/themes/supra/main.js"></script>
-    <link rel="stylesheet" href="/css/Common.css">
+    <link rel="stylesheet" href="./css/Common.css">
     <link rel="stylesheet" type="text/css" href="/themes/supra/borders/borders-round.css">
     <link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-dark.css">
 	<link rel="stylesheet" type="text/css" href="/themes/supra/icons/dark/icons.css">
@@ -131,7 +132,7 @@
                     </div>
                 </div>
                 <div class="row" style="margin-bottom: 20px;">
-                    <div class="col col-12 content" onclick="ClickDiscord()">
+                    <div class="col col-12 content" onclick="game.OpenLink('https://discord.gg/fWHjNfg');">
 						<img src="themes/supra/discord-logo.png" style="position:relative; width:100%;" />
                         <div style="text-align: center; padding-bottom: -20px; padding-left: 5px;"><h1 style="font-size: 1.1em;">join the Discord Server!</h1></div>
                     </div>
@@ -354,44 +355,169 @@
 	</div>
 
     <div id="settings">
-        <div class="col-center">
-            <div class="row">
-                <div class="top-tab-container">
-                    <div id="gameplayButton" class="tab tab-left" onclick="SettingsPage(0);">Game</div>
-                    <div id="graphicsButton" class="tab" onclick="SettingsPage(1);">Graphics</div>
-                    <div id="audioButton" class="tab" onclick="SettingsPage(2);">Audio</div>
-                    <div id="onlineButton" class="tab" onclick="SettingsPage(3);">Online</div>
-                    <div id="uiButton" class="tab tab-right" onclick="SettingsPage(4);">UI</div>
-                </div>
-            </div>
-            <div class="row content" style="height: 800px;">
-				<div id="gameplaySettings">
-					<div style="text-align: left;">Gameplay</div>
-					<pre style="font-size:32px;" id="settingsdump">Settings</pre>
+		<div class="col-left col-color">
+			<div id="coreButton" class="settings-tree-cat" onclick="changeSettingsCat(0);">
+				<h2>Core</h2>
+			</div>
+			<div id="graphicsButton" class="settings-tree-cat" onclick="changeSettingsCat(1);">
+				<h2>Graphics</h2>
+			</div>
+			<div id="audioButton" class="settings-tree-cat" onclick="changeSettingsCat(2);">
+				<h2>Audio</h2>
+			</div>
+			<div id="serverButton" class="settings-tree-cat" onclick="changeSettingsCat(3);">
+				<h2>Server</h2>
+			</div>
+			<div id="playerButton" class="settings-tree-cat" onclick="changeSettingsCat(4);">
+				<h2>Player</h2>
+			</div>
+			<div id="uiButton" class="settings-tree-cat" onclick="changeSettingsCat(5);">
+				<h2>UI</h2>
+			</div>
+		</div>
+		<div class="col-center col-color">
+			<div id="settingsCore" class="settings-page">
+				<h1>Core</h1>
+				<div class="settings-container">
+					<div class="settings-item">
+						<p>Max Downloads At Once</p>
+						<div id="maxDownloadSlider"></div>
+					</div>
 				</div>
+			</div>
 
-				<div id="graphicsSettings">
-					<div style="text-align: left;">Graphics</div>
+			<div id="settingsGraphics" class="settings-page">
+				<h1>Graphics</h1>
+				<div class="settings-container">
+					<div class="settings-item">
+						<p>MSAA</p>
+						<div id="msaaSlider"></div>
+					</div>
+					<div class="settings-item">
+						<p>VSync</p>
+						<div id="vsyncToggle" class="toggle-switch" onclick="toggleSwitch(event, this);">
+							<span class="toggle-slider"></span>
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Mirror Scale</p>
+						<div id="mirrorScaleSlider"></div>
+					</div>
+					<div class="settings-item">
+						<p>LOD Scale</p>
+						<div id="lodScaleSlider"></div>
+					</div>
+					<div class="settings-item">
+						<p>Shadow Quality Scale</p>
+						<div id="shadowQualitySlider"></div>
+					</div>
 				</div>
+			</div>
 
-				<div id="audioSettings">
-					<div style="text-align: left;">Audio</div>
+			<div id="settingsAudio" class="settings-page">
+				<h1 style="text-align: left;">Audio</h1>
+			</div>
+
+			<div id="settingsServer" class="settings-page">
+				<h1>Server</h1>
+				<div class="settings-container">
+					<div class="settings-item">
+						<p>API Port</p>
+						<div id="apiPort">
+							<input class="settings-input" type="number" max="65535" min="1" />
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Game Port</p>
+						<div id="gamePort">
+							<input class="settings-input" type="number" max="65535" min="1" />
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Max Players</p>
+						<div id="maxPlayer">
+							<input class="settings-input" type="number" max="1000" min="1" />
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Tick</p>
+						<div id="tick">
+							<input class="settings-input" type="number" max="90" min="30" />
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Bandwidth Limit Per Player</p>
+						<div id="bandwidthLimitPerPlayer">
+							<input class="settings-input" type="number" max="1048576" min="1024" />
+						</div>
+					</div>
 				</div>
+			</div>
 
-				<div id="onlineSettings">
-					<div style="text-align: left;">Online</div>
+			<div id="settingsPlayer" class="settings-page">
+				<h1>Player</h1>
+				<div class="settings-container">
+					<div class="settings-item">
+						<p>User Eye Height</p>
+						<div id="userEyeHeight">
+							<input class="settings-input" type="number" max="2" min="-2" />
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Turn Speed</p>
+						<div id="turnSpeed">
+							<input class="settings-input" type="number" max="360" min="30" />
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Use Voice Activation</p>
+						<div id="useVoiceActivationToggle" class="toggle-switch" onclick="toggleSwitch(event, this);">
+							<span class="toggle-slider"></span>
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Pointer Smooth Mult</p>
+						<div id="pointerSmoothMult">
+							<input class="settings-input" type="number" max="100" min="0" />
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Show Local Nameplate</p>
+						<div id="showLocalNameplateToggle" class="toggle-switch" onclick="toggleSwitch(event, this);">
+							<span class="toggle-slider"></span>
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Highlight Red</p>
+						<div id="highlight_r">
+							<input class="settings-input" type="number" max="1" min="0" />
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Highlight Green</p>
+						<div id="highlight_g">
+							<input class="settings-input" type="number" max="1" min="0" />
+						</div>
+					</div>
+					<div class="settings-item">
+						<p>Highlight Blue</p>
+						<div id="highlight_b">
+							<input class="settings-input" type="number" max="1" min="0" />
+						</div>
+					</div>
 				</div>
+			</div>
 
-				<div id="uiSettings">
+			<div id="settingsUI" class="settings-page">
+				<h1>UI</h1>
+				<div class="settings-container">
 					<div style="text-align: left;">Color Palettes</div>
 					<div id="themeList" ></div>
 					<div style="text-align: left;">Icons</div>
 					<div id="iconList" ></div>
 				</div>
-            </div>
-        </div>
-
-
+			</div>
+		</div>
     </div>
 
 	<div id="menuButtons">
@@ -407,5 +533,16 @@
 		</div>
 	</div>
 
+	<div id="notificationPopup" style="display:none;">
+		<div id="notificationPopupInfo">
+			<h1>Notification from June</h1>
+			<p>June has sent you a friend request. What would you like to do?</p>
+		</div>
+		<div id="notificationPopupControls">
+			<button>Accept</button>
+			<button>Reject</button>
+			<button>Block</button>
+		</div>
+	</div>
 </body>
 </html>

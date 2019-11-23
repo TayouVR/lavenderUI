@@ -1,8 +1,3 @@
-// assets
-var dateOptions = ["All Time", "Hour", "Day", "Week", "Month", "6 Months"];
-var sortByOptions = ["Date Added", "Name", "Subscribers", "Likes", "Size"];
-var typeOptions = ["Avatar", "World", "Prop", "Gamemode"];
-
 // ui themes
 var registeredThemes = ["lavender", "dark", "light", "default"]
 var themePicturePaths = ["/themes/supra/pictures/colors_lavender.jpg", "/themes/supra/pictures/colors_dark.jpg", "/themes/supra/pictures/colors_light.jpg", "/themes/supra/pictures/colors_default.jpg"];
@@ -13,514 +8,8 @@ var iconsDark = ["/themes/supra/icons/dark/settings.png", "/themes/supra/icons/d
 var iconsLight = ["/themes/supra/icons/light/settings.png", "/themes/supra/icons/light/content.png", "/themes/supra/icons/light/galaxy.png"];
 var icons = [iconsDark, iconsLight];
 
-// social
-var friendSearchOptions = {
-	"page": 0
-};
-
-var friendData = {
-	"onlinePage": 0,
-	"offlinePage": 0,
-	"totalFriends": 0,
-	"offlineFriends": 0,
-	"onlineFriends": 0
-};
-
 //--------------------------------------------------------------------------
 
-
-//############################################
-//# Functions the game calls to give the api #
-//############################################
-var game = {};
-function SetAPI(api) {
-    game = api;
-
-    //game.BindFunc1("AddPlayer", function (data) {
-    //    players.push(data);
-    //});
-
-    //runs once when the UI is first loaded
-    //Bind all functions and events here
-    game.BindFunc0("updateFriendsList", function () {
-        GetFriends();
-    });
-
-}
-//############################################
-
-// #region friends
-function SearchFriends() {
-    var d = document.getElementById("friendSearchResults");
-    document.getElementById("friendSearchError").children[0].style.display = "hidden";
-    while (d.children.length > 0)
-        d.removeChild(d.firstElementChild);
-
-    game.Friends.SearchUsers(document.getElementById('friendSearchInput').value, friendSearchOptions.page, 6, function (results) {
-
-        if (results.Count == 0) {
-            document.getElementById("friendSearchError").children[0].style.display = "";
-            document.getElementById("friendSearchError").children[0].textContent = "No results";
-            return;
-        }
-
-        var curElm = document.createElement("div");
-        curElm.classList.add("row");
-        curElm.style.marginBottom = "25px";
-
-
-        for (var i = 0; i < results.Count; i++) {
-
-            if (i % 2 == 0 && i != 0) {
-                d.appendChild(curElm);
-                curElm = document.createElement("div");
-                curElm.classList.add("row");
-                curElm.style.marginBottom = "25px";
-            }
-
-            var temp = document.createElement("div");
-            temp.classList.add("friend-item");
-            var img = document.createElement("img");
-            var text = document.createElement("p");
-
-            if (results[i].AccountPicture != null && results[i].AccountPicture != "")
-                img.src = "image://" + results[i].AccountPictureURL;
-            else
-                img.src = "image://icon_app_19.png";
-
-            text.textContent = results[i].DisplayName;
-
-            temp.appendChild(img);
-            temp.appendChild(text);
-            function f(n) {
-                temp.addEventListener("click", function (event) {
-                    game.Friends.GetUserInfo(n.ID.toString(), function (r) {
-                        UpdateUserInfo(r);
-                    });
-                });
-            } f(results[i]);
-
-
-            curElm.appendChild(temp);
-        }
-        d.appendChild(curElm);
-    }, function (e) {
-        document.getElementById("friendSearchError").children[0].style.display = "";
-        if (e.StatusCode == "429") {
-            document.getElementById("friendSearchError").children[0].textContent = "Error: To many requests";
-        }
-        else {
-
-            document.getElementById("friendSearchError").children[0].textContent = "Error: " + e.StatusResult;
-        }
-    });
-}
-
-function UpdateUserInfo(user) {
-    var nft = document.getElementById("noFriendText");
-    var oui = document.getElementById("otherUserInfo");
-    var fi = document.getElementById("friendInfo");
-    fi.style.display = "none";
-    oui.style.display = "none";
-    nft.style.display = "none";
-
-    if (user.FriendSince == null) {
-        oui.style.display = "block";
-        var addFriendButton = document.getElementById("addFriendButton");
-        var afbParent = addFriendButton.parentElement;
-        addFriendButton.remove();
-
-        addFriendButton = document.createElement("button");
-        addFriendButton.classList.add("friend-button-add");
-        addFriendButton.id = "addFriendButton";
-
-        //need to do this to get around power ui's image bug
-        var img = document.getElementById("otherUserImage");
-        var imgParent = img.parentElement;
-        img.remove();
-
-        img = document.createElement("img");
-        img.id = "otherUserImage";
-        img.style.width = "auto";
-        img.style.height = "256px";
-        if (user.AccountPicture == null) {
-            img.src = "image://icon_app_19.png";
-        }
-        else {
-            img.src = "image://" + user.AccountPictureURL;
-        }
-        //
-
-        imgParent.appendChild(img);
-
-
-        function f(x) {
-            document.getElementById("otherUserName").textContent = x.DisplayName;
-            if (user.RequestPending) {
-                addFriendButton.textContent = "Request Pending";
-            }
-            else {
-                addFriendButton.textContent = "Add Friend";
-                addFriendButton.addEventListener("click", function (e) {
-                    AddFriend(x.ID.toString());
-                    addFriendButton.textContent = "Sent!";
-                });
-            }
-        } f(user);
-
-        afbParent.appendChild(addFriendButton);
-    }
-    else {
-        fi.style.display = "block";
-        var sendMessageButton = document.getElementById("sendMessageButton");
-        var joinGameButton = document.getElementById("joinGameButton");
-        var friendButtonParent = sendMessageButton.parentElement;
-
-        document.getElementById("friendName").textContent = user.DisplayName;
-        document.getElementById("friendImage").src = user.AccountPictureURL;
-
-        //sendMessageButton.remove();
-        //joinGameButton.remove();
-
-        //sendMessageButton = document.createElement("button");
-        //joinGameButton = document.createElement("button");
-
-        ////message system not implememented yet
-        //sendMessageButton.classList.add("");
-        //sendMessageButton.textContent = "Send Message";
-
-        ////needs to be conditional on if the user is running a game or not
-        //joinGameButton.classList.add("");
-        //joinGameButton.textContent = "Join Game";
-
-    }
-}
-
-function AddFriend(friendID) {
-    game.Friends.AddFriend(friendID,
-        function () {
-
-
-        },
-        function (e) {
-            console.log(e.StatusResult);
-        });
-}
-
-function nextFriendPage() {
-    friendSearchOptions.page++;
-    SearchFriends();
-}
-
-function previousFriendPage() {
-    friendSearchOptions.page--;
-    if (friendSearchOptions.page < 0)
-        friendSearchOptions.page = 0;
-
-    SearchFriends();
-}
-
-function GetFriends() {
-    game.Friends.GetFriends(
-        function (x) {
-            UpdateFriends(x);
-        }, function (e) {
-            console.log(e);
-        });
-}
-
-function UpdateFriends(x) {
-    friendData.onlineFriends = x.OnlineFriends.Count;
-    friendData.offlineFriends = x.OfflineFriends.Count;
-    friendData.totalFriends = x.TotalFriends;
-
-    var offlineContainer = document.getElementById("offlineFriendsContainer");
-    var onlineContainer = document.getElementById("onlineFriendsContainer");
-    while (offlineContainer.firstChild)
-        offlineContainer.firstChild.remove();
-    while (onlineContainer.firstChild)
-        onlineContainer.firstChild.remove();
-
-
-    //online
-    for (var i = friendData.onlinePage * 3; i < x.OnlineFriends.Count; i++) {
-        console.log(x.onlineFriends[i].DisplayName);
-        if (friendData.onlinePage > 0)
-            if (i >= friendData.onlinePage * 3 + 3)
-                break;
-
-        var child = document.createElement("div");
-        child.classList.add("friend-item");
-        child.addEventListener("click", function (e) { SelectFriend(child, x.OnlineFriends[i].ID.toString()); });
-        var img = document.createElement("img");
-
-        if (x.OnlineFriends[i].AccountPicture == null)
-            img.src = "image://icon_app_19.png";
-        else
-            img.src = "image://" + x.OnlineFriends[i].AccountPictureURL;
-
-        var p = document.createElement("p");
-        p.textContent = x.OnlineFriends[i].DisplayName;
-
-        child.appendChild(img);
-        child.appendChild(p);
-
-        onlineContainer.appendChild(child);
-    }
-
-    //offline
-    for (var i = friendData.offlinePage * 3; i < x.OfflineFriends.Count; i++) {
-        if (friendData.offlinePage > 0) {
-            if (i >= friendData.offlinePage * 3 + 3) {
-                break;
-            }
-        }
-        else {
-            if (i > 2)
-                break;
-        }
-
-        var child = document.createElement("div");
-        child.classList.add("friend-item");
-        child.addEventListener("click", function (e) { SelectFriend(child, x.OfflineFriends[i].ID.toString()); });
-        var img = document.createElement("img");
-
-        if (x.OfflineFriends[i].AccountPicture == null)
-            img.src = "image://icon_app_19.png";
-        else
-            img.src = "image://" + x.OfflineFriends[i].AccountPictureURL;
-
-        var p = document.createElement("p");
-        p.textContent = x.OfflineFriends[i].DisplayName;
-
-        child.appendChild(img);
-        child.appendChild(p);
-
-
-        offlineContainer.appendChild(child);
-    }
-
-    document.getElementById("totalOnlineFriends").textContent = "Online: " + x.OnlineFriends.Count;
-    document.getElementById("totalOfflineFriends").textContent = "Offline: " + x.OfflineFriends.Count;
-}
-
-function nextOnlineFriendPage() {
-}
-function previousOnlineFriendPage() {
-
-}
-
-function nextOfflineFriendPage() {
-    friendData.offlinePage++;
-
-    if ((friendData.offlinePage + 1) * 3 > friendData.offlineFriends + 3) {
-        friendData.offlinePage--;
-    }
-    else {
-        GetFriends();
-    }
-}
-function previousOfflineFriendPage() {
-    friendData.offlinePage--;
-
-    if (friendData.offlinePage < 0) {
-        friendData.offlinePage = 0;
-    }
-    else {
-        GetFriends();
-    }
-}
-//#endregion
-
-// #region content
-function searchContent() {
-    var searchInput = document.getElementById("contentSearchInput");
-
-    if (searchInput.value != null) {
-        game.Content.SearchSettings.SearchTerm = searchInput.value.toString();
-    }
-    else {
-        game.Content.SearchSettings.SearchTerm = "";
-    }
-
-    game.Content.Search(
-        function (result) {
-            var container = document.getElementById("contentItemContainer");
-
-            while (container.firstElementChild)
-                container.removeChild(container.firstElementChild);
-
-            var currentRow = document.createElement("div");
-            currentRow.classList.add("row");
-            currentRow.classList.add("content-row");
-
-            for (var i = 0; i < result.Elements.Count; i++) {
-                if (i % 3 == 0 && i != 0) {
-                    container.appendChild(currentRow);
-                    currentRow = document.createElement("div");
-                    currentRow.classList.add("row");
-                    currentRow.classList.add("content-row");
-                }
-
-                var elm = document.createElement("div");
-                elm.classList.add("content-item");
-
-                function f(asset) {
-                    elm.addEventListener("click", function (e) {
-                        updateAssetInfo(asset);
-                    });
-                } f(result.Elements[i]);
-
-
-                var img = document.createElement("img");
-                img.src = "image://" + result.Elements[i].AssetImageURL + "_256";
-                elm.appendChild(img);
-
-
-                var inner = document.createElement("div");
-
-                var p = document.createElement("p");
-                p.textContent = result.Elements[i].Name;
-
-                inner.appendChild(p);
-
-                elm.appendChild(inner);
-
-                currentRow.appendChild(elm);
-            }
-            container.appendChild(currentRow);
-        },
-        function (error) {
-            console.log(error);
-        }
-    );
-}
-function nextPage() {
-    game.Content.SearchSettings.Page++;
-    searchContent();
-}
-function previousPage() {
-    game.Content.SearchSettings.Page--;
-    if (game.Content.SearchSettings.Page < 0)
-        game.Content.SearchSettings.Page = 0;
-    else
-        searchContent();
-}
-//#endregion
-
-//#region notification
-function openNotification() {
-    game.GetNotifications()
-        .then(function (resolve) {
-
-            console.log("RESOLVE: " + resolve);
-
-
-        })
-        .catch(
-            function (e) {
-                console.log("ERROR: " + e)
-            });
-
-
-
-    var popup = document.getElementById("notificationPopup");
-    var info = document.getElementById("notificationPopupInfo");
-    var controls = document.getElementById("notificationPopupControls");
-    popup.style.display = "block";
-
-    // while (controls.firstElementChild)
-    //     controls.removeChild(controls.firstElementChild);
-
-
-
-
-
-    console.log(guid);
-}
-function dismissNotification(guid) {
-    console.log(guid);
-}
-//#endregion
-
-
-function updateUserProfile() {
-    game.Friends.UpdateProfile(function (result) {
-        var container = document.getElementById("profileImageContainer");
-        container.removeChild(container.firstElementChild);
-        var elm = document.createElement("img");
-        elm.style.width = "400";
-        elm.style.height = "400";
-
-        if (result.AccountPicture != null)
-            elm.src = "image://" + result.AccountPictureURL;
-        else
-            elm.src = "image://icon_app_19_gray.png";
-
-        container.appendChild(elm);
-
-        document.getElementById("nameText").innerText = "Hello " + result.DisplayName + "!";
-
-    }, function (error) { console.log(error.StatusResult); });
-}
-
-function updateAssetInfo(asset) {
-    var name = document.getElementById("assetInfoName");
-    //var name = document.getElementById("assetInfoName");
-    var desc = document.getElementById("assetInfoDescription");
-
-    var img = document.getElementById("assetInfoImage");
-    var size = document.getElementById("assetInfoSize");
-    var buttonContainer = document.getElementById("assetInfoButtons");
-    var assetInfoAuthor = document.getElementById("assetInfoAuthor");
-
-
-	var imgp = img.parentElement;
-
-	imgp.removeChild(img);
-	img = document.createElement("img");
-	img.id = "assetInfoImage";
-
-    name.textContent = asset.Name;
-    desc.textContent = asset.Description;
-    size.textContent = "Size: " + formatBytes(asset.Size, 2);
-    assetInfoAuthor.textContent = "Author: " + asset.OwnerName;
-    img.src = "image://" + asset.AssetImageURL + "_256";
-
-    imgp.appendChild(img);
-
-    buttonContainer.removeChild(buttonContainer.lastElementChild);
-
-
-    var spawn = document.createElement("button");
-    spawn.textContent = "Spawn";
-    spawn.classList.add("asset-info-spawn");
-
-    if (asset.Type == 1) {
-		spawn.textContent = "Switch To Avatar";
-        spawn.addEventListener("click", function (event) {
-            game.Content.SpawnAvatar(asset.ID.toString());
-        });
-    }
-    else if (asset.Type == 2) {
-    	spawn.textContent = "Go To World";
-        spawn.addEventListener("click", function (event) {
-            game.Content.SpawnWorld(asset.ID.toString());
-        });
-    }
-    else if (asset.Type == 3) {
-    	spawn.textContent = "Spawn Prop";
-        spawn.addEventListener("click", function (event) {
-            game.Content.SpawnProp(asset.ID.toString());
-        });
-    }
-
-    buttonContainer.appendChild(spawn);
-
-
-    document.getElementById("noAssetText").style.display = "none";
-    document.getElementById("assetInfo").style.display = "block";
-}
 
 
 //#region dropdown
@@ -583,29 +72,6 @@ function openDropDown(elm, array) {
 //#endregion
 
 
-function togglePasswordField(elm) {
-
-	var p = document.getElementById('password');
-
-	var data = p.value;
-
-
-	if (p.type == 'text')
-		p.type = 'password';
-	else if (p.type == 'password')
-		p.type = 'text';
-
-	p.value = "";
-	p.value = data;
-
-}
-
-function UpdateProfileData(profile) {
-	var obj = JSON.parse(profile);
-	document.getElementById("nameText").innerText = obj.DisplayName;
-
-}
-
 
 //#region settings
 function LoadSettings() {
@@ -666,7 +132,7 @@ function ChangeTheme(name) {
 	//document.getElementById("colorHolder").innerHTML = '<link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-' + name + '.css">';
 }
 
-function SettingsPage(newState) {
+function changeSettingsCat(newState) {
 	//newState is a state enum with the values:
 	//0 Gameplay
 	//1 Graphics
@@ -678,38 +144,37 @@ function SettingsPage(newState) {
 
 	//Grab the various elements we care about
 
-	var gameplay = document.getElementById("gameplaySettings");
-	var graphics = document.getElementById("graphicsSettings");
-	var audio = document.getElementById("audioSettings");
-	var online = document.getElementById("onlineSettings");
-	var ui = document.getElementById("uiSettings");
+	var core = document.getElementById("settingsCore");
+	var graphics = document.getElementById("settingsGraphics");
+	var audio = document.getElementById("settingsAudio");
+	var server = document.getElementById("settingsServer");
+	var player = document.getElementById("settingsPlayer");
+	var ui = document.getElementById("settingsUI");
 
 	//buttons
-	var gameplayButton = document.getElementById("gameplayButton");
+	var coreButton = document.getElementById("coreButton");
 	var graphicsButton = document.getElementById("graphicsButton");
 	var audioButton = document.getElementById("audioButton");
-	var onlineButton = document.getElementById("onlineButton");
+	var serverButton = document.getElementById("serverButton");
+	var playerButton = document.getElementById("playerButton");
 	var uiButton = document.getElementById("uiButton");
 
-	gameplayButton.classList.remove("active");
+	coreButton.classList.remove("active");
 	graphicsButton.classList.remove("active");
 	audioButton.classList.remove("active");
-	onlineButton.classList.remove("active");
+	serverButton.classList.remove("active");
+	playerButton.classList.remove("active");
 	uiButton.classList.remove("active");
 
 	//Hide all of them
-	gameplay.style.display = "none";
-	graphics.style.display = "none";
-	audio.style.display = "none";
-	online.style.display = "none";
-	ui.style.display = "none";
+	core.style.display = graphics.style.display = audio.style.display = server.style.display = player.style.display = ui.style.display = "none";
 
 	//Show the ones for the state we just entered
 	switch (newState) {
 		case 0:
 			{
-				gameplay.style.display = "";
-				gameplayButton.classList.add("active");
+				core.style.display = "";
+				coreButton.classList.add("active");
 			}
 			break;
 		case 1:
@@ -726,11 +191,17 @@ function SettingsPage(newState) {
 			break;
 		case 3:
 			{
-				online.style.display = "";
-				onlineButton.classList.add("active");
+				server.style.display = "";
+				serverButton.classList.add("active");
 			}
 			break;
 		case 4:
+			{
+				player.style.display = "";
+				playerButton.classList.add("active");
+			}
+			break;
+		case 5:
 			{
 				LoadThemes();
 				LoadIcons();
@@ -872,65 +343,6 @@ function FailToLogin(reason) {
 	fail.style.display = "block";
 }
 
-function TogglePassword() {
-    var pass = document.getElementById("password");
-    var type = pass.getAttribute("type");
-
-    if (type == "password") {
-        pass.setAttribute("type", "text");
-        console.log(type + " -> text");
-    }
-    else
-    {
-        pass.setAttribute("type", "password");
-        console.log(type + " -> password");
-    }
-}
-
-function Login() {
-	//clear the error text before starting to login
-	var fail = document.getElementById("errorText");
-	fail.innerText = "";
-	fail.style.display = "none";
-
-	document.getElementById("loginBox").style.display = "none";
-	document.getElementById("loginLoader").style.display = "block";
-
-	var user = document.getElementById("email").value;
-	var pass = document.getElementById("password").value;
-	game.Login(user, pass);
-}
-
-function Connect() {
-	//clear the error text before starting to connect
-	var fail = document.getElementById("connectFail");
-	fail.innerText = "";
-	fail.style.display = "none";
-
-	var ip = document.getElementById("ip").value;
-	var port = document.getElementById("port").value;
-	game.Connect(ip, port);
-}
-
-function FailToConnect(reason) {
-	var fail = document.getElementById("connectFail");
-	fail.innerText = reason;
-	fail.style.display = "block";
-}
-
-function ClickDiscord() {
-	game.OpenLink("https://discord.gg/fWHjNfg");
-}
-
-//https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
-function formatBytes(a, b) {
-	if (0 == a)
-		return "0 Bytes";
-	var c = 1024, d = b || 2,
-		e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
-		f = Math.floor(Math.log(a) / Math.log(c));
-	return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
-}
 
 /*document.addEventListener('keyup', (e) => {
 	switch(e.key) {
