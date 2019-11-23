@@ -7,7 +7,7 @@ to install the UI download the latest zip from the [release](https://github.com/
 to change color schemes change the import in the header of Panorama.html.
 possible choices are:
 - colors-dark.css
-- colors-default.css
+- colors-default.css //kind of deprecated, original looks more like dark by now.
 - colors-lavender.css
 - colors-light.css
 
@@ -25,7 +25,7 @@ in Common.css
 
 the border width is defined directly in Common.css.
 ```
---border-width: 0px;
+--border-width: #px;
 ```
 
 # Screenshots
