@@ -310,26 +310,65 @@
 			</div>
 			<div class="col col-1"></div>
 		</div>
-		<div class="col-center">
-			<div class="friends col col-12 col-color">
-				<div class="row online-friends">
-					<h1>Online Friends</h1>
-					<div id="onlineFriendsContainer" class="row">
+        <div class="col-center">
+            <div class="friend-requests col col-12 col-color" style="display: none">
+                <div class="row pending-request-list">
+                    <h1>Pending Friend Requests</h1>
+                    <div class="pending-requests-inner">
+                        <button class="friends-back" onclick="previousOnlineFriendPage()">&lt;</button>
+                        <div id="friendPendingContainer" class="row">
+                            <div class="friend-item"></div>
+                            <div class="friend-item"></div>
+                            <div class="friend-item"></div>
+                        </div>
+                        <button class="friends-forward" onclick="nextOnlineFriendPage()">&gt;</button>
+                    </div>
+                    <p class="totalOnlineFriends" id="totalOnlineFriends">Online: 0</p>
+                </div>
+                <div class="row friend-request-list">
+                    <h1>Offline Friends</h1>
+                    <div class="friend-request-inner">
+                        <button class="friends-back" onclick="previousOfflineFriendPage()">&lt;</button>
+                        <div id="friendRequestContainer" class="row">
 
-					</div>
-					<p class="totalOnlineFriends" id="totalOnlineFriends">Online: 0</p>
-				</div>
-				<div class="row offline-friends">
-					<h1>Offline Friends</h1>
-					<div id="offlineFriendsContainer" class="row">
+                            <div class="friend-item"></div>
+                            <div class="friend-item"></div>
+                            <div class="friend-item"></div>
+                        </div>
+                        <button class="friends-forward" onclick="nextOfflineFriendPage()">&gt;</button>
+                    </div>
+                    <p class="totalOnlineFriends" id="totalOnlineFriends">Online: 0</p>
+                </div>
+            </div>
+            <div class="friends col col-12 col-color">
+                <div class="row online-friends">
+                    <h1>Online Friends</h1>
+                    <div class="online-friends-inner">
+                        <button class="friends-back" onclick="previousOnlineFriendPage()">&lt;</button>
+                        <div id="onlineFriendsContainer" class="row">
 
-					</div>
-					<p class="totalOfflineFriends" id="totalOfflineFriends">Offline: 2</p>
-				</div>
-				<br />
-				<br />
-			</div>
-		</div>
+                        </div>
+                        <button class="friends-forward" onclick="nextOnlineFriendPage()">&gt;</button>
+                    </div>
+                    <p class="totalOnlineFriends" id="totalOnlineFriends">Online: 0</p>
+                </div>
+                <div class="row offline-friends">
+                    <h1>Offline Friends</h1>
+                    <div class="offline-friends-inner">
+                        <button class="friends-back" onclick="previousOfflineFriendPage()">&lt;</button>
+                        <div id="offlineFriendsContainer" class="row">
+
+                        </div>
+                        <button class="friends-forward" onclick="nextOfflineFriendPage()">&gt;</button>
+                    </div>
+                    <p class="totalOfflineFriends" id="totalOfflineFriends">Offline: 2</p>
+                </div>
+
+            </div>
+            <!--<div class="friend-page-buttons">
+                <button onclick="toggleFriendRequests()">Requests</button>
+            </div>-->
+        </div>
 		<div class="col-right">
 			<div class="row">
 				<div class="col col-12 friend-search col-color">
