@@ -237,7 +237,7 @@ function ChangeState(newState) {
 	var loginInProgress = document.getElementById("loginInProgress");
 	var social = document.getElementById("social");
 	var content = document.getElementById("content");
-	//var galaxy = document.getElementById("galaxy");
+	var galaxy = document.getElementById("galaxy");
 	//var testing = document.getElementById("testing");
 	var settings = document.getElementById("settings");
 	//var connecting = document.getElementById("connecting");
@@ -257,7 +257,7 @@ function ChangeState(newState) {
 	main.style.display = "none";
 	social.style.display = "none";
 	content.style.display = "none";
-	//galaxy.style.display = "none";
+	galaxy.style.display = "none";
 	//testing.style.display = "none";
 	settings.style.display = "none";
 	//connecting.style.display = "none";
@@ -310,6 +310,7 @@ function ChangeState(newState) {
 				galaxy.style.display = "";
 				menuButtons.style.display = "";
 				galaxyButton.classList.add("active");
+				getServerList();
 			}
 			break;
 		case 6:
