@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/themes/supra/borders/borders-round.css">
     <link rel="stylesheet" href="/themes/supra/colors/colors-dark.css">
     <link rel="stylesheet" href="/themes/supra/Common.css">
+    <link rel="stylesheet" href="/themes/supra/calculator.css">
     <link rel="stylesheet" href="/themes/supra/customizations/navbar/navbar.css">
     <link rel="stylesheet" href="/themes/supra/customizations/android-app-style/android-app-style.css">
 
@@ -12,7 +13,7 @@
     <script src="./js/tablet.js"></script>
 	<script src="/themes/supra/main.js"></script>
 </head>
-<body>
+<body onload="updateClock(); setInterval('updateClock()', 1000 )">
     <div class="header">
         <div class="headerLeftAlign" id="headerLeft"></div>
 
@@ -65,18 +66,19 @@
             <div class="home-notification-list">
 
             </div>
+			<div class="clock">17:06:25</div>
             <div class="home-nav">
                     <button class="home-nav-button icon-content" onclick="ChangeState(1, true)"><div>Content</div></button>
                     <button class="home-nav-button icon-social" onclick="ChangeState(2, true)" disabled><div>Social</div></button>
                     <button class="home-nav-button icon-galaxy" onclick="ChangeState(3, true)"><div>Galaxy</div></button>
-                    <button class="home-nav-button icon-camera" onclick="ChangeState(4, true)" disabled><div>Camera</div></button>
+                    <button class="home-nav-button icon-camera" onclick="ChangeState(4, true)"><div>Camera</div></button>
                     <button class="home-nav-button icon-downloads" onclick="ChangeState(5, true)" disabled><div>Downloads</div></button>
                     <button class="home-nav-button icon-share" onclick="ChangeState(6, true)" disabled><div>Share</div></button>
                     <button class="home-nav-button icon-players" onclick="ChangeState(7, true)" disabled><div>Players</div></button>
-                    <button class="home-nav-button icon-settings" onclick="ChangeState(8, true)"><div>Settings</div></button>
                     <button class="home-nav-button icon-chromium" onclick="ChangeState(10, true)"><div>Chromium</div></button>
                     <button class="home-nav-button icon-youtube" onclick="ChangeState(102, true)"><div>Youtube</div></button>
                     <button class="home-nav-button icon-calculator" onclick="ChangeState(103, true)"><div>Calculator</div></button>
+                    <button class="home-nav-button icon-settings" onclick="ChangeState(8, true)"><div>Settings</div></button>
             </div>
             <div class="home-power-control">
                 <button onclick="ChangeState(1000, true);"><span></span></button>
@@ -90,12 +92,12 @@
             </div>
         </div>
 
-
         <div id="camera">
-            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
-                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
-                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
-            </div>
+            <button onclick="Back();" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <button class="camera-center" onclick="api.SetCameraFocal()"><img src="./images/icon_app_183.png" /></button>
+            <button class="camera-picture-button" onclick="api.TakePicture()"><img src="./images/icon_device_50.png" /></button>
+            <button class="camera-switch" onclick="api.SwapCamera()"><img src="./images/icon_device_63.png" /></button>
+            <div id="cameraFOVSlider" class="camera-fov-slider"></div>
         </div>
 
         <div id="downloads">
@@ -121,7 +123,7 @@
 		</div>
 
 		<div id="calculator">
-			<form name="calculator">
+			<form onsubmit="calculator.display.value = eval(calculator.display.value)" name="calculator">
 			 <table>
 			    <tr>
 			       <td colspan="4">
@@ -1275,8 +1277,8 @@
     </div>
 
 	<div class="navbar">
-		<button onclick="ChangeState(0, true)" class="navbar-button">home</button>
-		<button onclick="Back()" class="navbar-button">&lt;</button>
+		<button onclick="ChangeState(0, true);" class="navbar-button">home</button>
+		<button onclick="Back();" class="navbar-button">&lt;</button>
 	</div>
 </body>
 </html>

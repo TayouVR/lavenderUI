@@ -15,7 +15,7 @@ function updateClock () {
 
   var currentHours = currentTime.getHours();
   var currentMinutes = currentTime.getMinutes();
-  var currentSeconds = currentTime.getSeconds() + 1;
+  var currentSeconds = currentTime.getSeconds();
 
   // Pad the minutes and seconds with leading zeros, if required
   currentHours = ( currentHours < 10 ? "0" : "" ) + currentHours;
