@@ -10,10 +10,72 @@ var icons = [iconsDark, iconsLight];
 
 //--------------------------------------------------------------------------
 
+function updateClock () {
+  var currentTime = new Date ( );
+
+  var currentHours = currentTime.getHours ( );
+  var currentMinutes = currentTime.getMinutes ( );
+  var currentSeconds = currentTime.getSeconds ( );
+
+  // Pad the minutes and seconds with leading zeros, if required
+  currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+  currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+
+  // Choose either "AM" or "PM" as appropriate
+  var timeOfDay = ( currentHours < 12 ) ? "AM" : "PM";
+
+  // Convert the hours component to 12-hour format if needed
+  currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+
+  // Convert an hours component of "0" to "12"
+  currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+
+  // Compose the string for display
+  var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+
+  // Update the time display
+  document.getElementById("clock").firstChild.nodeValue = currentTimeString;
+}
+
+/*window.onload = function() {
+	selectedTheme = getCookie("theme");
+	changeCSS(selectedTheme);
+};*/
+
+/*
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+function changeCSS(theme) {
+    var d = new Date();
+    d.setTime(d.getTime() + (2190*24*60*60*1000));
+    var expires = d.toUTCString();
+	document.cookie = "theme=" + theme + "; expires=" + expires;
+	if (theme == "light") {
+		document.getElementById('lightStyle').disabled = false;
+		document.getElementById('darkStyle').disabled  = true;
+	}
+	if (theme == "dark") {
+		document.getElementById('lightStyle').disabled = true;
+		document.getElementById('darkStyle').disabled  = false;
+	}
+}*/
 
 
 //#region dropdown
-function selectDropDown(option, id) {
+/*function selectDropDown(option, id) {
 
 	var doc = document.getElementById(id);
 	doc.getElementsByClassName("drop-down-text")[0].innerText = option;
@@ -68,16 +130,27 @@ function openDropDown(elm, array) {
     inner.style.width = rect.width;
 
 	p.parentElement.parentElement.parentElement.appendChild(inner);
-}
+}*/
 //#endregion
 
+/*function loadWebsite() {
+	document.getElementsByClassName("displayArea")[0].innerHTML = "<iframe"
+}*/
 
+//location.href='https://play.famobi.com/perfect-piano'
+
+function openNotificationMenu() {
+    var npanel = document.getElementById("notificationQuickMenu");
+	document.getElementsByClassName("home-notification-panel-open")[0].style.display = "none";
+    npanel.style.display = "block";
+}
+function closeNotificationMenu() {
+    var npanel = document.getElementById("notificationQuickMenu");
+	document.getElementsByClassName("home-notification-panel-open")[0].style.display = "";
+    npanel.style.display = "none";
+}
 
 //#region settings
-function LoadSettings() {
-	console.log("[JS] loading settings");
-	SettingsPage(0);
-}
 
 function LoadThemes() {
 	var themeContainer = document.getElementById("themeList");
@@ -132,218 +205,240 @@ function ChangeTheme(name) {
 	//document.getElementById("colorHolder").innerHTML = '<link rel="stylesheet" type="text/css" href="/themes/supra/colors/colors-' + name + '.css">';
 }
 
-function changeSettingsCat(newState) {
-	//newState is a state enum with the values:
-	//0 Gameplay
-	//1 Graphics
-	//2 Audio
-	//3 Online
-	//4 UI
-
-	console.log("[JS] Switching settings page to " + newState);
-
-	//Grab the various elements we care about
-
-	var core = document.getElementById("settingsCore");
-	var graphics = document.getElementById("settingsGraphics");
-	var audio = document.getElementById("settingsAudio");
-	var server = document.getElementById("settingsServer");
-	var player = document.getElementById("settingsPlayer");
-	var ui = document.getElementById("settingsUI");
+function changeSettingsCat(cat) {
+    var s1 = document.getElementById("settingsCore");
+    var s2 = document.getElementById("settingsAudio");
+    var s3 = document.getElementById("settingsGraphics");
+    var s4 = document.getElementById("settingsServer");
+    var s5 = document.getElementById("settingsPlayer");
+    var s6 = document.getElementById("settingsPlayerMisc");
+	var s7 = document.getElementById("settingsUI");
 
 	//buttons
-	var coreButton = document.getElementById("coreButton");
-	var graphicsButton = document.getElementById("graphicsButton");
-	var audioButton = document.getElementById("audioButton");
-	var serverButton = document.getElementById("serverButton");
-	var playerButton = document.getElementById("playerButton");
-	var uiButton = document.getElementById("uiButton");
+	var b1 = document.getElementById("settingsButtonCore");
+	var b2 = document.getElementById("settingsButtonAudio");
+	var b3 = document.getElementById("settingsButtonGraphics");
+	var b4 = document.getElementById("settingsButtonServer");
+	var b5 = document.getElementById("settingsButtonPlayer");
+	var b6 = document.getElementById("settingsButtonPlayerMisc");
+	var b7 = document.getElementById("settingsButtonUI");
 
-	coreButton.classList.remove("active");
-	graphicsButton.classList.remove("active");
-	audioButton.classList.remove("active");
-	serverButton.classList.remove("active");
-	playerButton.classList.remove("active");
-	uiButton.classList.remove("active");
+	b1.classList.remove("active");
+	b2.classList.remove("active");
+	b3.classList.remove("active");
+	b4.classList.remove("active");
+	b5.classList.remove("active");
+	b6.classList.remove("active");
+	b7.classList.remove("active");
 
-	//Hide all of them
-	core.style.display = graphics.style.display = audio.style.display = server.style.display = player.style.display = ui.style.display = "none";
+    s1.style.display = s2.style.display = s3.style.display = s4.style.display = s5.style.display = s6.style.display = s7.style.display = "none";
 
-	//Show the ones for the state we just entered
-	switch (newState) {
-		case 0:
-			{
-				core.style.display = "";
-				coreButton.classList.add("active");
-			}
-			break;
-		case 1:
-			{
-				graphics.style.display = "";
-				graphicsButton.classList.add("active");
-			}
-			break;
-		case 2:
-			{
-				audio.style.display = "";
-				audioButton.classList.add("active");
-			}
-			break;
-		case 3:
-			{
-				server.style.display = "";
-				serverButton.classList.add("active");
-			}
-			break;
-		case 4:
-			{
-				player.style.display = "";
-				playerButton.classList.add("active");
-			}
-			break;
-		case 5:
-			{
-				LoadThemes();
-				LoadIcons();
-				ui.style.display = "";
-				uiButton.classList.add("active");
-			}
-			break;
-	}
+    if (cat == 0) { s1.style.display = "block"; b1.classList.add("active"); }
+    else if (cat == 1) { s2.style.display = "block"; b2.classList.add("active"); }
+    else if (cat == 2) { s3.style.display = "block"; b3.classList.add("active"); }
+    else if (cat == 3) { s4.style.display = "block"; b4.classList.add("active"); }
+    else if (cat == 4) { s5.style.display = "block"; b5.classList.add("active"); }
+    else if (cat == 5) { s6.style.display = "block"; b6.classList.add("active"); }
+    else if (cat == 6) { s7.style.display = "block"; b7.classList.add("active"); LoadThemes(); LoadIcons(); }
+
 }
 //#endregion
 
 
-//Exposed functions for the game to call to change things
-function ChangeState(newState) {
-	//newState is a state enum with the values:
-	//0 Login
-	//1 Login in progress
-	//2 Main
-	//3 Social
-	//4 Content
-	//5 Galaxy
-	//6 Testing
-	//7 Settings
-	//8 Connecting to a server
+function ChangeState(newState, makeCrumb) {
+    //newState is a state enum with the values:
+    //0 homepage
+    //1 Content
+    //2 Social
+    //3 Galaxy
+    //4 Camera
+    //5 a player
+    //6 Settings
+    //7 Gamemode
+    //8 Settings
+    //9 Downloads
+    //10 Image Share
+    //11 Desktop Share
+    //12 Scripting
+    //console.log("[JS] Opening page " + newState + " bread:" + makeCrumb);
 
-	console.log("[JS] Switching to " + newState);
+	closeCamera();
 
-	//Grab the various elements we care about
-	var menuButtons = document.getElementById("menuButtons");
+    if (makeCrumb === true)
+        breadcrumb.push(newState);
 
-	var login = document.getElementById("login");
-	var main = document.getElementById("main");
-	var loginInProgress = document.getElementById("loginInProgress");
-	var social = document.getElementById("social");
-	var content = document.getElementById("content");
-	var galaxy = document.getElementById("galaxy");
-	//var testing = document.getElementById("testing");
-	var settings = document.getElementById("settings");
-	//var connecting = document.getElementById("connecting");
+    //Grab the various elements we care about
+    var login = document.getElementById("loginPage");
+    var loginLoading = document.getElementById("loginLoading");
+    var headerCenter = document.getElementById("headerCenter");
+    var homepage = document.getElementById("homepage");
+    var galaxy = document.getElementById("galaxy");
+
+    var content = document.getElementById("content");
+    var contentProps = document.getElementById("contentProps");
+    var contentAvatars = document.getElementById("contentAvatars");
+    var contentWorlds = document.getElementById("contentWorlds");
 
 
-	//buttons
-	var mainButton = document.getElementById("mainButton");
-	var socialButton = document.getElementById("socialButton");
-	var contentButton = document.getElementById("contentButton");
-	var galaxyButton = document.getElementById("galaxyButton");
-	var settingsButton = document.getElementById("settingsButton");
+    var social = document.getElementById("social");
+    var socialFriends = document.getElementById("socialFriends");
+    var socialSearch = document.getElementById("socialSearch");
+    var socialRequests = document.getElementById("socialRequests");
 
-	//Hide all of them
-	menuButtons.style.display = "none";
-	login.style.display = "none";
-	loginInProgress.style.display = "none";
-	main.style.display = "none";
-	social.style.display = "none";
-	content.style.display = "none";
-	galaxy.style.display = "none";
-	//testing.style.display = "none";
-	settings.style.display = "none";
-	//connecting.style.display = "none";
+    var camera = document.getElementById("camera");
+    var downloads = document.getElementById("downloads");
+    var share = document.getElementById("share");
 
-	//buttons
-	mainButton.classList.remove("active");
-	socialButton.classList.remove("active");
-	contentButton.classList.remove("active");
-	galaxyButton.classList.remove("active");
-	settingsButton.classList.remove("active");
+    var notifications = document.getElementById("notifications");
 
-	//Show the ones for the state we just entered
-	switch (parseInt(newState)) {
-		case 0:
-			{
-				login.style.display = "";
-			}
-			break;
-		case 1:
-			{
-				loginInProgress.style.display = "";
-			}
-			break;
-		case 2:
-			{
-				main.style.display = "";
-				menuButtons.style.display = "";
-				//mainButton.classList.add("active");
-				updateUserProfile();
-			}
-			break;
-		case 3:
-			{
-				social.style.display = "";
-				menuButtons.style.display = "";
-				socialButton.classList.add("active");
-				GetFriends();
-			}
-			break;
-		case 4:
-			{
-				content.style.display = "";
-				menuButtons.style.display = "";
-				contentButton.classList.add("active");
-				searchContent();
-			}
-			break;
-		case 5:
-			{
-				galaxy.style.display = "";
-				menuButtons.style.display = "";
-				galaxyButton.classList.add("active");
-				getServerList();
-			}
-			break;
-		case 6:
-			{
-				testing.style.display = "";
-				menuButtons.style.display = "";
-				testingButton.classList.add("active");
-			}
-			break;
-		case 7:
-			{
-				settings.style.display = "";
-				menuButtons.style.display = "";
-				settingsButton.classList.add("active");
-				LoadSettings();
-			}
-			break;
-		case 8:
-			{
-				connecting.style.display = "";
-			}
-			break;
-	}
+	var browser = document.getElementById("browser");
+	var youtube = document.getElementById("youtube");
+	var calculator = document.getElementById("calculator");
+
+    var players = document.getElementById("players");
+    var player = document.getElementById("player");
+
+    var setting = document.getElementById("settings");
+
+    var power = document.getElementById("power");
+
+    //Hide all of them
+    login.style.display = "none";
+    loginLoading.style.display = "none";
+    homepage.style.display = "none";
+    galaxy.style.display = "none";
+
+    content.style.display = "none";
+    contentProps.style.display = "none";
+    contentAvatars.style.display = "none";
+    contentWorlds.style.display = "none";
+
+    social.style.display = "none";
+    socialFriends.style.display = "none";
+    socialSearch.style.display = "none";
+    socialRequests.style.display = "none";
+
+    camera.style.display = "none";
+    downloads.style.display = "none";
+    share.style.display = "none";
+
+	browser.style.display = "none";
+	youtube.style.display = "none";
+	calculator.style.display = "none";
+
+
+    notifications.style.display = "none";
+
+
+
+    setting.style.display = "none";
+    players.style.display = "none";
+    player.style.display = "none";
+    power.style.display = "none";
+
+    //Show the ones for the panel we just entered
+    switch (parseInt(newState)) {
+        case -2:
+            loginLoading.style.display = "block";
+            break;
+        case -1:
+            login.style.display = "block";
+            break;
+        case 0:
+            homepage.style.display = "block";
+            headerCenter.innerText = "Home";
+            break;
+        case 1000:
+            power.style.display = "block";
+            headerCenter.innerText = "Power";
+            break;
+        //Content////////////////////////////////////
+        case 1:
+            searchSettings.page = 0;
+            content.style.display = "block";
+            headerCenter.innerText = "Content";
+            break;
+        case 11:
+            searchSettings.count = 18;
+            contentProps.style.display = "block";
+            headerCenter.innerText = "Props";
+            break;
+        case 12:
+            searchSettings.count = 10;
+            contentAvatars.style.display = "block";
+            headerCenter.innerText = "Avatars";
+            break;
+        case 13:
+            searchSettings.count = 10;
+            contentWorlds.style.display = "block";
+            headerCenter.innerText = "Worlds";
+            break;
+        /////////////////////////////////////////////
+        //Social/////////////////////////////////////
+        case 2:
+            socialSearchSettings.page = 0;
+            socialSearchSettings.count = 10;
+            social.style.display = "block";
+            headerCenter.innerText = "Social";
+            break;
+        case 21:
+            socialFriends.style.display = "block";
+            headerCenter.innerText = "Friends";
+            break;
+        case 22:
+            socialSearch.style.display = "block";
+            headerCenter.innerText = "Search";
+            break;
+        case 23:
+            socialRequests.style.display = "block";
+            headerCenter.innerText = "Friend Requests";
+            break;
+        ////////////////////////////////////////////
+        case 3:
+            updateWorldList();
+            galaxy.style.display = "block";
+            headerCenter.innerText = "Galaxy";
+            break;
+        case 4:
+            openCamera();
+            camera.style.display = "block";
+            headerCenter.innerText = "Camera";
+            break;
+        /////////////////////////////////////////////
+        case 7:
+            players.style.display = "block";
+            headerCenter.innerText = "Players";
+            break;
+        case 71:
+            player.style.display = "block";
+            headerCenter.innerText = "Player Info";
+            break;
+        /////////////////////////////////////////////
+        case 8:
+            setting.style.display = "block";
+            headerCenter.innerText = "Settings";
+            changeSettingsCat(0);
+            break;
+        case 9:
+            notifications.style.display = "block";
+            headerCenter.innerText = "Notifications";
+            break;
+        case 10:
+            browser.style.display = "block";
+            headerCenter.innerText = "Chromium";
+            break;
+        case 102:
+            youtube.style.display = "block";
+            headerCenter.innerText = "Youtube";
+            break;
+        case 103:
+            calculator.style.display = "block";
+            headerCenter.innerText = "Calculator";
+            break;
+        default:
+            break;
+    }
 }
-
-function FailToLogin(reason) {
-	document.getElementById("loginBox").style.display = "block";
-	document.getElementById("loginLoader").style.display = "none";
-	var fail = document.getElementById("errorText");
-	fail.innerText = reason;
-	fail.style.display = "block";
-}
-
 
 /*document.addEventListener('keyup', (e) => {
 	switch(e.key) {
@@ -353,5 +448,4 @@ function FailToLogin(reason) {
 		default:
 
 	}
-});
-*/
+});*/

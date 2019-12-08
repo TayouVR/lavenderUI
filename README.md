@@ -4,7 +4,7 @@ UI for the VR game lavender https://lavendervr.com/
 to install the UI download the latest zip from the [release](https://github.com/SupraLP/lavenderUI/releases "release") section and drag the BrowserAssets folder into the game directory.
 
 ---
-to change color schemes change the import in the header of Panorama.html.
+to change color schemes change the import in the header of Tablet.html.
 possible choices are:
 - colors-dark.css
 - colors-default.css //kind of deprecated, original looks more like dark by now.
@@ -27,6 +27,12 @@ the border width is defined directly in Common.css.
 ```
 --border-width: #px;
 ```
+
+---
+
+all of this will change soon as the game has moved from the panorama away to Tablet.html.
+However all of theese options up there should still work.
+Screenshots obviously don't match up with the tablet.
 
 # Screenshots
 ![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pictures/colors_lavender.jpg)

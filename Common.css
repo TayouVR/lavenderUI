@@ -1,4 +1,90 @@
+:root {
+	color: var(--textColor);
+	--border-width: 0px;
+	font-family: sans-serif;
+}
+.content-avatars-item, .content-props-item, .content-worlds-item {
+	overflow: hidden;
+}
+.content-avatars-item img, .content-worlds-item img {
+	width: 290px;
+}
+.content-props-item img {
+	width: 230px;
+}
+.home-nav-button, .content-cat-button, .content-avatars-item, .content-props-item, .content-worlds-item, .power-controls > button, .content-avatars-internal, .content-props-internal, .content-worlds-internal {
+	color: var(--textColor);
+	background-color: var(--backgroundColor);
+	border-style: solid;
+	border-width: var(--border-width);
+	border-color: var(--borderColor);
+	border-radius: var(--border-radius-outside);
+}
 
+input {
+	background-color: var(--inputBackground);
+	border-style: solid;
+	border-width: var(--border-width);
+	border-color: var(--inputBorder);
+	border-radius: var(--border-radius-inside);
+	color: var(--inputText);
+	box-sizing: border-box;
+}/*
+input[type=text], input[type=number], input[type=password] {
+	background-color: #33333333;
+    filter: blur(4px);
+}*/
+input:focus {
+	background-color: var(--focusedElementBackgroundColor);
+	color: var(--focusedElementColor);
+}
+input[type=button] , input[type=submit] , button {
+	background-color: var(--buttonBGColor);
+	border-style: solid;
+	border-width: var(--border-width);
+	border-color: var(--buttonBorder);
+	border-radius: var(--border-radius-inside);
+	color: var(--buttonFGColor);
+	box-sizing: border-box;
+}
+input:hover {
+	background-color: var(--buttonBGColorHover);
+}
+input:active {
+	background-color: var(--buttonBGColorActive);
+}
+.headerCenterAlign {
+	top: 8px;
+	font-size: 48px;
+}
+.header {
+	height: 70px;
+}
+.displayArea {
+	top: 70px;
+	height: calc(1080px - 70px);
+	overflow: hidden;
+}
+.settings-page {
+	height: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.panelrounding {
+	border-radius: 0;
+}
+.navbar {
+	display: none;
+}
+.home-nav {
+	top: 0;
+	width: 73%;
+	margin: 0 14%;
+}
+.clock {
+	display: none;
+}
+/*
 :root {
 	color: var(--textColor);
 	--border-width: 0px;
@@ -25,43 +111,6 @@ h1 {
 	font: 16px bold;
 	border-radius: var(--border-radius-outside);
 	font-size: 2rem;
-}
-
-input {
-	min-height:64px;
-	padding: 12px 20px;
-	background-color: var(--inputBackground);
-	border-style: solid;
-	border-width: var(--border-width);
-	border-color: var(--inputBorder);
-	border-radius: var(--border-radius-inside);
-	text-align: left;
-	font-size: 1em;
-	color: var(--inputText);
-	box-sizing: border-box;
-}
-input:focus {
-	background-color: var(--focusedElementBackgroundColor);
-	color: var(--focusedElementColor);
-}
-input[type=button] , input[type=submit] , button {
-	height: 64px;
-	background-color: var(--buttonBGColor);
-	border-style: solid;
-	border-width: var(--border-width);
-	border-color: var(--buttonBorder);
-	border-radius: var(--border-radius-inside);
-	text-align: center;
-	font-size: 2rem;
-	color: var(--buttonFGColor);
-	padding: 13px 20px;
-	box-sizing: border-box;
-}
-input:hover {
-	background-color: var(--buttonBGColorHover);
-}
-input:active {
-	background-color: var(--buttonBGColorActive);
 }
 
 .borderedBox {
@@ -118,16 +167,13 @@ input:active {
 }
 #galaxyButton {
 	background-image: var(--galaxy-icon);
-}/*
-#testingButton {
-	background-image: var(--testing-icon);
-}*/
+}
 #settingsButton {
 	background-image: var(--settings-icon);
 }
 #themeList, #iconList {
 	text-align: left;
-}
+}*/
 .themeCard {
 	width: calc(calc(33.3333% - var(--border-width)) - 10px);
 	height: auto !important;
@@ -146,8 +192,9 @@ input:active {
 	}
 
 .themeImage {
-	margin-top: calc(-10px + var(--border-width));
-	width: calc(calc(100% + 36px) - calc(var(--border-width) * 2));
+	margin-top: var(--border-width);
+	margin-left: calc(var(--border-width) - 5px);
+	width: calc(calc(100% + 11px) - calc(var(--border-width) * 2));
 	border-top-left-radius: var(--border-radius-medium) !important;
 	border-top-right-radius: var(--border-radius-medium) !important;
 	border-bottom-style: solid;
@@ -161,7 +208,10 @@ input:active {
 .active button div {
 	color: var(--activeFGcolor) !important;
 }
-
+.themeList, .iconList {
+	display: table-row;
+}
+/*
 #settings > * > *(0) {
 	margin-bottom: 30px;
 }
@@ -184,17 +234,6 @@ input:active {
     .tab:hover {
 		background-color: var(--buttonBGColorHover);
     }
-
-
-.tab-left {
-	border-top-left-radius: var(--border-radius-outside);
-	border-bottom-right-radius: var(--border-radius-outside); /* WTF? why do i have to switch left and right around on the bottom one??????*/
-}
-
-.tab-right {
-	border-top-right-radius: var(--border-radius-outside);
-	border-bottom-left-radius: var(--border-radius-outside); /* WTF? why do i have to switch left and right around on the bottom one??????*/
-}
 
 .content-row {
     margin-top: 0px;
@@ -286,10 +325,10 @@ input:active {
 		text-shadow: 1px 1px 2px black;
 	}
 
-/* for a purple tint, wich was used on the login panel in the default UI*/
 .loginPanelTint {
 	background-color: var(--loginPanelTint) !important;
 }
 .asset-info-spawn {
 	width: calc(100% - var(--border-width));
 }
+*/

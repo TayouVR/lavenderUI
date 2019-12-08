@@ -1,0 +1,1282 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/Common.css">
+    <link href="./css/tablet.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/themes/supra/borders/borders-round.css">
+    <link rel="stylesheet" href="/themes/supra/colors/colors-dark.css">
+    <link rel="stylesheet" href="/themes/supra/Common.css">
+    <link rel="stylesheet" href="/themes/supra/customizations/navbar/navbar.css">
+    <link rel="stylesheet" href="/themes/supra/customizations/android-app-style/android-app-style.css">
+
+    <script src="./js/ui.js"></script>
+    <script src="./js/tablet.js"></script>
+	<script src="/themes/supra/main.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="headerLeftAlign" id="headerLeft"></div>
+
+        <div class="headerCenterAlign" id="headerCenter">Home</div>
+
+        <div class="headerRightAlign" id="headerRight"></div>
+    </div>
+
+    <div class="displayArea">
+        <div id="loginPage" class="panelrounding login-page">
+            <div class="login-background"></div>
+            <div id="loginLogo" class="login-page-logo">
+                <img src="./images/logoflat.png" />
+            </div>
+            <div class="login-page-input">
+                <h2>Login</h2>
+                <input id="loginEmail" type="text" placeholder="Email" />
+                <div style="position: relative;">
+                    <input id="loginPassword" type="password" placeholder="Password" />
+                    <button id="showPassword" onclick="showPassword()"><span class="password-glyph-eye"></span></button>
+                </div>
+                <button onclick="login()">Login</button>
+            </div>
+            <div>
+                <p id="loginErrorText" class="text-danger"></p>
+            </div>
+        </div>
+
+        <div id="loginLoading" class="login-loading">
+            <img src="./images/logo.png" />
+
+        </div>
+
+        <div id="homepage" class="panelrounding home" style="display:none">
+            <div id="notificationQuickMenu" class="home-notification-panel" style="display:none;">
+                <div class="home-notification-panel-close home-notification-control">
+                    <button onclick="closeNotificationMenu()">&lt;</button>
+                </div>
+                <div class="home-notification-panel-content">
+
+                </div>
+                <div class="home-notification-all">
+                    <button onclick="ChangeState(9, true); closeNotificationMenu()">All notifications</button>
+                </div>
+            </div>
+            <div class="home-notification-panel-open home-notification-control">
+                <button onclick="openNotificationMenu()">&gt;</button>
+                <!--<p>7</p>-->
+            </div>
+            <div class="home-notification-list">
+
+            </div>
+            <div class="home-nav">
+                    <button class="home-nav-button icon-content" onclick="ChangeState(1, true)"><div>Content</div></button>
+                    <button class="home-nav-button icon-social" onclick="ChangeState(2, true)" disabled><div>Social</div></button>
+                    <button class="home-nav-button icon-galaxy" onclick="ChangeState(3, true)"><div>Galaxy</div></button>
+                    <button class="home-nav-button icon-camera" onclick="ChangeState(4, true)" disabled><div>Camera</div></button>
+                    <button class="home-nav-button icon-downloads" onclick="ChangeState(5, true)" disabled><div>Downloads</div></button>
+                    <button class="home-nav-button icon-share" onclick="ChangeState(6, true)" disabled><div>Share</div></button>
+                    <button class="home-nav-button icon-players" onclick="ChangeState(7, true)" disabled><div>Players</div></button>
+                    <button class="home-nav-button icon-settings" onclick="ChangeState(8, true)"><div>Settings</div></button>
+                    <button class="home-nav-button icon-chromium" onclick="ChangeState(10, true)"><div>Chromium</div></button>
+                    <button class="home-nav-button icon-youtube" onclick="ChangeState(102, true)"><div>Youtube</div></button>
+                    <button class="home-nav-button icon-calculator" onclick="ChangeState(103, true)"><div>Calculator</div></button>
+            </div>
+            <div class="home-power-control">
+                <button onclick="ChangeState(1000, true);"><span></span></button>
+            </div>
+            <div class="home-volume-mute">
+                <button><span></span></button>
+            </div>
+            <div class="home-volume-slider">
+                <div id="homeVolumeSlider">
+                </div>
+            </div>
+        </div>
+
+
+        <div id="camera">
+            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
+            </div>
+        </div>
+
+        <div id="downloads">
+            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
+            </div>
+        </div>
+
+        <div id="share">
+            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
+            </div>
+        </div>
+
+		<div id="browser">
+			<iframe src="https://duckduckgo.com/" width="100%" height="100%" X-Frame-Op></iframe>
+		</div>
+
+		<div id="youtube">
+			<iframe  width="100%" height="100%" src="https://www.youtube.com/embed/Ur_tXqaNXOI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></iframe>
+		</div>
+
+		<div id="calculator">
+			<form name="calculator">
+			 <table>
+			    <tr>
+			       <td colspan="4">
+			          <input type="text" name="display" id="display" disabled>
+			       </td>
+			    </tr>
+			    <tr>
+			       <td><input type="button" name="one" value="1" onclick="calculator.display.value += '1'"></td>
+			       <td><input type="button" name="two" value="2" onclick="calculator.display.value += '2'"></td>
+			       <td><input type="button" name="three" value="3" onclick="calculator.display.value += '3'"></td>
+			       <td><input type="button" class="operator" name="plus" value="+" onclick="calculator.display.value += '+'"></td>
+			    </tr>
+			    <tr>
+			       <td><input type="button" name="four" value="4" onclick="calculator.display.value += '4'"></td>
+			       <td><input type="button" name="five" value="5" onclick="calculator.display.value += '5'"></td>
+			       <td><input type="button" name="six" value="6" onclick="calculator.display.value += '6'"></td>
+			       <td><input type="button" class="operator" name="minus" value="-" onclick="calculator.display.value += '-'"></td>
+			    </tr>
+			    <tr>
+			       <td><input type="button" name="seven" value="7" onclick="calculator.display.value += '7'"></td>
+			       <td><input type="button" name="eight" value="8" onclick="calculator.display.value += '8'"></td>
+			       <td><input type="button" name="nine" value="9" onclick="calculator.display.value += '9'"></td>
+			       <td><input type="button" class="operator" name="times" value="x" onclick="calculator.display.value += '*'"></td>
+			    </tr>
+			    <tr>
+			       <td><input type="button" id="clear" name="clear" value="c" onclick="calculator.display.value = ''"></td>
+			       <td><input type="button" name="zero" value="0" onclick="calculator.display.value += '0'"></td>
+			       <td><input type="button" name="doit" value="=" onclick="calculator.display.value = eval(calculator.display.value)"></td>
+			       <td><input type="button" class="operator" name="div" value="/" onclick="calculator.display.value += '/'"></td>
+			    </tr>
+			 </table>
+			</form>
+		</div>
+
+        <div id="galaxy" class="panelrounding galaxy-page" style="display: none;">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="galaxy-page-inner">
+                <div class="galaxy-page-left-controls">
+                    <button>&lt;</button>
+                </div>
+                <div class="galaxy-page-content">
+                    <table style="background-color: rgba(0,0,0,0.7)">
+                        <thead>
+                            <tr>
+                                <th style="width: 96px;">Slot</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th style="width: 300px;">Players/Max</th>
+                                <th style="width: 96px;">Ping</th>
+                            </tr>
+                        </thead>
+                        <tbody id="galaxyBrowserContent">
+                            <tr onclick="openWorldInfo(this)" data-world="test">
+                                <td style="width: 96px;">1</td>
+                                <td>Lavender Official</td>
+                                <td>Lavenders Official Server</td>
+                                <td>0/1024</td>
+                                <td>50</td>
+                            </tr>
+                            <tr onclick="openWorldInfo(this)" data-world="test">
+                                <td style="width: 96px;">2</td>
+                                <td>Lavender Official</td>
+                                <td>Lavenders Official Server</td>
+                                <td>0/1024</td>
+                                <td>50</td>
+                            </tr>
+                            <tr onclick="openWorldInfo(this)" data-world="test">
+                                <td style="width: 96px;">3</td>
+                                <td>Lavender Official</td>
+                                <td>Lavenders Official Server</td>
+                                <td>0/1024</td>
+                                <td>50</td>
+                            </tr>
+                            <tr onclick="openWorldInfo(this)" data-world="test">
+                                <td style="width: 96px;">4</td>
+                                <td>Lavender Official</td>
+                                <td>Lavenders Official Server</td>
+                                <td>0/1024</td>
+                                <td>50</td>
+                            </tr>
+                            <tr onclick="openWorldInfo(this)" data-world="test">
+                                <td style="width: 96px;">5</td>
+                                <td>Lavender Official</td>
+                                <td>Lavenders Official Server</td>
+                                <td>0/1024</td>
+                                <td>50</td>
+                            </tr>
+                            <tr onclick="openWorldInfo(this)" data-world="test">
+                                <td style="width: 96px;">6</td>
+                                <td>Lavender Official</td>
+                                <td>Lavenders Official Server</td>
+                                <td>0/1024</td>
+                                <td>50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="galaxy-page-right-controls">
+                    <button>&gt;</button>
+                </div>
+                <div class="galaxy-page-bottom-controls">
+                    <div id="galaxyManualConnectInput"></div>
+                    <div id="galaxyManualConnectInputPort"></div>
+                    <div> <button onclick="manualConnect()">Connect</button></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="content-controls">
+                <button class="content-cat-button" onclick="ChangeState(11, true); api.Content.UpdatePropList()">Props</button>
+                <button class="content-cat-button" onclick="ChangeState(12, true); api.Content.UpdateAvatarList()">Avatars</button>
+                <button class="content-cat-button" onclick="ChangeState(13, true); api.Content.UpdateWorldList()">Worlds</button>
+            </div>
+        </div>
+
+        <div id="contentProps" class="panelrounding content-props-page" style="display:none;">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="content-props-container">
+                <div class="content-props-prev"><button onclick="prevPropPage()">&lt;</button></div>
+                <div class="content-props-content">
+                    <div class="content-props-row">
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-props-row">
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-props-row">
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-props-item">
+                            <div class="content-props-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-props-next"><button onclick="nextPropPage()">&gt;</button></div>
+            </div>
+            <div class="content-props-search">
+                <div><input type="text" /></div>
+                <div><button>Search</button></div>
+                <div id="contentPropSearchSettingMyContent" class="content-prop-search-toggle"><p>My Content</p></div>
+                <!--<div id="contentPropSearchSettingSubs" class="content-prop-search-toggle"><p>Subscriptions</p></div>-->
+                <!--<div id="contentPropSearchSettingFav" class="content-prop-search-toggle"><p>Favorites</p></div>-->
+            </div>
+            <div class="content-props-info">
+                <div class="content-props-info-image"><img /></div>
+                <div class="content-props-info-text">
+                    <p>Name: Test Asset</p>
+                    <p>Description: A test asset</p>
+                    <p>Size: 20MB</p>
+                </div>
+                <div class="content-props-info-controls">
+                    <!--<p>Prop Count 80/200</p>-->
+                    <button>Spawn</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="contentAvatars" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="content-avatars-container">
+                <div class="content-avatars-prev"><button onclick="prevAvatarPage();">&lt;</button></div>
+                <div class="content-avatars-content">
+                    <div class="content-avatars-row">
+                        <div class="content-avatars-item">
+                            <div class="content-avatars-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-avatars-item">
+                            <div class="content-avatars-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-avatars-item">
+                            <div class="content-avatars-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-avatars-item">
+                            <div class="content-avatars-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-avatars-item">
+                            <div class="content-avatars-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-avatars-row">
+                        <div class="content-avatars-item">
+                            <div class="content-avatars-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-avatars-item">
+                            <div class="content-avatars-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-avatars-item">
+                            <div class="content-avatars-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-avatars-item">
+                            <div class="content-avatars-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-avatars-item">
+                            <div class="content-avatars-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-avatars-next"><button onclick="nextAvatarPage();">&gt;</button></div>
+            </div>
+            <div class="content-avatars-search">
+                <div><input type="text" /></div>
+                <div><button>Search</button></div>
+                <div id="contentAvatarSearchSettingMyContent" class="content-avatar-search-toggle"><p>My Content</p></div>
+                <div id="contentAvatarSearchSettingSubs" class="content-avatar-search-toggle"><p>Subscriptions</p></div>
+                <div id="contentAvatarSearchSettingFav" class="content-avatar-search-toggle"><p>Favorites</p></div>
+            </div>
+            <div class="content-avatars-info">
+                <div class="content-avatars-info-image"><img /></div>
+                <div class="content-avatars-info-text">
+                    <p>Name: Test Asset</p>
+                    <p>Description: A test asset</p>
+                    <p>Size: 20MB</p>
+                </div>
+                <div class="content-avatars-info-controls">
+                    <button>Switch To</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="contentWorlds" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="content-worlds-container">
+                <div class="content-worlds-prev"><button onclick="nextWorldPage()">&lt;</button></div>
+                <div class="content-worlds-content">
+                    <div class="content-worlds-row">
+                        <div class="content-worlds-item">
+                            <div class="content-worlds-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-worlds-item">
+                            <div class="content-worlds-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-worlds-item">
+                            <div class="content-worlds-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-worlds-item">
+                            <div class="content-worlds-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-worlds-item">
+                            <div class="content-worlds-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-worlds-row">
+                        <div class="content-worlds-item">
+                            <div class="content-worlds-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-worlds-item">
+                            <div class="content-worlds-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-worlds-item">
+                            <div class="content-worlds-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-worlds-item">
+                            <div class="content-worlds-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                        <div class="content-worlds-item">
+                            <div class="content-worlds-internal">
+                                <div><img /></div>
+                                <div>Prop Name</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-worlds-next"><button onclick="nextWorldPage()">&gt;</button></div>
+            </div>
+            <div class="content-worlds-search">
+                <div><input type="text" /></div>
+                <div><button>Search</button></div>
+                <div id="contentWorldSearchSettingMyContent" class="content-world-search-toggle"><p>My Content</p></div>
+                <div id="contentWorldSearchSettingSubs" class="content-world-search-toggle"><p>Subscriptions</p></div>
+                <div id="contentWorldSearchSettingFav" class="content-world-search-toggle"><p>Favorites</p></div>
+            </div>
+            <div class="content-worlds-info">
+                <div class="content-worlds-info-image"><img /></div>
+                <div class="content-worlds-info-text">
+                    <p>Name: Test Asset</p>
+                    <p>Description: A test asset</p>
+                    <p>Size: 20MB</p>
+                </div>
+                <div class="content-worlds-info-controls">
+                    <button>Host</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="social" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+
+            <div class="social-controls">
+                <button class="social-cat-button" onclick="ChangeState(21, true); updateFriendsList();">Friends</button>
+                <button class="social-cat-button" onclick="ChangeState(22, true); searchFriends();">Search</button>
+                <button class="social-cat-button" onclick="ChangeState(23, true)">Requests</button>
+            </div>
+            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
+            </div>
+        </div>
+
+        <div id="socialFriends" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="social-friends-container">
+                <div class="social-friends-prev"><button>&lt;</button></div>
+                <div class="social-friends-content">
+                    <div class="social-friends-row">
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-friends-row">
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-friends-next"><button>&gt;</button></div>
+            </div>
+            <div class="social-friends-search">
+                <div><input type="text" /></div>
+                <button>Search</button>
+                <div>
+                    <div id="socialFriendsSearchSettingOnline" class="social-friends-search-toggle"><p>Online Only</p></div>
+                    <div id="socialFriendsSearchSettingOfflineFirst" class="social-friends-search-toggle"><p>Offline First</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="socialSearch" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="social-friends-search-container">
+                <div class="social-friends-search-prev"><button onclick="prevUserSearchPage()">&lt;</button></div>
+                <div class="social-friends-search-content">
+                    <div class="social-friends-search-row">
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="social-friends-search-row">
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-friends-search-next"><button onclick="nextUserSearchPage();">&gt;</button></div>
+            </div>
+            <div class="social-friends-search-search">
+                <div><input type="text" oninput="socialSearchSettings.searchString = this.value;" /></div>
+                <button onclick="searchFriends()">Search</button>
+            </div>
+            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
+            </div>
+        </div>
+
+        <div id="socialRequests" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="social-requests-container">
+                <div class="social-requests-prev"><button>&lt;</button></div>
+                <div class="social-requests-content">
+                    <div class="social-requests-row">
+                        <div class="social-requests-item"></div>
+                        <div class="social-requests-item"></div>
+                        <div class="social-requests-item"></div>
+                        <div class="social-requests-item"></div>
+                        <div class="social-requests-item"></div>
+                    </div>
+                    <div class="social-requests-row">
+                        <div class="social-requests-item"></div>
+                        <div class="social-requests-item"></div>
+                        <div class="social-requests-item"></div>
+                        <div class="social-requests-item"></div>
+                        <div class="social-requests-item"></div>
+                    </div>
+                </div>
+                <div class="social-requests-next"><button>&gt;</button></div>
+            </div>
+            <div class="social-requests-search">
+                <div><input type="text" /></div>
+                <button>Search</button>
+                <div>
+                    <div id="socialRequestsSearchSettingOnline" class="social-requests-search-toggle"><p>Requests from me</p></div>
+                </div>
+            </div>
+            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
+            </div>
+        </div>
+
+
+
+        <div id="players" class="panelrounding players-page" style="display:none">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+
+
+            <div class="player-table-info">124/1024 Players | Showing 0 - 10</div>
+            <div class="player-container">
+
+                <div class="player-table-prev">
+                    <button>&lt;</button>
+                </div>
+                <div class="player-table">
+                    <div class="player-table-header">
+                        <div>Avatar</div>
+                        <div>Name</div>
+                        <div>Ping</div>
+                        <div>Voice</div>
+                    </div>
+                    <div class="player-table-content">
+                        <div class="player-table-row" onclick="ChangeState(71, true)">
+                            <div class="player-table-avatar">
+                                <img src="./images/icon_app_22.png" />
+                            </div>
+                            <div class="player-table-name">
+                                June
+                            </div>
+                            <div class="player-table-ping">
+                                100
+                            </div>
+                            <div class="player-table-voice">
+                                <img src="./images/speaker_mute.png" />
+                            </div>
+                        </div>
+                        <div class="player-table-row" onclick="ChangeState(71, true)">
+                            <div class="player-table-avatar">
+                                <img src="./images/icon_app_22.png" />
+                            </div>
+                            <div class="player-table-name">
+                                June
+                            </div>
+                            <div class="player-table-ping">
+                                100
+                            </div>
+                            <div class="player-table-voice">
+                                <img src="./images/speaker_mute.png" />
+                            </div>
+                        </div>
+                        <div class="player-table-row" onclick="ChangeState(71, true)">
+                            <div class="player-table-avatar">
+                                <img src="./images/icon_app_22.png" />
+                            </div>
+                            <div class="player-table-name">
+                                June
+                            </div>
+                            <div class="player-table-ping">
+                                100
+                            </div>
+                            <div class="player-table-voice">
+                                <img src="./images/speaker_mute.png" />
+                            </div>
+                        </div>
+                        <div class="player-table-row" onclick="ChangeState(71, true)">
+                            <div class="player-table-avatar">
+                                <img src="./images/icon_app_22.png" />
+                            </div>
+                            <div class="player-table-name">
+                                June
+                            </div>
+                            <div class="player-table-ping">
+                                100
+                            </div>
+                            <div class="player-table-voice">
+                                <img src="./images/speaker_mute.png" />
+                            </div>
+                        </div>
+                        <div class="player-table-row" onclick="ChangeState(71, true)">
+                            <div class="player-table-avatar">
+                                <img src="./images/icon_app_22.png" />
+                            </div>
+                            <div class="player-table-name">
+                                June
+                            </div>
+                            <div class="player-table-ping">
+                                100
+                            </div>
+                            <div class="player-table-voice">
+                                <img src="./images/speaker_mute.png" />
+                            </div>
+                        </div>
+                        <div class="player-table-row" onclick="ChangeState(71, true)">
+                            <div class="player-table-avatar">
+                                <img src="./images/icon_app_22.png" />
+                            </div>
+                            <div class="player-table-name">
+                                June
+                            </div>
+                            <div class="player-table-ping">
+                                100
+                            </div>
+                            <div class="player-table-voice">
+                                <img src="./images/speaker_mute.png" />
+                            </div>
+                        </div>
+                        <div class="player-table-row" onclick="ChangeState(71, true)">
+                            <div class="player-table-avatar">
+                                <img src="./images/icon_app_22.png" />
+                            </div>
+                            <div class="player-table-name">
+                                June
+                            </div>
+                            <div class="player-table-ping">
+                                100
+                            </div>
+                            <div class="player-table-voice">
+                                <img src="./images/speaker_mute.png" />
+                            </div>
+                        </div>
+                        <div class="player-table-row" onclick="ChangeState(71, true)">
+                            <div class="player-table-avatar">
+                                <img src="./images/icon_app_22.png" />
+                            </div>
+                            <div class="player-table-name">
+                                June
+                            </div>
+                            <div class="player-table-ping">
+                                100
+                            </div>
+                            <div class="player-table-voice">
+                                <img src="./images/speaker_mute.png" />
+                            </div>
+                        </div>
+                        <div class="player-table-row" onclick="ChangeState(71, true)">
+                            <div class="player-table-avatar">
+                                <img src="./images/icon_app_22.png" />
+                            </div>
+                            <div class="player-table-name">
+                                June
+                            </div>
+                            <div class="player-table-ping">
+                                100
+                            </div>
+                            <div class="player-table-voice">
+                                <img src="./images/speaker_mute.png" />
+                            </div>
+                        </div>
+                        <div class="player-table-row" onclick="ChangeState(71, true)">
+                            <div class="player-table-avatar">
+                                <img src="./images/icon_app_22.png" />
+                            </div>
+                            <div class="player-table-name">
+                                June
+                            </div>
+                            <div class="player-table-ping">
+                                100
+                            </div>
+                            <div class="player-table-voice">
+                                <img src="./images/speaker_mute.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="player-table-next">
+                    <button>&gt;</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="player" class="panelrounding player-page" style="display:none">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+
+            <div class="player-info-container">
+                <div class="player-info-basic">
+                    <p>Nickname(name)</p>
+                    <img />
+                </div>
+                <!--<div class="player-info-volume-controls">
+                <p>50%</p>
+                <input type="range" />
+                <button>Mute</button>
+            </div>-->
+                <div class="player-info-controls">
+                    <div style="display: none;">
+                        <button>Add Friend</button>
+                    </div>
+                    <div style="display: none;">
+                        <button>Change Nickname</button>
+                        <button>Block</button>
+                        <button>Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings" class="panelrounding" style="display:none; background-image: url(../images/background.png);">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div style=" position: absolute; top: 100px; left: 20px; width: 20%;">
+                <div id="settingsButtonCore" class="settings-tree-cat" onclick="changeSettingsCat(0);">
+                    <h2>Core</h2>
+                </div>
+                <div id="settingsButtonAudio" class="settings-tree-cat" onclick="changeSettingsCat(1);">
+                    <h2>Audio</h2>
+                </div>
+                <div id="settingsButtonGraphics" class="settings-tree-cat" onclick="changeSettingsCat(2);">
+                    <h2>Graphics</h2>
+                </div>
+                <div id="settingsButtonServer" class="settings-tree-cat" onclick="changeSettingsCat(3);">
+                    <h2>Server</h2>
+                </div>
+                <div id="settingsButtonPlayer" class="settings-tree-cat" onclick="changeSettingsCat(4);">
+                    <h2>Player</h2>
+                </div>
+                <div id="settingsButtonPlayerMisc" class="settings-tree-cat" onclick="changeSettingsCat(5);">
+                    <h2>Player Misc</h2>
+                </div>
+                <div id="settingsButtonUI" class="settings-tree-cat" onclick="changeSettingsCat(6);">
+                    <h2>UI</h2>
+                </div>
+            </div>
+            <div style="position: absolute; left: 25%; width: 75%; top: 20px;">
+                <div id="settingsCore" class="settings-page">
+                    <h1>Core</h1>
+                    <div class="settings-container">
+                        <div class="settings-item">
+                            <p>Max Downloads At Once</p>
+                            <div id="maxDownloadSlider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="settingsAudio" class="settings-page">
+                    <h1>Audio</h1>
+                    <div class="settings-container">
+                        <div class="settings-item">
+                            <p>Volume</p>
+                            <div id="volumeSlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Music Volume</p>
+                            <div id="musicVolumeSlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Avatar Volume</p>
+                            <div id="avatarVolumeSlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Mic Input Volume</p>
+                            <div id="micVolumeSlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Use Voice Activation</p>
+                            <div id="useVoiceActivationToggle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="settingsGraphics" class="settings-page">
+                    <h1>Graphics</h1>
+                    <div class="settings-container">
+                        <div class="settings-item">
+                            <p>MSAA</p>
+                            <div id="msaaSlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>VSync</p>
+                            <div id="vsyncToggle"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Mirror Quality</p>
+                            <div id="mirrorScaleSlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>LOD Quality</p>
+                            <div id="lodScaleSlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Shadow Quality Scale</p>
+                            <div id="shadowQualitySlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Pixel Light Count</p>
+                            <div id="pixelLightCountSlider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="settingsServer" class="settings-page">
+                    <h1>Server</h1>
+                    <div class="settings-container">
+                        <div class="settings-item">
+                            <p>API Port</p>
+                            <div id="apiPort"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Game Port</p>
+                            <div id="port"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Max Players</p>
+                            <div id="maxPlayer"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Tick</p>
+                            <div id="tick"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Bandwidth Limit Per Player</p>
+                            <div id="bandwidthLimitPerPlayer"></div>
+                        </div>
+
+                        <div class="settings-item">
+                            <p>Prop Limit Per Player</p>
+                            <div id="propLimitPerPlayer">
+                            </div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Cleanup Props On Disconnect</p>
+                            <div id="cleanupPropsOnDisconnectToggle"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Server Name</p>
+                            <div id="serverNameInput"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Public</p>
+                            <div id="publicToggle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="settingsPlayer" class="settings-page">
+                    <h1>Player</h1>
+                    <div class="settings-container">
+                        <div class="settings-item">
+                            <p>User Eye Height</p>
+                            <div id="userEyeHeight">
+                            </div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Turn Speed</p>
+                            <div id="smoothTurnSpeed">
+                            </div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Snap Count</p>
+                            <div id="snapCount">
+                            </div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Use Smooth Turn</p>
+                            <div id="useSmoothTurn"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Pointer Smooth Mult</p>
+                            <div id="pointerSmoothMult">
+                            </div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Show Local Nameplate</p>
+                            <div id="showLocalNameplateToggle"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>FOV</p>
+                            <div id="fovInput"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="settingsPlayerMisc" class="settings-page">
+                    <h1>Player</h1>
+                    <div class="settings-container">
+                        <div class="settings-item">
+                            <p>Third Person</p>
+                            <div id="thirdPerson"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Toggle Crouch</p>
+                            <div id="toggleCrouch"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Allow Physical Body</p>
+                            <div id="allowPhysicalBody"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Physical Body Type</p>
+                            <div id="physicalBodyType"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Highlight Red</p>
+                            <div id="highlight_r">
+                            </div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Highlight Green</p>
+                            <div id="highlight_g">
+                            </div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Highlight Blue</p>
+                            <div id="highlight_b">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="settingsUI" class="settings-page">
+					<h1>UI</h1>
+					<div class="settings-container">
+						<div style="text-align: left;">Color Palettes</div>
+						<div id="themeList" ></div>
+						<div style="text-align: left;">Icons</div>
+						<div id="iconList" ></div>
+					</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="power" class="panelrounding power-page">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="power-controls">
+                <button onclick="logout();">Logout</button>
+                <button onclick="quit();">Quit</button>
+                <button onclick="disconnect();">Disconnect</button>
+            </div>
+        </div>
+
+
+        <div id="notifications" class="panelrounding notification-page">
+            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="notification-container">
+                <div class="notification-table-prev"><button>&lt;</button></div>
+                <div class="notification-table">
+                    <div class="notification-table-header">
+                        <div>From</div>
+                        <div>Title</div>
+                        <div>Received</div>
+                        <div>Control</div>
+                    </div>
+                    <div class="notification-table-content">
+                        <div class="notification-table-row">
+                            <div>June</div>
+                            <div>June sent you a friend request</div>
+                            <div>12/4/2019 10:05:35 PM</div>
+                            <div><button>X</button></div>
+                        </div>
+                        <div class="notification-table-row">
+                            <div>June</div>
+                            <div>June sent you a friend request</div>
+                            <div>12/4/2019 10:05:35 PM</div>
+                            <div><button>X</button></div>
+                        </div>
+                        <div class="notification-table-row">
+                            <div>June</div>
+                            <div>June sent you a friend request</div>
+                            <div>12/4/2019 10:05:35 PM</div>
+                            <div><button>X</button></div>
+                        </div>
+                        <div class="notification-table-row">
+                            <div>June</div>
+                            <div>June sent you a friend request</div>
+                            <div>12/4/2019 10:05:35 PM</div>
+                            <div><button>X</button></div>
+                        </div>
+                        <div class="notification-table-row">
+                            <div>June</div>
+                            <div>June sent you a friend request</div>
+                            <div>12/4/2019 10:05:35 PM</div>
+                            <div><button>X</button></div>
+                        </div>
+                        <div class="notification-table-row">
+                            <div>June</div>
+                            <div>June sent you a friend request</div>
+                            <div>12/4/2019 10:05:35 PM</div>
+                            <div><button>X</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="notification-table-next"><button>&gt;</button></div>
+            </div>
+            <div class="notification-table-search">
+                <div><input type="text" /></div>
+                <button>Search</button>
+                <div>
+                    <div id="socialFriendsSearchSettingOnline" class="notification-table-search-toggle"><p>Online Only</p></div>
+                    <div id="socialFriendsSearchSettingOfflineFirst" class="notification-table-search-toggle"><p>Offline First</p></div>
+                </div>
+            </div>
+
+            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
+            </div>
+
+        </div>
+
+
+    </div>
+
+	<div class="navbar">
+		<button onclick="ChangeState(0, true)" class="navbar-button">home</button>
+		<button onclick="Back()" class="navbar-button">&lt;</button>
+	</div>
+</body>
+</html>
