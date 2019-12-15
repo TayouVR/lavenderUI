@@ -35,16 +35,69 @@
                     <input id="loginPassword" type="password" placeholder="Password" />
                     <button id="showPassword" onclick="showPassword()"><span class="password-glyph-eye"></span></button>
                 </div>
-                <button onclick="login()">Login</button>
+                <div class="login-page-buttons">
+                    <button onclick="login()">Login</button>
+                    <button onclick="ChangeState(10, false)">Register</button>
+                </div>
+                <p id="loginError" class="text-danger"></p>
             </div>
-            <div>
-                <p id="loginErrorText" class="text-danger"></p>
+            <div class="login-page-info">
+                <h2>Welcome to Lavender!</h2>
+                <p>If you do not have an account, you can create an account here or on our website <a style="text-decoration: underline;" onclick="api.OpenBrowser('https://lavendervr.com/Account/Register')">LavenderVR.com</a></p>
             </div>
         </div>
 
         <div id="loginLoading" class="login-loading">
             <img src="./images/logo.png" />
 
+        </div>
+
+        <div id="registerPage" class="panelrounding register-page" style="display: none;">
+            <div class="login-background"></div>
+            <div id="loginLogo" class="login-page-logo">
+                <img src="./images/logoflat.png" />
+            </div>
+            <div class="register-page-input">
+                <h2>Register</h2>
+                <input id="registerEmail" type="text" placeholder="Email" />
+                <input id="registerDisplayName" type="text" placeholder="Display Name" />
+                <div style="position: relative;">
+                    <input id="registerPassword" type="password" placeholder="Password"/>
+                    <button id="showPassword" onclick="showPassword(this)"><span class="password-glyph-eye"></span></button>
+                </div>
+                <div style="position: relative;">
+                    <input id="registerPasswordConfirm" type="password" placeholder="Confirm Password" />
+                    <button id="showPassword" onclick="showPassword(this)"><span class="password-glyph-eye"></span></button>
+                </div>
+                <div class="login-page-buttons">
+                    <button onclick="registerBack();">Back</button>
+                    <button onclick="register();">Register</button>
+                </div>
+                <p id="registerError" class="text-danger"></p>
+            </div>
+        </div>
+
+        <div id="registerSteamBindPage" class="panelrounding register-steam-page" style="display: none;">
+            <div class="login-background"></div>
+            <div id="loginLogo" class="login-page-logo">
+                <img src="./images/logoflat.png" />
+            </div>
+            <div class="register-page-bind-input">
+                <h2>Success</h2>
+                <p>You have been successfully registered</p>
+                <p>Would you like to register this Lavender VR account to your current Steam Account?</p>
+                <p>If not, you can always go to <a style="text-decoration: underline;" onclick="api.OpenBrowser('https://lavendervr.com/account/register')"> LavenderVR.com</a> and link your Steam Account from there. </p>
+                <p>To use the game you must be logged in with an account you have linked with Steam</p>
+                <p>Lavender VR does not share your information with any third party</p>
+                <div class="login-page-buttons">
+                    <button onclick="bindSteamAccount();">Yes</button>
+                    <button onclick="registerFinish();">No</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="registerLoading" class="login-loading">
+            <img src="./images/logo.png" />
         </div>
 
         <div id="homepage" class="panelrounding home" style="display:none">
@@ -75,9 +128,9 @@
                     <button class="home-nav-button icon-downloads" onclick="ChangeState(5, true)" disabled><div>Downloads</div></button>
                     <button class="home-nav-button icon-share" onclick="ChangeState(6, true)" disabled><div>Share</div></button>
                     <button class="home-nav-button icon-players" onclick="ChangeState(7, true)" disabled><div>Players</div></button>
-                    <button class="home-nav-button icon-chromium" onclick="ChangeState(10, true)"><div>Chromium</div></button>
-                    <button class="home-nav-button icon-youtube" onclick="ChangeState(102, true)"><div>Youtube</div></button>
-                    <button class="home-nav-button icon-calculator" onclick="ChangeState(103, true)"><div>Calculator</div></button>
+                    <button class="home-nav-button icon-chromium" onclick="ChangeState(201, true)"><div>Chromium</div></button>
+                    <button class="home-nav-button icon-youtube" onclick="ChangeState(202, true)"><div>Youtube</div></button>
+                    <button class="home-nav-button icon-calculator" onclick="ChangeState(203, true)"><div>Calculator</div></button>
                     <button class="home-nav-button icon-settings" onclick="ChangeState(8, true)"><div>Settings</div></button>
             </div>
             <div class="home-power-control">
@@ -93,11 +146,13 @@
         </div>
 
         <div id="camera">
-            <button onclick="Back();" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
-            <button class="camera-center" onclick="api.SetCameraFocal()"><img src="./images/icon_app_183.png" /></button>
-            <button class="camera-picture-button" onclick="api.TakePicture()"><img src="./images/icon_device_50.png" /></button>
-            <button class="camera-switch" onclick="api.SwapCamera()"><img src="./images/icon_device_63.png" /></button>
+            <button onclick="Back(); closeCamera();" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <button class="camera-center" onclick="api.Camera.SetCameraFocal()"><img src="./images/icon_app_183.png" /></button>
+            <button class="camera-picture-button" onclick="api.Camera.TakePicture(); "><img src="./images/icon_device_50.png" /></button>
+            <button class="camera-switch" onclick="api.Camera.SwapCamera();"><img src="./images/icon_device_63.png" /></button>
+            <button class="camera-settings" onclick="openCameraSettings();"><img src="./images/icon_common_63.png" /></button>
             <div id="cameraFOVSlider" class="camera-fov-slider"></div>
+            <p style="position: absolute; left: 0px; bottom: 0px; font-size: 38px;">Hold shift to move the camera around in desktop mode</p>
         </div>
 
         <div id="downloads">
@@ -115,7 +170,7 @@
         </div>
 
 		<div id="browser">
-			<iframe src="https://duckduckgo.com/" width="100%" height="100%" X-Frame-Op></iframe>
+			<iframe src="" width="100%" height="100%" X-Frame-Op></iframe>
 		</div>
 
 		<div id="youtube">
@@ -123,7 +178,7 @@
 		</div>
 
 		<div id="calculator">
-			<form onsubmit="calculator.display.value = eval(calculator.display.value)" name="calculator">
+			<form name="calculator">
 			 <table>
 			    <tr>
 			       <td colspan="4">
@@ -155,7 +210,7 @@
 			       <td><input type="button" class="operator" name="div" value="/" onclick="calculator.display.value += '/'"></td>
 			    </tr>
 			 </table>
-			</form>
+		 </form>
 		</div>
 
         <div id="galaxy" class="panelrounding galaxy-page" style="display: none;">
@@ -242,7 +297,16 @@
         </div>
 
         <div id="contentProps" class="panelrounding content-props-page" style="display:none;">
-            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="content-header-controls">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <div class="content-search-controls">
+                    <div id="contentPropSearchSettingMyContent" class="search-toggle"><p>My Content</p></div>
+                    <!--<div id="contentPropSearchSettingSubs" class="search-toggle"><p>Subscriptions</p></div>
+                    <div id="contentPropSearchSettingFav" class="search-toggle"><p>Favorites</p></div>-->
+                    <div><input type="text" oninput="searchSettings.search = event.target.value;" /></div>
+                    <div><button onclick="updatePropList();">Search</button></div>
+                </div>
+            </div>
             <div class="content-props-container">
                 <div class="content-props-prev"><button onclick="prevPropPage()">&lt;</button></div>
                 <div class="content-props-content">
@@ -363,21 +427,15 @@
                 </div>
                 <div class="content-props-next"><button onclick="nextPropPage()">&gt;</button></div>
             </div>
-            <div class="content-props-search">
-                <div><input type="text" /></div>
-                <div><button>Search</button></div>
-                <div id="contentPropSearchSettingMyContent" class="content-prop-search-toggle"><p>My Content</p></div>
-                <!--<div id="contentPropSearchSettingSubs" class="content-prop-search-toggle"><p>Subscriptions</p></div>-->
-                <!--<div id="contentPropSearchSettingFav" class="content-prop-search-toggle"><p>Favorites</p></div>-->
-            </div>
-            <div class="content-props-info">
-                <div class="content-props-info-image"><img /></div>
-                <div class="content-props-info-text">
-                    <p>Name: Test Asset</p>
-                    <p>Description: A test asset</p>
-                    <p>Size: 20MB</p>
+
+            <div id="contentPropInfo" class="content-info">
+                <div class="content-info-image"><img /></div>
+                <div class="content-info-text">
+                    <p>Name: No Asset Selected</p>
+                    <p>Description: </p>
+                    <p>Size: </p>
                 </div>
-                <div class="content-props-info-controls">
+                <div class="content-info-controls">
                     <!--<p>Prop Count 80/200</p>-->
                     <button>Spawn</button>
                 </div>
@@ -385,7 +443,18 @@
         </div>
 
         <div id="contentAvatars" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
-            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="content-header-controls">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <div class="content-search-controls">
+                    <div id="contentAvatarSearchSettingMyContent" class="search-toggle"><p>My Content</p></div>
+                    <!--<div id="contentAvatarSearchSettingSubs" class="search-toggle"><p>Subscriptions</p></div>
+                    <div id="contentAvatarSearchSettingFav" class="search-toggle"><p>Favorites</p></div>-->
+                    <div><input type="text" oninput="searchSettings.search = event.target.value;" /></div>
+                    <div><button onclick="api.Content.UpdateAvatarList(searchSettings);">Search</button></div>
+                </div>
+            </div>
+
+
             <div class="content-avatars-container">
                 <div class="content-avatars-prev"><button onclick="prevAvatarPage();">&lt;</button></div>
                 <div class="content-avatars-content">
@@ -456,30 +525,35 @@
                 </div>
                 <div class="content-avatars-next"><button onclick="nextAvatarPage();">&gt;</button></div>
             </div>
-            <div class="content-avatars-search">
-                <div><input type="text" /></div>
-                <div><button>Search</button></div>
-                <div id="contentAvatarSearchSettingMyContent" class="content-avatar-search-toggle"><p>My Content</p></div>
-                <div id="contentAvatarSearchSettingSubs" class="content-avatar-search-toggle"><p>Subscriptions</p></div>
-                <div id="contentAvatarSearchSettingFav" class="content-avatar-search-toggle"><p>Favorites</p></div>
-            </div>
-            <div class="content-avatars-info">
-                <div class="content-avatars-info-image"><img /></div>
-                <div class="content-avatars-info-text">
-                    <p>Name: Test Asset</p>
-                    <p>Description: A test asset</p>
-                    <p>Size: 20MB</p>
+
+            <div id="contentAvatarInfo" class="content-info">
+                <div class="content-info-image"><img /></div>
+                <div class="content-info-text">
+                    <p>Name: No Asset Selected</p>
+                    <p>Description: </p>
+                    <p>Size:</p>
                 </div>
-                <div class="content-avatars-info-controls">
+                <div class="content-info-controls">
                     <button>Switch To</button>
                 </div>
             </div>
         </div>
 
         <div id="contentWorlds" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
-            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+
+            <div class="content-header-controls">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <div class="content-search-controls">
+                    <div id="contentWorldSearchSettingMyContent" class="search-toggle"><p>My Content</p></div>
+                    <!--<div id="contentWorldSearchSettingSubs" class="search-toggle"><p>Subscriptions</p></div>
+                    <div id="contentWorldSearchSettingFav" class="search-toggle"><p>Favorites</p></div>-->
+                    <div><input type="text" oninput="searchSettings.search = event.target.value;" /></div>
+                    <div><button onclick="api.Content.UpdateWorldList(searchSettings);">Search</button></div>
+                </div>
+            </div>
+
             <div class="content-worlds-container">
-                <div class="content-worlds-prev"><button onclick="nextWorldPage()">&lt;</button></div>
+                <div class="content-worlds-prev"><button onclick="prevWorldPage()">&lt;</button></div>
                 <div class="content-worlds-content">
                     <div class="content-worlds-row">
                         <div class="content-worlds-item">
@@ -548,26 +622,19 @@
                 </div>
                 <div class="content-worlds-next"><button onclick="nextWorldPage()">&gt;</button></div>
             </div>
-            <div class="content-worlds-search">
-                <div><input type="text" /></div>
-                <div><button>Search</button></div>
-                <div id="contentWorldSearchSettingMyContent" class="content-world-search-toggle"><p>My Content</p></div>
-                <div id="contentWorldSearchSettingSubs" class="content-world-search-toggle"><p>Subscriptions</p></div>
-                <div id="contentWorldSearchSettingFav" class="content-world-search-toggle"><p>Favorites</p></div>
-            </div>
-            <div class="content-worlds-info">
-                <div class="content-worlds-info-image"><img /></div>
-                <div class="content-worlds-info-text">
-                    <p>Name: Test Asset</p>
-                    <p>Description: A test asset</p>
-                    <p>Size: 20MB</p>
+            <div id="contentWorldInfo" class="content-info">
+                <div class="content-info-image"><img /></div>
+                <div class="content-info-text">
+                    <p>Name: No Asset Selected</p>
+                    <p>Description: </p>
+                    <p>Size:</p>
                 </div>
-                <div class="content-worlds-info-controls">
+                <div class="content-info-controls">
                     <button>Host</button>
+                    <button>Set As Home</button>
                 </div>
             </div>
         </div>
-
 
         <div id="social" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
             <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
@@ -1017,12 +1084,12 @@
                     <h1>Audio</h1>
                     <div class="settings-container">
                         <div class="settings-item">
-                            <p>Volume</p>
+                            <p>Overall Volume</p>
                             <div id="volumeSlider"></div>
                         </div>
                         <div class="settings-item">
-                            <p>Music Volume</p>
-                            <div id="musicVolumeSlider"></div>
+                            <p>World Volume</p>
+                            <div id="worldVolumeSlider"></div>
                         </div>
                         <div class="settings-item">
                             <p>Avatar Volume</p>
@@ -1110,6 +1177,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div id="settingsPlayer" class="settings-page">
                     <h1>Player</h1>
                     <div class="settings-container">
@@ -1147,6 +1215,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div id="settingsPlayerMisc" class="settings-page">
                     <h1>Player</h1>
                     <div class="settings-container">
@@ -1159,12 +1229,17 @@
                             <div id="toggleCrouch"></div>
                         </div>
                         <div class="settings-item">
-                            <p>Allow Physical Body</p>
+                            <p>Physical Body (EXPERMENTAL)</p>
                             <div id="allowPhysicalBody"></div>
                         </div>
                         <div class="settings-item">
                             <p>Physical Body Type</p>
                             <div id="physicalBodyType"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Noclip</p>
+                            <div id="noclip">
+                            </div>
                         </div>
                         <div class="settings-item">
                             <p>Highlight Red</p>
@@ -1274,11 +1349,29 @@
         </div>
 
 
+        <div id="scripting" class="panelrounding scripting-page">
+            <button onclick="Back(); closeCamera();" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <!--<div>
+                <button>Output</button>
+                <button>Editor</button>
+            </div>-->
+            <div class="scripting-display">
+                <textarea id="luaConsoleOutput" readonly="readonly"></textarea>
+                <img src="./images/lualogo.png" />
+            </div>
+            <div class="scripting-controls">
+                <input id="luaConsoleInput" type="text" />
+                <button onclick="evalLua();">Run</button>
+            </div>
+        </div>
+
+
     </div>
+    <p class="early-access-tag">Early access. R3296</p>
 
 	<div class="navbar">
-		<button onclick="ChangeState(0, true);" class="navbar-button">home</button>
-		<button onclick="Back();" class="navbar-button">&lt;</button>
+		<button onclick="ChangeState(0, true)" class="navbar-button">home</button>
+		<button onclick="Back()" class="navbar-button">&lt;</button>
 	</div>
 </body>
 </html>

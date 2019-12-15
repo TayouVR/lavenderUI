@@ -283,9 +283,10 @@ function ChangeState(newState, makeCrumb) {
 
     var notifications = document.getElementById("notifications");
 
-	var browser = document.getElementById("browser");
-	var youtube = document.getElementById("youtube");
-	var calculator = document.getElementById("calculator");
+
+    var scripting = document.getElementById("scripting");
+
+
 
     var players = document.getElementById("players");
     var player = document.getElementById("player");
@@ -293,6 +294,16 @@ function ChangeState(newState, makeCrumb) {
     var setting = document.getElementById("settings");
 
     var power = document.getElementById("power");
+
+
+	var browser = document.getElementById("browser");
+	var youtube = document.getElementById("youtube");
+	var calculator = document.getElementById("calculator");
+
+
+    var register = document.getElementById("registerPage");
+    var registerLoading = document.getElementById("registerLoading");
+    var registerSteamBindPage = document.getElementById("registerSteamBindPage");
 
     //Hide all of them
     login.style.display = "none";
@@ -314,12 +325,24 @@ function ChangeState(newState, makeCrumb) {
     downloads.style.display = "none";
     share.style.display = "none";
 
+
+
+
+    notifications.style.display = "none";
+
+
 	browser.style.display = "none";
 	youtube.style.display = "none";
 	calculator.style.display = "none";
 
 
-    notifications.style.display = "none";
+    register.style.display = "none";
+    registerLoading.style.display = "none";
+    registerSteamBindPage.style.display = "none";
+
+
+
+    scripting.style.display = "none";
 
 
 
@@ -352,16 +375,25 @@ function ChangeState(newState, makeCrumb) {
             break;
         case 11:
             searchSettings.count = 18;
+            searchSettings.myContent = false;
+            searchSettings.search = "";
+            searchSettings.page = 0;
             contentProps.style.display = "block";
             headerCenter.innerText = "Props";
             break;
         case 12:
             searchSettings.count = 10;
+            searchSettings.myContent = false;
+            searchSettings.search = "";
+            searchSettings.page = 0;
             contentAvatars.style.display = "block";
             headerCenter.innerText = "Avatars";
             break;
         case 13:
             searchSettings.count = 10;
+            searchSettings.myContent = false;
+            searchSettings.search = "";
+            searchSettings.page = 0;
             contentWorlds.style.display = "block";
             headerCenter.innerText = "Worlds";
             break;
@@ -397,6 +429,12 @@ function ChangeState(newState, makeCrumb) {
             headerCenter.innerText = "Camera";
             break;
         /////////////////////////////////////////////
+        //Scripting//////////////////////////////////
+        case 5:
+            scripting.style.display = "block";
+            headerCenter.innerText = "Scripting";
+            break;
+        /////////////////////////////////////////////
         case 7:
             players.style.display = "block";
             headerCenter.innerText = "Players";
@@ -416,14 +454,26 @@ function ChangeState(newState, makeCrumb) {
             headerCenter.innerText = "Notifications";
             break;
         case 10:
+            register.style.display = "block";
+            headerCenter.innerText = "Register";
+            break;
+        case 101:
+            registerLoading.style.display = "block";
+            headerCenter.innerText = "Register";
+            break;
+        case 102:
+            registerSteamBindPage.style.display = "block";
+            headerCenter.innerText = "Register";
+            break;
+        case 201:
             browser.style.display = "block";
             headerCenter.innerText = "Chromium";
             break;
-        case 102:
+        case 202:
             youtube.style.display = "block";
             headerCenter.innerText = "Youtube";
             break;
-        case 103:
+        case 203:
             calculator.style.display = "block";
             headerCenter.innerText = "Calculator";
             break;
