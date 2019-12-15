@@ -127,6 +127,7 @@
                     <button class="home-nav-button icon-camera" onclick="ChangeState(4, true)"><div>Camera</div></button>
                     <button class="home-nav-button icon-downloads" onclick="ChangeState(5, true)" disabled><div>Downloads</div></button>
                     <button class="home-nav-button icon-share" onclick="ChangeState(6, true)" disabled><div>Share</div></button>
+                    <button class="home-nav-button icon-scripting" onclick="ChangeState(5, true)"><div>Scripting</div></button>
                     <button class="home-nav-button icon-players" onclick="ChangeState(7, true)" disabled><div>Players</div></button>
                     <button class="home-nav-button icon-chromium" onclick="ChangeState(201, true)"><div>Chromium</div></button>
                     <button class="home-nav-button icon-youtube" onclick="ChangeState(202, true)"><div>Youtube</div></button>
@@ -137,7 +138,7 @@
                 <button onclick="ChangeState(1000, true);"><span></span></button>
             </div>
             <div class="home-volume-mute">
-                <button><span></span></button>
+                <button onclick="api.Settings.ToggleMic()">Not Muted</button>
             </div>
             <div class="home-volume-slider">
                 <div id="homeVolumeSlider">
