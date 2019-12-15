@@ -24,6 +24,7 @@
 }
 .home-nav-button > div {
 	margin-top: 170px;
+	text-shadow: 1px 1px 5px #000000;
 }
 .icon-chromium {
 	background-image: url("/themes/supra/icons/default/chromium.png");
