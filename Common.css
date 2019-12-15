@@ -98,6 +98,23 @@ input:active {
 .clock {
 	display: none;
 }
+
+
+
+/* galaxy table */
+.galaxy-page-content table, .galaxy-page-content tr, .galaxy-page-content td, .galaxy-page-content th, .galaxy-page-content {
+	border: none;
+}
+.galaxy-page-content table {
+	border-spacing: 0 1px;
+}
+.galaxy-page-content table thead tr {
+	background-color: rgba(0,0,0,0.7);
+}
+
+
+
+
 /*
 :root {
 	color: var(--textColor);
