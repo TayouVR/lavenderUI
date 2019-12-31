@@ -3,16 +3,31 @@
 	--border-width: 0px;
 	font-family: sans-serif;
 }
-.content-avatars-item, .content-props-item, .content-worlds-item {
+.content-avatars-item, .content-props-item, .content-worlds-item, .social-friends-item, .social-friends-search-item, .social-requests-item {
 	overflow: hidden;
 }
-.content-avatars-item img, .content-worlds-item img {
+.content-avatars-item img, .content-worlds-item img, .social-friends-item img, .social-friends-search-item img, .social-requests-item img {
 	width: 290px;
 }
 .content-props-item img {
 	width: 230px;
 }
-.home-nav-button, .content-cat-button, .content-avatars-item, .content-props-item, .content-worlds-item, .power-controls > button, .content-avatars-internal, .content-props-internal, .content-worlds-internal {
+.home-nav-button,
+.content-cat-button,
+.social-cat-button,
+.content-avatars-item,
+.content-props-item,
+.content-worlds-item,
+.power-controls > button,
+.content-avatars-internal,
+.content-props-internal,
+.content-worlds-internal,
+.social-friends-item,
+.social-friends-search-item,
+.social-requests-item,
+.social-friends-item-internal,
+.social-friends-search-item-internal,
+.social-friends-item-internal {
 	color: var(--textColor);
 	background-color: var(--backgroundColor);
 	border-style: solid;
@@ -20,7 +35,9 @@
 	border-color: var(--borderColor);
 	border-radius: var(--border-radius-outside);
 }
-
+.social-friends-item-internal > div:nth-child(2) {
+	bottom: 0;
+}
 input {
 	background-color: var(--inputBackground);
 	border-style: solid;
