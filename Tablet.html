@@ -122,7 +122,7 @@
 			<div class="clock">17:06:25</div>
             <div class="home-nav">
                     <button class="home-nav-button icon-content" onclick="ChangeState(1, true)"><div>Content</div></button>
-                    <button class="home-nav-button icon-social" onclick="ChangeState(2, true)" disabled><div>Social</div></button>
+                    <button class="home-nav-button icon-social" onclick="ChangeState(2, true)"><div>Social</div></button>
                     <button class="home-nav-button icon-galaxy" onclick="ChangeState(3, true)"><div>Galaxy</div></button>
                     <button class="home-nav-button icon-camera" onclick="ChangeState(4, true)"><div>Camera</div></button>
                     <button class="home-nav-button icon-downloads" onclick="ChangeState(5, true)" disabled><div>Downloads</div></button>
@@ -218,7 +218,7 @@
             <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
             <div class="galaxy-page-inner">
                 <div class="galaxy-page-left-controls">
-                    <button>&lt;</button>
+                    <button onclick="prevServerPage();">&lt;</button>
                 </div>
                 <div class="galaxy-page-content">
                     <table>
@@ -278,7 +278,7 @@
                     </table>
                 </div>
                 <div class="galaxy-page-right-controls">
-                    <button>&gt;</button>
+                    <button onclick="nextServerPage();">&gt;</button>
                 </div>
                 <div class="galaxy-page-bottom-controls">
                     <div id="galaxyManualConnectInput"></div>
@@ -637,22 +637,26 @@
             </div>
         </div>
 
-        <div id="social" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
+		<div id="social" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
             <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
 
             <div class="social-controls">
                 <button class="social-cat-button" onclick="ChangeState(21, true); updateFriendsList();">Friends</button>
                 <button class="social-cat-button" onclick="ChangeState(22, true); searchFriends();">Search</button>
-                <button class="social-cat-button" onclick="ChangeState(23, true)">Requests</button>
+                <button class="social-cat-button" onclick="ChangeState(23, true); updateRequestList()">Requests</button>
             </div>
-            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
-                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
-                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
-            </div>
+
         </div>
 
         <div id="socialFriends" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
-            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="social-header-controls">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <div class="social-search-controls">
+                    <div id="socialFriendsSearchSettingOnline" class="search-toggle"><p>Online Only</p></div>
+                    <div><input type="text" oninput="socialSearchSettings.search = event.target.value;" /></div>
+                    <div><button onclick="updateFriendsList();">Search</button></div>
+                </div>
+            </div>
             <div class="social-friends-container">
                 <div class="social-friends-prev"><button>&lt;</button></div>
                 <div class="social-friends-content">
@@ -720,21 +724,52 @@
                             </div>
                         </div>
                     </div>
+                    <div class="social-friends-row">
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="social-friends-next"><button>&gt;</button></div>
-            </div>
-            <div class="social-friends-search">
-                <div><input type="text" /></div>
-                <button>Search</button>
-                <div>
-                    <div id="socialFriendsSearchSettingOnline" class="social-friends-search-toggle"><p>Online Only</p></div>
-                    <div id="socialFriendsSearchSettingOfflineFirst" class="social-friends-search-toggle"><p>Offline First</p></div>
-                </div>
             </div>
         </div>
 
         <div id="socialSearch" class="panelrounding" style="display:none; background-image: url(/images/background.png)">
-            <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+            <div class="social-header-controls">
+                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
+                <div class="social-search-controls">
+                    <div><input type="text" oninput="socialSearchSettings.search = event.target.value;" /></div>
+                    <div><button onclick="socialSearchSettings.page = 0;searchFriends();">Search</button></div>
+                </div>
+            </div>
+
             <div class="social-friends-search-container">
                 <div class="social-friends-search-prev"><button onclick="prevUserSearchPage()">&lt;</button></div>
                 <div class="social-friends-search-content">
@@ -803,16 +838,40 @@
                             </div>
                         </div>
                     </div>
+                    <div class="social-friends-search-row">
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                        <div class="social-friends-search-item">
+                            <div class="social-friends-search-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="social-friends-search-next"><button onclick="nextUserSearchPage();">&gt;</button></div>
-            </div>
-            <div class="social-friends-search-search">
-                <div><input type="text" oninput="socialSearchSettings.searchString = this.value;" /></div>
-                <button onclick="searchFriends()">Search</button>
-            </div>
-            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
-                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
-                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
             </div>
         </div>
 
@@ -822,36 +881,135 @@
                 <div class="social-requests-prev"><button>&lt;</button></div>
                 <div class="social-requests-content">
                     <div class="social-requests-row">
-                        <div class="social-requests-item"></div>
-                        <div class="social-requests-item"></div>
-                        <div class="social-requests-item"></div>
-                        <div class="social-requests-item"></div>
-                        <div class="social-requests-item"></div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="social-requests-row">
-                        <div class="social-requests-item"></div>
-                        <div class="social-requests-item"></div>
-                        <div class="social-requests-item"></div>
-                        <div class="social-requests-item"></div>
-                        <div class="social-requests-item"></div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-requests-row">
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
+                        <div class="social-requests-item">
+                            <div class="social-friends-item-internal">
+                                <div><img /></div>
+                                <div>Name</div>
+                                <button>Accept</button>
+                                <button>Reject</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="social-requests-next"><button>&gt;</button></div>
             </div>
-            <div class="social-requests-search">
-                <div><input type="text" /></div>
-                <button>Search</button>
-                <div>
-                    <div id="socialRequestsSearchSettingOnline" class="social-requests-search-toggle"><p>Requests from me</p></div>
-                </div>
-            </div>
-            <div style="height: 100%; width: 100%; line-height: 650px; position: absolute; left: 0px; top: 0px; background-image: url(/images/background.png)">
-                <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
-                <h1 style=" text-align:center; font-size: 100px;">Comming soon</h1>
-            </div>
         </div>
-
-
 
         <div id="players" class="panelrounding players-page" style="display:none">
             <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
@@ -1020,7 +1178,7 @@
             </div>
         </div>
 
-        <div id="player" class="panelrounding player-page" style="display:none">
+		<div id="player" class="panelrounding player-page" style="display:none">
             <button onclick="Back()" class="back"><img src="./images/icon_line_arrow_11.png" /></button>
 
             <div class="player-info-container">
@@ -1029,18 +1187,18 @@
                     <img />
                 </div>
                 <!--<div class="player-info-volume-controls">
-                <p>50%</p>
-                <input type="range" />
-                <button>Mute</button>
-            </div>-->
+                    <p>50%</p>
+                    <input type="range" />
+                    <button>Mute</button>
+                </div>-->
                 <div class="player-info-controls">
                     <div style="display: none;">
                         <button>Add Friend</button>
                     </div>
                     <div style="display: none;">
-                        <button>Change Nickname</button>
+                        <!--<button>Change Nickname</button>
                         <button>Block</button>
-                        <button>Remove</button>
+                        <button>Remove</button>-->
                     </div>
                 </div>
             </div>
@@ -1079,6 +1237,10 @@
                             <p>Max Downloads At Once</p>
                             <div id="maxDownloadSlider"></div>
                         </div>
+                        <div class="settings-item">
+                            <p>Home World</p>
+                            <div id="homeWorldInput"></div>
+                        </div>
                     </div>
                 </div>
                 <div id="settingsAudio" class="settings-page">
@@ -1095,6 +1257,18 @@
                         <div class="settings-item">
                             <p>Avatar Volume</p>
                             <div id="avatarVolumeSlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Voice Volume</p>
+                            <div id="voiceVolumeSlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Prop Volume</p>
+                            <div id="propVolumeSlider"></div>
+                        </div>
+                        <div class="settings-item">
+                            <p>Music Volume</p>
+                            <div id="musicVolumeSlider"></div>
                         </div>
                         <div class="settings-item">
                             <p>Mic Input Volume</p>
