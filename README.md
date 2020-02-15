@@ -6,4 +6,4 @@ to install the UI download the latest zip from the [release](https://github.com/
 ---
 
 # Screenshots
-![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/pre-pictures/pre01.png)
+![screenshot](https://github.com/SupraLP/lavenderUI/blob/master/preview-pictures/pre01.png)
