@@ -3,12 +3,15 @@ form[name=calculator] {
 	height: 100%;
 }
 form[name=calculator] input {
+	border-color: #222222;
 	border-radius: 0;
 	border-width: 1px;
 	border-style: solid;
 	width: 100%;
 	height: 100%;
-	font-size: 3em;
+	font-size: 6em;
+	background-color: #111111;
+	color: #FFFFFF;
 }
 form[name=calculator] table {
 	width: 100%;
@@ -19,4 +22,10 @@ form[name=calculator] .operator {
 }
 form[name=calculator] [name=doit] {
 	background-color: #DD6600;
+}
+form[name=calculator] .clear {
+	background-color: #FF0000;
+}
+form[name=calculator] .function {
+	background-color: #66DD00;
 }
