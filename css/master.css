@@ -1,0 +1,14 @@
+/* Supra Theme things */
+::-webkit-scrollbar-track {
+  background-color: #33333333 !important;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: darkgrey !important;
+}
+.clock {
+	border: none !important;
+	overflow: hidden;
+}
+.clock > canvas {
+	margin: -190px 0 !important;
+}
