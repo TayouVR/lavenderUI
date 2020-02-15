@@ -1,0 +1,76 @@
+﻿<head>
+    <link rel="stylesheet" href="./css/lib/onsenui.min.css">
+    <link rel="stylesheet" href="./css/lib/onsen-css-components.min.css">
+    <link rel="stylesheet" href="./css/lib/theme.css">
+    <script src="./js/lib/onsenui.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="./js/lib/canvas_clock.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/lib/fittext.js"></script>
+    <script src="./themes/supra/js/main.js"></script>
+	<<link rel="stylesheet" href="./themes/supra/css/master.css">
+    <style>
+        * {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        body {
+            margin: 20px;
+        }
+
+        /*Remove background from all pages*/
+        /*.page__background {
+            background: none;
+        }*/
+        /* width */
+        ::-webkit-scrollbar {
+        width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+        background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+        }
+    </style>
+    <script>
+        ons.platform.select('android');
+        game = { platform: 'desktop' };
+        window.onload = function () {
+            if (game.platform == 'vr') {
+                document.body.style.margin = "0px";
+            }
+            ons.disableDeviceBackButtonHandler();
+        };
+
+    </script>
+</head>
+
+<body>
+    <ons-page>
+        <ons-tabbar id="navBar" position="top" modifier="material">
+            <ons-tab id="homeTab" page="pages/home.html" label="Home" icon="md-home" active>
+            </ons-tab>
+            <!-- Next Update -->
+            <!-- <ons-tab page="pages/social.html" label="Social (Next Update)" icon="fa-user-friends" active-icon="fa-user-friends" disabled>
+            </ons-tab> -->
+            <ons-tab page="pages/content.html" label="Content" icon="fa-hammer" active-icon="fa-hammer">
+            </ons-tab>
+            <ons-tab page="pages/galaxy.html" label="Galaxy" icon="fa-satellite" active-icon="fa-satellite">
+            </ons-tab>
+            <ons-tab page="pages/scripting.html" label="Scripting" icon="fa-laptop-code" active-icon="fa-laptop-code">
+            </ons-tab>
+            <ons-tab page="pages/settings.html" label="Settings" icon="fa-sliders-h" active-icon="fa-sliders-h">
+            </ons-tab>
+        </ons-tabbar>
+    </ons-page>
+</body>
