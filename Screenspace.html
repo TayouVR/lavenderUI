@@ -1,4 +1,4 @@
-﻿<head>
+<head>
     <link rel="stylesheet" href="./css/lib/onsenui.min.css">
     <link rel="stylesheet" href="./css/lib/onsen-css-components.min.css">
     <link rel="stylesheet" href="./css/lib/theme.css">
@@ -49,6 +49,9 @@
                 document.body.style.margin = "0px";
             }
             ons.disableDeviceBackButtonHandler();
+			setTimeout(function(){
+			    placeApps();
+			}, 0);
         };
 
     </script>

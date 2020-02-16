@@ -51,10 +51,6 @@ var apps = [new App("chromium", "Browser", `
 											</div>`),
 			new App("camera", "Camera", "")];
 
-window.onloadeddata = function() {
-	placeApps();
-}
-
 function placeApps() {
 	var appsContainer = document.getElementsByClassName("home-center")[0].appendChild(document.createElement("ons-row"));
 	appsContainer.style.float = "left";
