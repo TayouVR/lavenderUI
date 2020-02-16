@@ -24,23 +24,22 @@
         }*/
         /* width */
         ::-webkit-scrollbar {
-        width: 10px;
+            width: 10px;
         }
 
         /* Track */
         ::-webkit-scrollbar-track {
-        background: #f1f1f1;
+            background: #363636;
         }
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-        background: #888;
+            background: var(--highlight-color);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--second-highlight-color);
         }
 
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-        }
     </style>
     <script>
         ons.platform.select('android');
