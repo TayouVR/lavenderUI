@@ -1,19 +1,20 @@
-function App(name, displayName, appHTML) {
+function App(id, name, displayName, appHTML) {
+	this.id = id;
 	this.name = name;
 	this.displayName = displayName;
 	this.imagePath = "/themes/supra/app-icons/" + name + ".png";
 	this.appHTML = appHTML;
 }
 
-var apps = [new App("chromium", "Browser", `
+var apps = [new App(0, "chromium", "Browser", `
 											<div id="browser">
 												<iframe src="" width="100%" height="100%" X-Frame-Op></iframe>
 											</div>`),
-			new App("youtube", "Youtube", `
+			new App(1, "youtube", "Youtube", `
 											<div id="youtube">
 												<iframe  width="100%" height="100%" src="https://www.youtube.com/embed/Ur_tXqaNXOI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 											</div>`),
-			new App("calculator", "Calculator", `
+			new App(2, "calculator", "Calculator", `
 											<div id="calculator">
 												<form name="calculator">
 													 <table>
@@ -49,7 +50,7 @@ var apps = [new App("chromium", "Browser", `
 													 </table>
 												 </form>
 											</div>`),
-			new App("camera", "Camera", "")];
+			new App(3, "camera", "Camera", "")];
 
 function placeApps() {
 	var appsContainer = document.getElementsByClassName("home-center")[0].appendChild(document.createElement("ons-row"));
