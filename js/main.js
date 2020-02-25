@@ -4,6 +4,9 @@ function App(id, name, displayName, appHTML) {
 	this.displayName = displayName;
 	this.imagePath = "/themes/supra/app-icons/" + name + ".png";
 	this.appHTML = appHTML;
+	this.htmlAsElement = document.createElement("div");
+	this.htmlAsElement.style = "width: 100%; height: 100%; position: fixed; background-color: rgba(38,38,38,1)";
+	this.htmlAsElement.innerHTML = appHTML + '<ons-button id="backButton" onclick="home(' + this.id + ')" style="z-index: 10; position: absolute; width: 100px; height: 35px; top: 3px; left: 3px;" modifier="material" >HOME</ons-button>';;
 }
 
 var apps = [new App(0, "chromium", "Browser", `
@@ -61,9 +64,12 @@ function placeApps() {
 		appText.innerText = app.displayName;
 		appElement.classList = "app";
 		appElement.style.backgroundImage = "url(" + app.imagePath + ")";
-		appElement.onclick = function() {document.getElementById("pages/home.html").childNodes[1].innerHTML = app.appHTML}
+		appElement.onclick = function() {document.getElementById("pages/home.html").appendChild(app.htmlAsElement)}
 		appElement.appendChild(appText);
 		appsContainer.appendChild(appElement);
 	});
+}
 
+function home(appIndex) {
+	document.getElementById("pages/home.html").removeChild(apps[appIndex].htmlAsElement); //childNodes[1].innerHTML -= apps[appIndex].htmlAsElement;
 }
